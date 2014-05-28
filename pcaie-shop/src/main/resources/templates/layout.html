@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+  <head>
+    <title>Layout</title>
+    <link rel="stylesheet"
+      th:href="@{/bootstrap-3.1.1-dist/css/bootstrap.min.css}"
+      href="../static/bootstrap-3.1.1-dist/css/bootstrap.min.css"/>
+  </head>
+  <body>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" th:href="@{/}" href="index.html">
+              Index
+          </a>
+          <ul class="nav navbar-nav">
+            <li>
+              <a th:href="@{/user}" href="user/index.html">
+                User
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/illust}" href="illust/index.html">
+                Illust
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="page-header" layout:fragment="header">
+            <h1>Layout</h1>
+        </div>
+        <div layout:fragment="content">
+            Fake content
+        </div>
+    </div>
+  </body>
+</html>

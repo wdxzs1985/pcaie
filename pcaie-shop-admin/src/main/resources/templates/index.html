@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+  <head>
+    <title>Search</title>
+  </head>
+  <body>
+    <div class="page-header" layout:fragment="header">
+        <h1 >Search</h1>
+    </div>
+    <div layout:fragment="content" class="container">
+        <form class="form-horizontal" action="subscribe.html" th:action="@{/subscribe}" method="post">
+          <div class="form-group">
+            <label for="inputUserId" class="col-sm-2 control-label">UserId</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" id="inputUserId" name="userId" placeholder="UserId" />
+            </div>
+            <div class="col-sm-3">
+                <button type="submit" class="btn btn-default">Subscribe</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </body>
+</html>
