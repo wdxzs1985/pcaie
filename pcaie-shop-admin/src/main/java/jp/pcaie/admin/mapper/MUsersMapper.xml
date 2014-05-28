@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.pcaie.admin.mapper.MUsersMapper">
+
+    <select id="fetchBean" resultType="UserBean">
+      SELECT 
+          U.ID AS id,
+          U.EMAIL AS email,
+          U.PASSWORD AS password,
+          U.NICKNAME AS nickname
+      FROM
+          M_USERS U
+      WHERE
+          U.DEL_FLG = 0
+      <if test="email != null">
+      AND U.EMAIL = #{email}
+      </if>
+    </select>
+
+    <select id="fetchBeanByToken" resultType="UserBean">
+        SELECT
+            U.ID
+        ,   U.NICKNAME
+        ,   U.EMAIL
+        FROM
+            R_USER_PASSWORD_HISTORY UPH
+        LEFT JOIN M_USERS U ON U.ID = UPH.USER_ID
+        WHERE
+            UPH.TOKEN = #{token}
+        AND UPH.EXPIRE <![CDATA[>]]> CURRENT_TIMESTAMP
+        AND UPH.DEL_FLG = 0
+    </select>
+
+    <insert id="insert">
+        INSERT INTO m_users (
+            nickname
+        ,   email
+        ,   password
+        ,   add_date
+        ) VALUES (
+            #{nickname}
+        ,   #{email}
+        ,   #{password}
+        ,   CURRENT_TIMESTAMP
+        )
+    </insert>
+    
+    <update id="update">
+        UPDATE
+            m_users
+        <set>
+            <if test="password != null">PASSWORD = #{password},</if>
+        </set>
+        WHERE
+            ID = #{id}
+        AND DEL_FLG = 0
+    </update>
+    
+    <update id="deleteToken">
+        UPDATE
+            R_USER_PASSWORD_HISTORY
+        SET
+            DEL_FLG = 1
+        WHERE
+            USER_ID = #{id}
+        AND DEL_FLG = 0
+    </update>
+</mapper>

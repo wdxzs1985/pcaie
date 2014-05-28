@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+<body>
+<div class="login-container">
+    <div layout:fragment="content">
+        <form id="login-form" action="/login" method="post" class="form">
+            <div class="form-group has-error">
+                <label class="form-label" for="inputEmail">
+                    UserBean.email
+                </label>
+                    <input type="text" id="inputEmail" name="email" class="form-controller"
+                        placeholder="UserBean.email" />
+                    <span class="help-block">emailError</span>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
