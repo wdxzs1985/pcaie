@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+<body>
+<div class="container">
+    <div layout:fragment="content">
+        <div>
+            There was an unexpected error (type=<span th:text="${error}">Bad</span>, status=<span th:text="${status}">500</span>).
+        </div>
+        <div class="alert alert-error">
+            <h4 th:text="${title}">title</h4>
+            <p th:text="${message}">message</p>
+        </div>
+        <div>
+            Please contact the operator with the above information.
+        </div>
+    </div>
+</div>
+</body>
+</html>

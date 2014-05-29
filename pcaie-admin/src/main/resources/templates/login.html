@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+<head>
+    <title th:inline="text">[[#{user.login}]]</title>
+</head>
+<body>
+<div class="container">
+    <div class="page-header" layout:fragment="header">
+        <h1 th:text="#{user.login}">user.login</h1>
+    </div>
+    <div layout:fragment="content">
+        <div class="alert alert-danger"
+            th:unless="${#lists.isEmpty(error)}"
+            th:text="${error}">
+            error
+        </div>
+        <form id="login-form" method="post" class="form"
+            action="login.html" th:action="@{/login}">
+            <div class="form-group" 
+                th:class="${#strings.isEmpty(emailError)} ? 'form-group' : 'form-group has-error'">
+                <label class="control-label" for="inputMail" 
+                    th:text="#{UserBean.email}">
+                    UserBean.email
+                </label>
+                <input type="text" id="inputMail" name="email" class="form-control"
+                    placeholder="UserBean.email" 
+                    th:placeholder="#{UserBean.email}"
+                    th:value="${email}"/>
+                <span class="help-block"
+                    th:text="${emailError}"
+                    th:unless="${#strings.isEmpty(emailError)}">emailError</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="inputPassword" 
+                    th:text="#{UserBean.password}">
+                    UserBean.password
+                </label>
+                <input type="password" id="inputPassword" class="form-control"
+                    placeholder="UserBean.password" th:placeholder="#{UserBean.password}"
+                     />
+                <input type="hidden" id="hiddenPassword" name="password"
+                    th:attr="data-salt=${session.salt}" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block btn-large">
+                    <span class="glyphicon glyphicon-log-in"></span>&nbsp;
+                    <span th:text="#{user.login}">user.login</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<th:block layout:fragment="scripts">
+    <script th:src="@{/common/js/md5.min.js}"
+            src="../static/common/js/md5.min.js"></script>
+    <script>
+    $(function(){
+        $('#login-form').submit(function(){
+            var p = $('#inputPassword').val();
+            var s = $('#hiddenPassword').data('salt');
+            $('#hiddenPassword').val(md5(md5(md5(p) + s) + s));
+        });
+    });
+    </script>
+</th:block>
+</body>
+</html>

@@ -1,5 +1,0 @@
-<html>
-<body>
-<div>http://localhost:8888/prohub/forgot/${userPasswordHistoryBean.token}</div>
-</body>
-</html>

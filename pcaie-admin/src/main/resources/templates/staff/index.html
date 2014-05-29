@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+<head>
+    <title th:inline="text">[[#{admin.staff}]]</title>
+</head>
+<body>
+<div class="container">
+    <div class="page-header" layout:fragment="header">
+        <h1 th:text="#{admin.staff}">admin.staff</h1>
+    </div>
+    <div layout:fragment="content">
+        <form method="GET" class="form-horizontal"
+            action="../staff/index.html" th:action="@{/staff}">
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="inputMail"
+                    th:text="#{UserBean.email}">
+                    UserBean.email
+                </label>
+                <div class="col-xs-6">
+                    <input type="text" id="inputMail" name="email" class="form-control"
+                    placeholder="UserBean.email" 
+                    th:placeholder="#{UserBean.email}"
+                    th:value="${paginate.params[email]}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="inputNickname"
+                    th:text="#{UserBean.nickname}">
+                    UserBean.nickname
+                </label>
+                <div class="col-xs-4">
+                    <input type="text" id="inputNickname" name="nickname" class="form-control"
+                        placeholder="UserBean.nickname" 
+                        th:placeholder="#{UserBean.nickname}"
+                        th:value="${paginate.params[nickname]}" />
+                </div>
+                <div class="col-xs-2">
+                    <button type="submit" class="btn btn-block btn-default">
+                        <span class="glyphicon glyphicon-search"></span>&nbsp;
+                        <span th:text="#{button.search}">button.search</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <hr />
+        <div th:if="${#lists.isEmpty(paginate.items)}">
+            <div class="alert alert-default">
+                <p th:text="#{application.nodata}">application.nodata</p>
+            </div>
+        </div>
+        <div th:unless="${#lists.isEmpty(paginate.items)}">
+            <table class="table table-bordered table-hover">
+              <tr>
+                <th th:text="#{UserBean.nickname}" style="width:226px;">
+                    UserBean.nickname
+                </th>
+                <th th:text="#{UserBean.email}">UserBean.email</th>
+                <th th:text="#{application.operation}" style="width:226px;" class="text-center">
+                    application.operation
+                </th>
+              </tr>
+              <tr th:each="staff : ${paginate.items}">
+                <td>
+                    <th:block th:switch="${staff.role}">
+                      <p th:case="0">
+                        <span class="glyphicon glyphicon-user" style="color:#222"></span>
+                      </p>
+                      <p th:case="1">
+                        <span class="glyphicon glyphicon-certificate" style="color:#f0ad4e;"></span>
+                      </p>
+                    </th:block>
+                    <a href="edit.html" th:href="@{/staff/${id}}"
+                        title="staff.nickname"
+                        th:title="${staff.nickname}"
+                        th:text="${staff.nickname}">
+                        staff.nickname
+                    </a>
+                </td>
+                <td th:text="${staff.nickname}">staff.nickname</td>
+                <td>
+                   <a href="edit.html" th:href="@{/staff/${id}}"
+                       class="btn btn-sm btn-default">
+                       <span class="glyphicon glyphicon-edit"></span>&nbsp;
+                        <span th:text="#{button.edit}">button.edit</span>
+                   </a>
+                   <a href="delete.html" th:href="@{/staff/${id}/delete}"
+                      class="btn btn-sm btn-danger btn-delete-account">
+                       <span class="glyphicon glyphicon-trash"></span>&nbsp;
+                       <span th:text="#{button.remove}">button.remove</span>
+                   </a>
+                </td>
+              </tr>
+            </table>
+            
+            <div class="">
+                <p th:text="#{paginate.title(${paginate.itemCount}, ${paginate.start + 1}, ${paginate.end + 1})}">
+                    paginate.title
+                </p>
+                <ul class="pagination">
+                    <li th:unless="${paginate.first}">
+                        <a th:href="@{/staff(page=1, email=${paginate.params[email]}, nickname=${paginate.params[nickname]})}">
+                            <span th:text="#{button.firstpage}">button.firstpage</span>
+                        </a>
+                    </li>
+                    <th:block th:each="i : ${#numbers.sequence(1, paginate.pageCount)}"
+                        th:switch="paginate.page">
+                        <li th:case="${i + 5}" class="disabled">
+                            <span>...</span>
+                        </li>
+                        <li th:case="${i - 5}" class="disabled">
+                            <span>...</span>
+                        </li>
+	                    <li th:case="*" class="${i == paginate.page} ? 'active'">
+	                        <a th:href="@{/staff(page=${i}, email=${paginate.params[email]}, nickname=${paginate.params[nickname]})}">
+	                            <span th:text="${i}">i</span>
+	                        </a>
+	                    </li>
+                    </th:block>
+                    <li th:unless="${paginate.last}">
+                        <a th:href="@{/staff(page=${paginate.pageCount}, email=${paginate.params[email]}, nickname=${paginate.params.[nickname]})}">
+                            <span th:text="#{button.lastpage}">button.lastpage</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+    $('.btn-delete-account').click(function(){
+        return confirm('本当にこのアカウントを削除しますか。一度削除したら、復元できません。');
+    
+    $("a.js-tooltip").tooltip();
+});
+</script>
+</body>
+</html>
