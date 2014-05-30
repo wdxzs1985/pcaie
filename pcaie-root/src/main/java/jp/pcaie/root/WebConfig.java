@@ -1,6 +1,5 @@
-package jp.pcaie.admin;
+package jp.pcaie.root;
 
-import jp.pcaie.admin.interceptor.AuthLoginInterceptor;
 import jp.pcaie.common.interceptor.AccessLogInterceptor;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -30,27 +29,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(this.accessLog())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/resources/**");
-        //
-        registry.addInterceptor(this.authLogin())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/signup")
-                .excludePathPatterns("/login")
-                .excludePathPatterns("/logout")
-                .excludePathPatterns("/forgot")
-                .excludePathPatterns("/forgot/**")
-                .excludePathPatterns("/resources/**");
     }
 
     @Bean
     public AccessLogInterceptor accessLog() {
         return new AccessLogInterceptor();
-    }
-
-    @Bean
-    public AuthLoginInterceptor authLogin() {
-        final AuthLoginInterceptor authLogin = new AuthLoginInterceptor();
-        authLogin.setForward("/login");
-        return authLogin;
     }
 
     @InitBinder

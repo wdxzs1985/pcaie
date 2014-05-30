@@ -1,4 +1,4 @@
-package jp.pcaie.admin.interceptor;
+package jp.pcaie.common.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

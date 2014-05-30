@@ -84,8 +84,11 @@ public class StaffService {
         final String mail = userBean.getEmail();
         final StaffBean existUser = this.getUserByEmail(mail);
         if (existUser != null && existUser.getId() != userBean.getId()) {
-            final String message = this.messageSource.getMessage("validate.userExists",
-                                                                 null,
+            final String fieldName = this.messageSource.getMessage("StaffBean.email",
+                                                                   null,
+                                                                   locale);
+            final String message = this.messageSource.getMessage("validate.unique",
+                                                                 new String[] { fieldName },
                                                                  locale);
             model.addAttribute("emailError", message);
             isValid = false;
