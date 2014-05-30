@@ -21,12 +21,12 @@
             <div class="form-group" 
                 th:class="${#strings.isEmpty(emailError)} ? 'form-group' : 'form-group has-error'">
                 <label class="control-label" for="inputMail" 
-                    th:text="#{UserBean.email}">
-                    UserBean.email
+                    th:text="#{StaffBean.email}">
+                    StaffBean.email
                 </label>
                 <input type="text" id="inputMail" name="email" class="form-control"
-                    placeholder="UserBean.email" 
-                    th:placeholder="#{UserBean.email}"
+                    placeholder="StaffBean.email" 
+                    th:placeholder="#{StaffBean.email}"
                     th:value="${email}"/>
                 <span class="help-block"
                     th:text="${emailError}"
@@ -34,11 +34,11 @@
             </div>
             <div class="form-group">
                 <label class="control-label" for="inputPassword" 
-                    th:text="#{UserBean.password}">
-                    UserBean.password
+                    th:text="#{StaffBean.password}">
+                    StaffBean.password
                 </label>
                 <input type="password" id="inputPassword" class="form-control"
-                    placeholder="UserBean.password" th:placeholder="#{UserBean.password}"
+                    placeholder="StaffBean.password" th:placeholder="#{StaffBean.password}"
                      />
                 <input type="hidden" id="hiddenPassword" name="password"
                     th:attr="data-salt=${session.salt}" />

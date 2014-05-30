@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title th:inline="text">[[#{admin.staff.create}]]</title>
+</head>
+<body>
+<div class="container">
+    <div class="page-header" layout:fragment="header">
+        <h1 th:text="#{admin.staff.create}">admin.staff.create</h1>
+    </div>
+    <div layout:fragment="content">
+    <form class="form-horizontal" method="POST"
+          action="staff/create.html" th:action="@{/staff/create}" >
+      <div class="form-group" 
+           th:class="${#strings.isEmpty(emailError)} ? 'form-group' : 'form-group has-error'">
+        <label class="control-label col-xs-2" for="inputEmail"
+               th:text="#{StaffBean.email}">StaffBean.email</label>
+        <div class="col-xs-6">
+          <input type="text" id="inputEmail" name="email" class="form-control"
+                 th:value="${staffBean.email}"
+                 th:placeholder="#{StaffBean.email}" />
+          <span class="help-block"
+                th:text="${emailError}"
+                th:unless="${#strings.isEmpty(emailError)}">emailError</span>
+        </div>
+      </div>
+      <div class="form-group" 
+        th:class="${#strings.isEmpty(nameError)} ? 'form-group' : 'form-group has-error'">
+        <label class="control-label col-xs-2" for="inputName"
+            th:text="#{StaffBean.name}">StaffBean.name</label>
+        <div class="col-xs-6">
+          <input type="text" id="inputName" name="name" class="form-control"
+                 th:value="${staffBean.name}"
+                 th:placeholder="#{StaffBean.name}" />
+          <span class="help-block"
+                th:text="${nameError}"
+                th:unless="${#strings.isEmpty(nameError)}">nameError</span>
+        </div>
+      </div>
+      <div class="form-group" 
+           th:class="${#strings.isEmpty(passwordError)} ? 'form-group' : 'form-group has-error'">
+        <label class="control-label col-xs-2" for="inputPassword"
+               th:text="#{StaffBean.password}">StaffBean.password</label>
+        <div class="col-xs-6">
+          <input type="password" id="inputPassword" name="password" class="form-control"
+                 th:placeholder="#{StaffBean.password}" />
+          <span class="help-block"
+                th:text="${passwordError}"
+                th:unless="${#strings.isEmpty(passwordError)}">passwordError</span>
+        </div>
+      </div>
+      <div class="form-group" 
+           th:class="${#strings.isEmpty(password2Error)} ? 'form-group' : 'form-group has-error'">
+        <label class="control-label col-xs-2" for="inputPassword2"
+               th:text="#{StaffBean.password2}">StaffBean.password2</label>
+        <div class="col-xs-6">
+          <input type="password" id="inputPassword2" name="password2" class="form-control"
+                 th:placeholder="#{StaffBean.password2}" />
+          <span class="help-block"
+                th:text="${passwordError}"
+                th:unless="${#strings.isEmpty(password2Error)}">password2Error</span>
+        </div>
+      </div>
+      <div class="form-group" >
+        <label class="control-label col-xs-2" for="radioRoleNormal"
+               th:text="#{StaffBean.role}">StaffBean.role</label>
+        <div class="col-xs-6">
+            <label class="radio-inline">
+                <input type="radio" id="radioRoleNormal" name="role" value="0" th:checked="${staffBean.role == 0 }" />
+                <span th:text="#{user.role.normal}">user.role.normal</span> 
+            </label>
+            <label class="radio-inline">
+                <input type="radio" id="radioRoleAdmin" name="role" value="1" th:checked="${staffBean.role == 1 }" /> 
+                <span th:text="#{user.role.admin}">user.role.admin</span> 
+            </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-6 col-xs-offset-2">
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-ok"></span>&nbsp;
+            <span th:text="#{button.create}">button.create</span>
+          </button>
+          <a class="btn btn-default"
+             href="index.html"
+             th:href="@{/staff}">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;
+            <span th:text="#{button.back}">button.back</span> 
+          </a>
+        </div>
+      </div>
+    </form>
+    </div>
+</div>
+</body>
+</html>

@@ -7,7 +7,7 @@ public class StaffBean extends DtoBean {
      */
     private static final long serialVersionUID = 5451974491866159547L;
 
-    private String nickname;
+    private String name;
 
     private String email;
 
@@ -15,15 +15,7 @@ public class StaffBean extends DtoBean {
 
     private String password2;
 
-    private Integer role;
-
-    public String getNickname() {
-        return this.nickname;
-    }
-
-    public void setNickname(final String nickname) {
-        this.nickname = nickname;
-    }
+    private Integer role = 0;
 
     public String getEmail() {
         return this.email;
@@ -55,6 +47,14 @@ public class StaffBean extends DtoBean {
 
     public void setRole(final Integer role) {
         this.role = role;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
     }
 
 }

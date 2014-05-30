@@ -9,7 +9,7 @@
             staff.ID AS id,
             staff.EMAIL AS email,
             staff.PASSWORD AS password,
-            staff.NICKNAME AS nickname,
+            staff.NAME AS name,
             staff.ROLE AS role
         FROM
             m_staff staff
@@ -26,14 +26,14 @@
 
     <insert id="insert" useGeneratedKeys="true">
         INSERT INTO m_staff (
-            NICKNAME
-        ,   email
+            email
         ,   password
+        ,   NAME
         ,   role
         ) VALUES (
-            #{nickname}
-        ,   #{email}
+            #{email}
         ,   #{password}
+        ,   #{name}
         ,   #{role}
         )
         <selectKey resultType="int" keyProperty="id" order="AFTER">
@@ -46,7 +46,7 @@
             m_staff
         <set>
             <if test="email != null">EMAIL = #{email},</if>
-            <if test="nickname != null">NICKNAME = #{nickname},</if>
+            <if test="name != null">NAME = #{name},</if>
             <if test="password != null">PASSWORD = #{password},</if>
             <if test="role != null">ROLE = #{role},</if>
         </set>
@@ -61,10 +61,10 @@
             m_staff staff
         <where>
             <if test="email != null">
-            AND staff.email LIKE CONCAT('%', #{email}, '%')
+            AND staff.EMAIL LIKE CONCAT('%', #{email}, '%')
             </if>
             <if test="nickname != null">
-            AND staff.nickname LIKE CONCAT('%', #{nickname}, '%')
+            AND staff.NAME LIKE CONCAT('%', #{name}, '%')
             </if>
             AND staff.DEL_FLG = '0'
         </where>
@@ -74,7 +74,7 @@
         SELECT 
             staff.ID AS id,
             staff.EMAIL AS email,
-            staff.NICKNAME AS nickname,
+            staff.NAME AS name,
             staff.ROLE AS role
         FROM
             m_staff staff
@@ -82,8 +82,8 @@
             <if test="email != null">
             AND staff.email LIKE CONCAT('%', #{email}, '%')
             </if>
-            <if test="nickname != null">
-            AND staff.nickname LIKE CONCAT('%', #{nickname}, '%')
+            <if test="name != null">
+            AND staff.NAME LIKE CONCAT('%', #{name}, '%')
             </if>
             AND staff.DEL_FLG = '0'
         </where>
