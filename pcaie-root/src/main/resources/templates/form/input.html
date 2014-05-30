@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+  <head>
+    <title th:inline="text">[[#{form.title}]]</title>
+    <style type="text/css">
+        
+        .required {
+            color: #d9534f;
+        }
+        
+        .required .glyphicon-exclamation-sign{
+            display: inline-block;
+        }
+        
+        .required .glyphicon-ok{
+            display: none;
+        }
+        
+        .required-success {
+            color: #5cb85c;
+        }
+        
+        .required-success .glyphicon-ok{
+            display: inline-block;
+        }
+        
+        .required-success .glyphicon-exclamation-sign{
+            display: none;
+        }
+        
+        
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="page-header" layout:fragment="header">
+            <h1 th:text="#{form.title}">form.title</h1>
+        </div>
+        <div class="col-sm-8 col-sm-offset-2" layout:fragment="content">
+            <form role="form" method="POST" 
+                  action="confirm.html" th:action="@{/form}">
+              <div class="row form-group ">
+                <div class="col-sm-6 required">
+                    <label for="inputName" class="control-label" >
+                       <span th:text="#{FormBean.name}">FormBean.name</span>&nbsp;
+                       <span class="glyphicon glyphicon-exclamation-sign"></span>
+                       <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+                    <input type="text" class="form-control" 
+                           id="inputName" 
+                           th:placeholder="#{FormBean.name}"
+                           th:value="${formBean.name}" />
+                </div>
+                <div class="col-sm-6">
+                    <label for="inputKana" class="control-label" 
+                           th:text="#{FormBean.kana}">FormBean.kana</label>
+                    <div class="">
+                      <input type="text" class="form-control" id="inputKana" 
+                             th:placeholder="#{FormBean.kana}"
+                             th:value="${formBean.kana}" />
+                    </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-6">
+                    <label for="inputEmployment" class="control-label" 
+                           th:text="#{FormBean.employment}">FormBean.employment</label>
+                    <div class="">
+                      <input type="text" class="form-control" id="inputEmployment" 
+                             th:placeholder="#{FormBean.employment}" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="inputDepartment" class=" control-label" 
+                           th:text="#{FormBean.department}">FormBean.department</label>
+                    <div class="">
+                      <input type="text" class="form-control" id="inputDepartment" 
+                             th:placeholder="#{FormBean.department}" />
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <span class="help-block" th:text="#{form.ifNeedEmployment}">
+                        form.ifNeedEmployment
+                    </span>
+                </div>
+              </div>
+              
+              <div class="row form-group" id="contact-by">
+                <div class="col-sm-2">
+                    <label class="control-label" for="radioContactByEmail"
+                           th:text="#{FormBean.contactBy}">FormBean.contactBy</label>
+                </div>
+                <div class="col-sm-10">
+                    <label class="radio-inline">
+                        <input type="radio" id="radioContactByEmail" name="contactBy" value="0" th:checked="${formBean.contactBy == 0 }" />
+                        <span th:text="#{form.contactBy.email}">form.contactBy.email</span> 
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" id="radioContactByTel" name="contactBy" value="1" th:checked="${formBean.contactBy == 1 }" /> 
+                        <span th:text="#{form.contactBy.tel}">form.contactBy.tel</span> 
+                    </label>
+                </div>
+              </div>
+              
+              <div class="row form-group" id="contact-by-email">
+                <div class="col-sm-6 required">
+                  <label for="inputEmail" class=" control-label" >
+                    <span th:text="#{FormBean.email}">FormBean.email</span>&nbsp;
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </label>
+                  <input type="email" class="form-control" id="inputEmail" 
+                         th:placeholder="#{FormBean.email}" />
+                </div>
+                <div class="col-sm-6 required">
+                  <label for="inputEmail2" class="control-label" >
+                    <span th:text="#{FormBean.email2}">FormBean.email2</span>&nbsp;
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </label>
+                  <input type="email" class="form-control" id="inputEmail2" 
+                         th:placeholder="#{FormBean.email2}" />
+                </div>
+              </div>
+              
+              <div class="row form-group" id="contact-by-tel">
+                <div class="col-sm-6 required">
+                  <label for="inputTel" class="control-label">
+                    <span th:text="#{FormBean.tel}">FormBean.tel</span>&nbsp;
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </label>
+                  <input type="text" class="form-control" id="inputTel" 
+                         th:placeholder="#{FormBean.tel}" />
+                </div>
+              </div>
+              
+              <hr />
+              
+              <div class="row form-group">
+                <div class="col-sm-6">
+                  <label for="inputTel" class="control-label" 
+                       th:text="#{FormBean.maker}">FormBean.maker</label>
+                  <input type="text" class="form-control" id="inputMaker" 
+                         th:placeholder="#{FormBean.maker}" />
+                </div>
+                <div class="col-sm-6">
+                  <label for="inputTel" class="control-label" 
+                       th:text="#{FormBean.model}">FormBean.model</label>
+                  <input type="text" class="form-control" id="inputModel" 
+                         th:placeholder="#{FormBean.model}" />
+                </div>
+              </div>
+              
+              <div class="row form-group">
+                <div class="col-sm-12">
+                  <label for="inputContent" class="control-label" 
+                         th:text="#{FormBean.content}">FormBean.content</label>
+                  <textarea type="text" class="form-control" id="inputContent" 
+                            rows="10"
+                            th:placeholder="#{FormBean.content}" 
+                            th:value="${formBean.content}"/>
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-large">
+                    <span th:text="#{button.next}">button.next</span>&nbsp;
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                  </button>
+              </div>
+            </form>
+        </div>
+    </div>
+<th:block layout:fragment="scripts">
+    <script>
+    $(function(){
+        $('#contact-by').on('change', 'input[type="radio"]',function() {
+            if($('#radioContactByEmail:checked').length > 0) {
+                $('#contact-by-email').fadeIn();
+                $('#contact-by-tel').hide();
+            }
+            if($('#radioContactByTel:checked').length > 0) {
+                $('#contact-by-email').hide();
+                $('#contact-by-tel').fadeIn();
+            }
+        });
+        $('#radioContactByEmail').trigger('change');
+        
+        $('.required').on('change', 'input', function(){
+        	var $this = $(this);
+        	if($this.val() == '') {
+        		$this.parents('.required').removeClass('required-success');
+        	} else {
+                $this.parents('.required').addClass('required-success');
+        	}
+        });
+    });
+    </script>
+</th:block>
+  </body>
+</html>

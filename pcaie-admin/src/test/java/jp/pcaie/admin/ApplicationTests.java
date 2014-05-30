@@ -1,6 +1,6 @@
 package jp.pcaie.admin;
 
-import jp.pcaie.admin.Application;
+import jp.pcaie.Application;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
