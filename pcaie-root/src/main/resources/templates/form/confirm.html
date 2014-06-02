@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+  <head>
+    <title th:inline="text">[[#{form.title}]]</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="page-header" layout:fragment="header">
+            <h1 th:text="#{form.title}">form.title</h1>
+        </div>
+        <div layout:fragment="content">
+            <form method="POST" class="form-horizontal"
+                  action="finish.html" th:action="@{/form/finish}">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" 
+                           th:text="#{CustomerBean.name}">
+                           CustomerBean.name
+                    </label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static"
+                           th:text="${formBean.customerBean.name}" >
+                           formBean.customerBean.name
+                        </p>
+                        <input type="hidden" name="customerBean.name"
+                               th:value="${formBean.customerBean.name}" />
+                    </div>
+                </div>
+                <div class="form-group" 
+                     th:unless="${#strings.isEmpty(formBean.customerBean.kana)}">
+                    <label class="control-label col-sm-4" 
+                           th:text="#{CustomerBean.kana}">
+                           CustomerBean.kana
+                     </label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static"
+                           th:text="${formBean.customerBean.kana}" >
+                           formBean.customerBean.kana
+                        </p>
+                        <input type="hidden" name="customerBean.kana"
+                               th:value="${formBean.customerBean.kana}" />
+                    </div>
+                </div>
+                <div class="form-group" 
+                     th:unless="${#strings.isEmpty(formBean.customerBean.employment)}">
+                    <label class="control-label col-sm-4" 
+                           th:text="#{CustomerBean.employment}">
+                           CustomerBean.employment
+                    </label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static"
+                           th:text="${formBean.customerBean.employment}" >
+                           formBean.customerBean.employment
+                        </p>
+                        <input type="hidden" name="customerBean.employment"
+                               th:value="${formBean.customerBean.employment}" />
+                    </div>
+                </div>
+                <div class="form-group" 
+                     th:unless="${#strings.isEmpty(formBean.customerBean.department)}">
+                    <label class=" control-label col-sm-4" 
+                           th:text="#{CustomerBean.department}">
+                           FormBean.department
+                    </label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static"
+                           th:text="${formBean.customerBean.department}" >
+                           formBean.customerBean.department
+                        </p>
+                        <input type="hidden" name="customerBean.department"
+                               th:value="${formBean.customerBean.department}" />
+                    </div>
+                </div>
+              
+                <div class="form-group" >
+                    <label class="control-label col-sm-4"
+                           th:text="#{FormBean.contactBy}">
+                           FormBean.contactBy
+                    </label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static"
+                           th:if="${formBean.contactBy == 0 }"
+                           th:text="#{form.contactBy.email}">
+                           form.contactBy.email
+                        </p>
+                        <p class="form-control-static"
+                           th:if="${formBean.contactBy == 1 }"
+                           th:text="#{form.contactBy.tel}">
+                           form.contactBy.tel
+                        </p>
+                        <input type="hidden" name="contactBy"
+                               th:value="${formBean.contactBy}" />
+                    </div>
+                </div>
+              
+              <div id="contact-by-email" class="form-group"
+                   th:if="${formBean.contactBy == 0 }">
+                  <label class=" control-label col-sm-4" 
+                         th:text="#{CustomerBean.email}">
+                         CustomerBean.email
+                  </label>
+                  <div class="col-sm-6">
+                      <p class="form-control-static"
+                         th:text="${formBean.customerBean.email}" >
+                         formBean.customerBean.email
+                      </p>
+                      <input type="hidden" name="customerBean.email"
+                             th:value="${formBean.customerBean.email}" />
+                      <input type="hidden" name="customerBean.email2"
+                             th:value="${formBean.customerBean.email2}" />
+                  </div>
+              </div>
+              
+              <div id="contact-by-tel" class="form-group"
+                   th:if="${formBean.contactBy == 1 }">
+                  <label class="control-label col-sm-4" 
+                         th:text="#{CustomerBean.tel}">
+                         CustomerBean.tel
+                  </label>
+                  <div class="col-sm-6">
+                      <p class="form-control-static"
+                         th:text="${formBean.customerBean.tel}" >
+                         formBean.customerBean.tel
+                      </p>
+                      <input type="hidden" name="customerBean.tel"
+                             th:value="${formBean.customerBean.tel}" />
+                  </div>
+              </div>
+              
+              <div class="form-group"
+                   th:unless="${#strings.isEmpty(formBean.maker)}">
+                <label class="control-label col-sm-4" 
+                     th:text="#{FormBean.maker}">FormBean.maker</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static"
+                       th:text="${formBean.maker}" >formBean.maker</p>
+                    <input type="hidden" name="maker"
+                           th:placeholder="#{FormBean.maker}"
+                           th:value="${formBean.maker}" />
+                </div>
+              </div>
+              <div class="form-group"
+                   th:unless="${#strings.isEmpty(formBean.model)}">
+                <label for="inputTel" class="control-label col-sm-4" 
+                     th:text="#{FormBean.model}">FormBean.model</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static"
+                       th:text="${formBean.maker}" >formBean.model</p>
+                    <input type="hidden" class="form-control" 
+                           id="inputModel" name="model"
+                           th:placeholder="#{FormBean.model}"
+                           th:value="${formBean.model}" />
+                </div>
+              </div>
+              
+              <div class="form-group"
+                   th:unless="${#strings.isEmpty(formBean.content)}">
+                <label for="inputContent" class="control-label col-sm-4" 
+                       th:text="#{FormBean.content}">FormBean.content</label>
+                <div class="col-sm-6">
+                  <pre class="form-control-static"
+                     th:text="${formBean.content}" >formBean.content</pre>
+                  <input type="hidden" class="form-control" 
+                         id="inputContent" name="content"
+                         th:placeholder="#{FormBean.content}"
+                         th:value="${formBean.content}" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-6">
+                  <a href="javascript:history.go(-1);" class="btn btn-default">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span th:text="#{button.prev}">button.prev</span>&nbsp;
+                  </a>
+                  <button type="submit" class="btn btn-primary">
+                    <span th:text="#{button.next}">button.next</span>&nbsp;
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                  </button>
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
+  </body>
+</html>

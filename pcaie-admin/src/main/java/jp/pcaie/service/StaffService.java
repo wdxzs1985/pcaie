@@ -23,8 +23,8 @@ import org.springframework.ui.Model;
 @Transactional
 public class StaffService {
 
+    public static final int MAX_NAME_LENGTH = 45;
     public static final int MAX_MAIL_LENGTH = 100;
-    public static final int MAX_NAME_LENGTH = 100;
 
     @Autowired
     private final MStaffMapper staffMapper = null;

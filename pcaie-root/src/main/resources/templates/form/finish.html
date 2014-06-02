@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+  <head>
+    <title th:inline="text">[[#{form.title}]]</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="page-header" layout:fragment="header">
+            <h1 th:text="#{form.title}">form.title</h1>
+        </div>
+        <div layout:fragment="content">
+            <p th:text="#{form.thankyou}"></p>
+            <p >
+                <a class="btn btn-default"
+                   href="../index.html" th:href="@{/}"
+                   th:text="#{application.goTopPage}">
+                    application.goTopPage
+                </a>
+            </p>
+        </div>
+    </div>
+  </body>
+</html>
