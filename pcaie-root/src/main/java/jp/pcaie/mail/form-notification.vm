@@ -1,0 +1,5 @@
+<html>
+<body>
+<div>${userBean.nickname}, ご登録ありがとうございました。</div>
+</body>
+</html>

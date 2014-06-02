@@ -4,28 +4,27 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import jp.pcaie.domain.StaffBean;
+import jp.pcaie.domain.FormBean;
 import jp.pcaie.support.MailSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
 
-@Component
-public class PasswordChangedNotification extends MailSupport {
+public class FormNotification extends MailSupport {
 
     @Autowired
     private final MessageSource messageSource = null;
 
-    public void send(final StaffBean userBean, final Locale locale) {
-        final String[] toAddressArray = { userBean.getEmail() };
+    public void send(final FormBean formBean, final Locale locale) {
 
-        final String subject = this.messageSource.getMessage("user.passwordChanged.subject",
+        final String[] toAddressArray = { formBean.getCustomerBean().getEmail() };
+
+        final String subject = this.messageSource.getMessage("form.mail.subject",
                                                              null,
                                                              locale);
 
         final Map<String, Object> model = new HashMap<String, Object>();
-        model.put("userBean", userBean);
+        model.put("formBean", formBean);
 
         this.send(toAddressArray, subject, model);
     }

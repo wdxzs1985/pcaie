@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import jp.pcaie.domain.StaffBean;
+import jp.pcaie.support.MailSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

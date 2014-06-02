@@ -2,6 +2,8 @@ package jp.pcaie;
 
 import java.util.Properties;
 
+import jp.pcaie.mail.FormNotification;
+
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -16,15 +18,24 @@ public class AppConfig {
 
     @Bean
     public JavaMailSender mailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        final JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("mail.mycompany.com");
         return mailSender;
     }
 
     @Bean
+    public FormNotification formNotification() {
+        final FormNotification formNotification = new FormNotification();
+        formNotification.setFrom("support@pcaie.jp");
+        formNotification.setBcc(new String[] { "support@pcaie.jp" });
+        formNotification.setTemplate("jp/pcaie/mail/form-notification.vm");
+        return formNotification;
+    }
+
+    @Bean
     public VelocityEngine velocityEngine() {
-        VelocityEngineFactoryBean velocityEngine = new VelocityEngineFactoryBean();
-        Properties velocityProperties = new Properties();
+        final VelocityEngineFactoryBean velocityEngine = new VelocityEngineFactoryBean();
+        final Properties velocityProperties = new Properties();
         velocityProperties.put("resource.loader", "class");
         velocityProperties.put("class.resource.loader.class",
                                "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
@@ -34,7 +45,7 @@ public class AppConfig {
 
     @Bean
     public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasenames("common-i18n",
                                    "common-bean",
                                    "common-validate",

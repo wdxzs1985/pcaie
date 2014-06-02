@@ -1,4 +1,4 @@
-package jp.pcaie.mail;
+package jp.pcaie.support;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -24,7 +24,7 @@ public abstract class MailSupport {
     @Autowired
     private VelocityEngine velocityEngine;
 
-    private String encoding;
+    private String encoding = "UTF-8";
 
     private String from;
     private String[] bcc;
@@ -33,9 +33,7 @@ public abstract class MailSupport {
 
     private boolean html;
 
-    protected void send(final String[] toAddressArray,
-                        final String subject,
-                        final Map<String, Object> model) {
+    protected void send(final String[] toAddressArray, final String subject, final Map<String, Object> model) {
         if (ArrayUtils.isEmpty(toAddressArray)) {
             return;
         }
@@ -48,11 +46,7 @@ public abstract class MailSupport {
         }
     }
 
-    protected void send(final String from,
-                        final String to,
-                        final String subject,
-                        final String text,
-                        final boolean html) {
+    protected void send(final String from, final String to, final String subject, final String text, final boolean html) {
         final MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
             public void prepare(final MimeMessage mimeMessage) throws Exception {
@@ -66,14 +60,10 @@ public abstract class MailSupport {
         };
         // this.mailSender.send(preparator);
         this.log.debug("---------- Send Mail Start ----------");
-        this.log.debug("From: "
-                       + from);
-        this.log.debug("To  : "
-                       + to);
-        this.log.debug("Bcc  : "
-                       + Arrays.toString(this.bcc));
-        this.log.debug("Sub : "
-                       + subject);
+        this.log.debug("From: " + from);
+        this.log.debug("To  : " + to);
+        this.log.debug("Bcc  : " + Arrays.toString(this.bcc));
+        this.log.debug("Sub : " + subject);
         this.log.debug("Text : ");
         this.log.debug(text);
         this.log.debug("----------  Send Mail End  ----------");
