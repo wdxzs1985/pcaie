@@ -5,6 +5,7 @@ import java.util.Properties;
 import jp.pcaie.mail.FormNotification;
 
 import org.apache.velocity.app.VelocityEngine;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,9 +18,15 @@ import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 public class AppConfig {
 
     @Bean
-    public JavaMailSender mailSender() {
+    public JavaMailSender mailSender(@Value(value = "${mail.host}") final String host,
+                                     @Value(value = "${mail.port}") final int port,
+                                     @Value(value = "${mail.username}") final String username,
+                                     @Value(value = "${mail.password}") final String password) {
         final JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("mail.mycompany.com");
+        mailSender.setHost(host);
+        mailSender.setPort(port);
+        mailSender.setUsername(username);
+        mailSender.setPassword(password);
         return mailSender;
     }
 
