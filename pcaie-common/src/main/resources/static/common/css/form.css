@@ -1,0 +1,23 @@
+.required {
+    color: #a94442;
+}
+
+.required .glyphicon-exclamation-sign{
+    display: inline-block;
+}
+
+.required .glyphicon-ok{
+    display: none;
+}
+
+.required-success {
+    color: #5cb85c;
+}
+
+.required-success .glyphicon-ok{
+    display: inline-block;
+}
+
+.required-success .glyphicon-exclamation-sign{
+    display: none;
+}

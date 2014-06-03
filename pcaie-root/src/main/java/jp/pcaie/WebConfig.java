@@ -2,9 +2,11 @@ package jp.pcaie;
 
 import jp.pcaie.interceptor.AccessLogInterceptor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -24,16 +26,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return filter;
     }
 
+    @Autowired
+    private AccessLogInterceptor accessLog;
+
     @Override
     public void addInterceptors(final InterceptorRegistry registry) {
-        registry.addInterceptor(this.accessLog())
+        registry.addInterceptor(this.accessLog)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/resources/**");
-    }
-
-    @Bean
-    public AccessLogInterceptor accessLog() {
-        return new AccessLogInterceptor();
     }
 
     @InitBinder

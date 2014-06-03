@@ -1,5 +1,6 @@
 package jp.pcaie.domain;
 
+
 public class StaffBean extends UserBean {
 
     public static Integer ROLE_NORMAL = 0;

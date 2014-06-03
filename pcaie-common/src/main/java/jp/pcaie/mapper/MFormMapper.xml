@@ -11,12 +11,14 @@
         ,   maker
         ,   model
         ,   content
+        ,   create_date
         ) VALUES (
             #{customerBean.id}
         ,   #{contactBy}
         ,   #{maker}
         ,   #{model}
         ,   #{content}
+        ,   CURRENT_TIMESTAMP
         )
         <selectKey resultType="int" keyProperty="id" order="AFTER">
             SELECT @@IDENTITY

@@ -1,13 +1,17 @@
 package jp.pcaie.service;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import jp.pcaie.domain.CustomerBean;
 import jp.pcaie.domain.FormBean;
+import jp.pcaie.domain.StaffBean;
 import jp.pcaie.mapper.MCustomerMapper;
 import jp.pcaie.mapper.MFormMapper;
+import jp.pcaie.support.Paginate;
 import jp.pcaie.validator.CustomerBeanValidator;
 import jp.pcaie.validator.FormBeanValidator;
 
@@ -17,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 @Service
-public class FormSerivce {
+public class FormService {
 
     @Autowired
     private FormBeanValidator formBeanValidator = null;
@@ -28,7 +32,9 @@ public class FormSerivce {
     @Autowired
     private MFormMapper mFormMapper = null;
 
-    public boolean validate(final FormBean formBean, final Model model, final Locale locale) {
+    public boolean validate(final FormBean formBean,
+                            final Model model,
+                            final Locale locale) {
         boolean isValid = true;
 
         final CustomerBean customerBean = formBean.getCustomerBean();
@@ -98,6 +104,22 @@ public class FormSerivce {
 
     private void saveForm(final FormBean formBean) {
         this.mFormMapper.insert(formBean);
+    }
+
+    public void doSearch(final Paginate<StaffBean> paginate) {
+        final Map<String, Object> params = paginate.getParams();
+        final int itemCount = this.mFormMapper.count(params);
+
+        paginate.setItemCount(itemCount);
+        paginate.compute();
+
+        List<StaffBean> items = null;
+        if (itemCount == 0) {
+            items = Collections.emptyList();
+        } else {
+            items = this.mFormMapper.fetchList(params);
+        }
+        paginate.setItems(items);
     }
 
 }

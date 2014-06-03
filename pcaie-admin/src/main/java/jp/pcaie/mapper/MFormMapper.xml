@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.pcaie.mapper.MFormMapper">
+    
+    <insert id="insert" useGeneratedKeys="true">
+        INSERT INTO m_form (
+            customer_id
+        ,   contact_by
+        ,   maker
+        ,   model
+        ,   content
+        ,   create_date
+        ) VALUES (
+            #{customerBean.id}
+        ,   #{contactBy}
+        ,   #{maker}
+        ,   #{model}
+        ,   #{content}
+        ,   CURRENT_TIMESTAMP
+        )
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+    </insert>
+
+    
+    <select id="count" resultType="int">
+        SELECT 
+            count(form.id)
+        FROM
+            m_form form
+        LEFT JOIN m_customer customer 
+        ON form.customer_id = customer.id
+        <where>
+            <if test="email != null">
+            AND customer.email LIKE CONCAT('%', #{email}, '%')
+            </if>
+            <if test="name != null">
+            AND customer.NAME LIKE CONCAT('%', #{name}, '%')
+            </if>
+            AND form.DEL_FLG = '0'
+        </where>
+    </select>
+    
+    <select id="fetchList" resultType="FormBean">
+        SELECT 
+            form.ID             AS `id`,
+            customer.id         AS `customerBean.id`,
+            customer.name       AS `customerBean.name`,
+            customer.kana       AS `customerBean.kana`,
+            customer.email      AS `customerBean.email`,
+            customer.tel        AS `customerBean.tel`,
+            customer.employment AS `customerBean.employment`,
+            customer.department AS `customerBean.department`,
+            form.CONTACT_BY     AS `contactBy`,
+            form.MAKER          AS `maker`,
+            form.MODEL          AS `model`,
+            form.CONTENT        AS `content`,
+            form.STATUS         AS `status`,
+            form.CREATE_DATE    AS `createDate`
+        FROM
+            m_form form
+        LEFT JOIN m_customer customer 
+        ON form.customer_id = customer.id
+        <where>
+            <if test="email != null">
+            AND customer.email LIKE CONCAT('%', #{email}, '%')
+            </if>
+            <if test="name != null">
+            AND customer.NAME LIKE CONCAT('%', #{name}, '%')
+            </if>
+            AND form.DEL_FLG = '0'
+        </where>
+        order by form.id desc
+        limit #{start}, #{pageSize}
+    </select>
+</mapper>

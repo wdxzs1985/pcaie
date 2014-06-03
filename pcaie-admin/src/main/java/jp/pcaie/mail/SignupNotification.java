@@ -9,13 +9,16 @@ import jp.pcaie.support.MailSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
 
-@Component
-public class SignupNotification extends MailSupport {
+public class SignupNotification {
 
     @Autowired
     private final MessageSource messageSource = null;
+
+    @Autowired
+    private MailSupport mailSupport = null;
+
+    private String template;
 
     public void send(final StaffBean userBean, final Locale locale) {
         final String[] toAddressArray = { userBean.getEmail() };
@@ -27,7 +30,15 @@ public class SignupNotification extends MailSupport {
         final Map<String, Object> model = new HashMap<String, Object>();
         model.put("userBean", userBean);
 
-        this.send(toAddressArray, subject, model);
+        this.mailSupport.send(toAddressArray, subject, this.template, model);
+    }
+
+    public String getTemplate() {
+        return this.template;
+    }
+
+    public void setTemplate(final String template) {
+        this.template = template;
     }
 
 }

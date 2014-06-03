@@ -3,55 +3,44 @@
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="layout">
 <head>
-    <title th:inline="text">[[#{admin.staff}]]</title>
-    <style>
-        a.role {
-            text-decoration: none;
-        }
-        a.role-normal > span {
-            color:#222;
-        }
-        a.role-admin > span {
-            color:#f0ad4e;
-        }
-    </style>
+    <title th:inline="text">[[#{admin.form}]]</title>
 </head>
 <body>
 <div class="container">
     <div class="page-header" layout:fragment="header">
         <div class="pull-right">
             <a class="btn btn-success"
-               href="create.html" th:href="@{/staff/create}"
-               th:text="#{admin.staff.create}">
-                admin.staff.create
+               href="create.html" th:href="@{/form/create}"
+               th:text="#{admin.form.create}">
+                admin.form.create
             </a>
         </div>
-        <h1 th:text="#{admin.staff}">admin.staff</h1>
+        <h1 th:text="#{admin.form}">admin.form</h1>
     </div>
     <div layout:fragment="content">
         <form method="GET" class="form-horizontal"
-            action="../staff/index.html" th:action="@{/staff}">
+            action="index.html" th:action="@{/form}">
             <div class="form-group">
                 <label class="control-label col-sm-4 col-md-3" for="inputMail"
-                    th:text="#{StaffBean.email}">
-                    StaffBean.email
+                    th:text="#{CustomerBean.email}">
+                    CustomerBean.email
                 </label>
                 <div class="col-sm-6">
                     <input type="text" id="inputMail" name="email" class="form-control"
-                    placeholder="StaffBean.email" 
-                    th:placeholder="#{StaffBean.email}"
+                    placeholder="CustomerBean.email" 
+                    th:placeholder="#{CustomerBean.email}"
                     th:value="${paginate.params[email]}" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-4 col-md-3" for="inputName"
-                    th:text="#{StaffBean.name}">
-                    StaffBean.name
+                    th:text="#{CustomerBean.name}">
+                    CustomerBean.name
                 </label>
                 <div class="col-sm-4">
                     <input type="text" id="inputName" name="name" class="form-control"
-                        placeholder="StaffBean.name" 
-                        th:placeholder="#{StaffBean.name}"
+                        placeholder="CustomerBean.name" 
+                        th:placeholder="#{CustomerBean.name}"
                         th:value="${paginate.params[name]}" />
                 </div>
                 <div class="col-sm-2">
@@ -65,49 +54,39 @@
         <hr />
         <div th:if="${#lists.isEmpty(paginate.items)}">
             <div class="alert alert-default">
-                <p th:text="#{application.nodata}">application.nodata</p>
+                <p th:text="#{application.nodata}">
+                    application.nodata
+                </p>
             </div>
         </div>
         <div th:unless="${#lists.isEmpty(paginate.items)}">
             <table class="table table-bordered table-hover">
               <tr>
-                <th th:text="#{StaffBean.name}" style="width:226px;">
-                    StaffBean.name
+                <th th:text="#{CustomerBean.name}" style="width:226px;">
+                    CustomerBean.name
                 </th>
-                <th th:text="#{StaffBean.email}">StaffBean.email</th>
+                <th th:text="#{FormBean.createDate}">FormBean.createDate</th>
                 <th th:text="#{application.operation}" style="width:226px;" class="text-center">
                     application.operation
                 </th>
               </tr>
-              <tr th:each="staff : ${paginate.items}">
+              <tr th:each="form : ${paginate.items}">
                 <td>
-                    <th:block th:switch="${staff.role}">
-                      <a th:case="0" th:title="#{StaffBean.role.normal}" class="role role-normal">
-                        <span class="glyphicon glyphicon-user" ></span>
-                      </a>
-                      <a th:case="1" th:title="#{StaffBean.role.admin}" class="role role-admin">
-                        <span class="glyphicon glyphicon-certificate" ></span>
-                      </a>
-                    </th:block>
-                    <a href="edit.html" th:href="@{/staff/__${staff.id}__}"
-                        title="staff.name"
-                        th:title="${staff.name}"
-                        th:text="${staff.name}">
-                        staff.name
+                    <a href="edit.html" th:href="@{/form/__${form.id}__}"
+                        title="form.customerBean.name"
+                        th:title="${form.customerBean.name}"
+                        th:text="${form.customerBean.name}">
+                        form.customerBean.name
                     </a>
                 </td>
-                <td th:text="${staff.email}">staff.email</td>
+                <td th:text="${#dates.format(form.createDate, 'dd/MMM/yyyy HH:mm')}">
+                    form.createDate
+                </td>
                 <td>
-                   <a href="edit.html" th:href="@{/staff/__${staff.id}__}"
+                   <a href="edit.html" th:href="@{/form/__${form.id}__}"
                        class="btn btn-sm btn-default">
                        <span class="glyphicon glyphicon-edit"></span>&nbsp;
                         <span th:text="#{button.edit}">button.edit</span>
-                   </a>
-                   <a href="delete.html" th:href="@{/staff/__${staff.id}__/delete}"
-                      class="btn btn-sm btn-danger btn-delete-account"
-                      th:unless="${staff.id == session.LOGIN_USER.id}">
-                       <span class="glyphicon glyphicon glyphicon-ban-circle"></span>&nbsp;
-                       <span th:text="#{button.remove}">button.remove</span>
                    </a>
                 </td>
               </tr>
@@ -119,7 +98,7 @@
                 </p>
                 <ul class="pagination">
                     <li th:unless="${paginate.first}">
-                        <a th:href="@{/staff(page=1, email=${paginate.params[email]}, name=${paginate.params[name]})}">
+                        <a th:href="@{/form(page=1, email=${paginate.params[email]}, name=${paginate.params[name]})}">
                             <span th:text="#{button.firstpage}">button.firstpage</span>
                         </a>
                     </li>
@@ -132,13 +111,13 @@
                             <span>...</span>
                         </li>
 	                    <li th:case="*" class="${i == paginate.page} ? 'active'">
-	                        <a th:href="@{/staff(page=${i}, email=${paginate.params[email]}, name=${paginate.params[name]})}">
+	                        <a th:href="@{/form(page=${i}, email=${paginate.params[email]}, name=${paginate.params[name]})}">
 	                            <span th:text="${i}">i</span>
 	                        </a>
 	                    </li>
                     </th:block>
                     <li th:unless="${paginate.last}">
-                        <a th:href="@{/staff(page=${paginate.pageCount}, email=${paginate.params[email]}, name=${paginate.params.[name]})}">
+                        <a th:href="@{/form(page=${paginate.pageCount}, email=${paginate.params[email]}, name=${paginate.params[name]})}">
                             <span th:text="#{button.lastpage}">button.lastpage</span>
                         </a>
                     </li>
@@ -152,7 +131,7 @@
 <script type="text/javascript" th:inline="javascript">
 $(function(){
     $('.btn-delete-account').click(function(){
-        return confirm([[#{admin.staff.deleteConfirm}]]);
+        return confirm([[#{admin.form.deleteConfirm}]]);
     });
 });
 </script>

@@ -1,15 +1,19 @@
 package jp.pcaie.domain;
 
+import java.util.Date;
+
 public class FormBean extends DtoBean {
 
     /**
      * 
      */
-    private static final long serialVersionUID = -1891094883945223225L;
+    private static final long serialVersionUID = -3908089675700714078L;
 
     public static final int CONTACT_BY_EMAIL = 0;
 
     public static final int CONTACT_BY_TEL = 1;
+
+    public static final int STATUS_WAITING = 0;
 
     private CustomerBean customerBean = new CustomerBean();
 
@@ -20,6 +24,10 @@ public class FormBean extends DtoBean {
     private String model;
 
     private String content;
+
+    private Integer status = STATUS_WAITING;
+
+    private Date createDate = null;
 
     public String getMaker() {
         return this.maker;
@@ -59,6 +67,22 @@ public class FormBean extends DtoBean {
 
     public void setCustomerBean(final CustomerBean customerBean) {
         this.customerBean = customerBean;
+    }
+
+    public Integer getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(final Integer status) {
+        this.status = status;
+    }
+
+    public Date getCreateDate() {
+        return this.createDate;
+    }
+
+    public void setCreateDate(final Date createDate) {
+        this.createDate = createDate;
     }
 
 }

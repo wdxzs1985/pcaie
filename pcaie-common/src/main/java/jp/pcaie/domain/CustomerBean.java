@@ -1,5 +1,6 @@
 package jp.pcaie.domain;
 
+
 public class CustomerBean extends DtoBean {
 
     /**

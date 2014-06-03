@@ -5,14 +5,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+@Component
 public class AccessLogInterceptor extends HandlerInterceptorAdapter {
 
     private final Log log = LogFactory.getLog(this.getClass());
 
     @Override
-    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
+    public boolean preHandle(final HttpServletRequest request,
+                             final HttpServletResponse response,
+                             final Object handler) throws Exception {
         final String sid = request.getRequestedSessionId();
         final String method = request.getMethod();
         final String uri = request.getRequestURI();

@@ -30,7 +30,10 @@ public class StaffController {
     private final MessageSource messageSource = null;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String doGetIndex(@RequestParam(required = false) final String email, @RequestParam(required = false) final String name, @RequestParam(required = false, defaultValue = "1") final int page, final Model model) {
+    public String doGetIndex(@RequestParam(required = false) final String email,
+                             @RequestParam(required = false) final String name,
+                             @RequestParam(required = false, defaultValue = "1") final int page,
+                             final Model model) {
         final Paginate<StaffBean> paginate = new Paginate<StaffBean>();
         paginate.setPage(page);
 
@@ -55,7 +58,15 @@ public class StaffController {
     }
 
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.POST)
-    public String doPostEdit(@PathVariable final Integer id, @RequestParam final String email, @RequestParam final String name, @RequestParam final String password, @RequestParam final String password2, @RequestParam final Integer role, final Model model, final Locale locale, final RedirectAttributes redirectAttributes) {
+    public String doPostEdit(@PathVariable final Integer id,
+                             @RequestParam final String email,
+                             @RequestParam final String name,
+                             @RequestParam final String password,
+                             @RequestParam final String password2,
+                             @RequestParam final Integer role,
+                             final Model model,
+                             final Locale locale,
+                             final RedirectAttributes redirectAttributes) {
         final StaffBean staffBean = this.staffService.getUserById(id);
         if (staffBean == null) {
             throw new PageNotFoundException();
@@ -95,7 +106,14 @@ public class StaffController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String doPostCreate(@RequestParam final String email, @RequestParam final String name, @RequestParam final String password, @RequestParam final String password2, @RequestParam final String role, final Model model, final Locale locale, final RedirectAttributes redirectAttributes) {
+    public String doPostCreate(@RequestParam final String email,
+                               @RequestParam final String name,
+                               @RequestParam final String password,
+                               @RequestParam final String password2,
+                               @RequestParam final String role,
+                               final Model model,
+                               final Locale locale,
+                               final RedirectAttributes redirectAttributes) {
         final StaffBean staffBean = new StaffBean();
         staffBean.setEmail(email);
         staffBean.setName(name);

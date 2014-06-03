@@ -10,13 +10,17 @@ import jp.pcaie.support.MailSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
-public class FormNotification extends MailSupport {
+public class FormNotification {
 
     @Autowired
-    private final MessageSource messageSource = null;
+    private MessageSource messageSource = null;
+
+    @Autowired
+    private MailSupport mailSupport = null;
+
+    private String template;
 
     public void send(final FormBean formBean, final Locale locale) {
-
         final String[] toAddressArray = { formBean.getCustomerBean().getEmail() };
 
         final String subject = this.messageSource.getMessage("form.mail.subject",
@@ -26,7 +30,15 @@ public class FormNotification extends MailSupport {
         final Map<String, Object> model = new HashMap<String, Object>();
         model.put("formBean", formBean);
 
-        this.send(toAddressArray, subject, model);
+        this.mailSupport.send(toAddressArray, subject, this.template, model);
+    }
+
+    public String getTemplate() {
+        return this.template;
+    }
+
+    public void setTemplate(final String template) {
+        this.template = template;
     }
 
 }

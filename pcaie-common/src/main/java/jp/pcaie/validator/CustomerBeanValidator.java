@@ -5,8 +5,10 @@ import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+@Component
 public class CustomerBeanValidator {
 
     public static final int MAX_NAME_LENGTH = 45;
@@ -22,7 +24,9 @@ public class CustomerBeanValidator {
     @Autowired
     private EmailValidator emailValidator = null;
 
-    public boolean validateInputName(final String inputName, final Model model, final Locale locale) {
+    public boolean validateInputName(final String inputName,
+                                     final Model model,
+                                     final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("CustomerBean.name",
                                                                null,
@@ -44,7 +48,9 @@ public class CustomerBeanValidator {
         return isValid;
     }
 
-    public boolean validateInputKana(final String inputKana, final Model model, final Locale locale) {
+    public boolean validateInputKana(final String inputKana,
+                                     final Model model,
+                                     final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("CustomerBean.kana",
                                                                null,
@@ -60,7 +66,9 @@ public class CustomerBeanValidator {
         return isValid;
     }
 
-    public boolean validateInputEmployment(final String inputEmployment, final Model model, final Locale locale) {
+    public boolean validateInputEmployment(final String inputEmployment,
+                                           final Model model,
+                                           final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("CustomerBean.employment",
                                                                null,
@@ -76,7 +84,9 @@ public class CustomerBeanValidator {
         return isValid;
     }
 
-    public boolean validateInputDepartment(final String inputDepartment, final Model model, final Locale locale) {
+    public boolean validateInputDepartment(final String inputDepartment,
+                                           final Model model,
+                                           final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("CustomerBean.department",
                                                                null,
@@ -92,7 +102,10 @@ public class CustomerBeanValidator {
         return isValid;
     }
 
-    public boolean validateInputEmail(final String inputEmail, final String inputEmail2, final Model model, final Locale locale) {
+    public boolean validateInputEmail(final String inputEmail,
+                                      final String inputEmail2,
+                                      final Model model,
+                                      final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("CustomerBean.email",
                                                                null,
@@ -131,7 +144,9 @@ public class CustomerBeanValidator {
         return isValid;
     }
 
-    public boolean validateInputTel(final String inputTel, final Model model, final Locale locale) {
+    public boolean validateInputTel(final String inputTel,
+                                    final Model model,
+                                    final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("CustomerBean.tel",
                                                                null,
