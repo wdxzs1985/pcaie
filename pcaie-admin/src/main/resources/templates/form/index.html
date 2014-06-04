@@ -62,32 +62,55 @@
         <div th:unless="${#lists.isEmpty(paginate.items)}">
             <table class="table table-bordered table-hover">
               <tr>
-                <th th:text="#{CustomerBean.name}" style="width:226px;">
+                <th style="width:146px;"
+                    th:text="#{FormBean.createDate}" >
+                    FormBean.createDate
+                </th>
+                <th th:text="#{CustomerBean.name}" >
                     CustomerBean.name
                 </th>
-                <th th:text="#{FormBean.createDate}">FormBean.createDate</th>
-                <th th:text="#{application.operation}" style="width:226px;" class="text-center">
+                <th style="width:226px;"
+                    th:text="#{FormBean.maker}">
+                    FormBean.maker
+                </th>
+                <th style="width:226px;"
+                    th:text="#{FormBean.model}">
+                    FormBean.model
+                </th>
+                <th style="width:86px;"
+                    th:text="#{FormBean.status}">
+                    FormBean.status
+                </th>
+                <th style="width:86px;" class="text-center"
+                    th:text="#{application.operation}" >
                     application.operation
                 </th>
               </tr>
               <tr th:each="form : ${paginate.items}">
-                <td>
-                    <a href="edit.html" th:href="@{/form/__${form.id}__}"
-                        title="form.customerBean.name"
-                        th:title="${form.customerBean.name}"
-                        th:text="${form.customerBean.name}">
-                        form.customerBean.name
-                    </a>
-                </td>
                 <td th:text="${#dates.format(form.createDate, 'yyyy/MM/dd HH:mm')}">
                     form.createDate
                 </td>
+                <td th:text="${form.customerBean.name}">
+                        form.customerBean.name
+                </td>
+                <td th:text="${form.maker}">
+                    form.maker
+                </td>
+                <td th:text="${form.model}">
+                    form.model
+                </td>
+                <td th:switch="${form.status}" class="text-center">
+                    <span th:case="0" th:text="#{FormBean.status.unread}">unread</span>
+                    <span th:case="1" th:text="#{FormBean.status.read}">read</span>
+                    <span th:case="2" th:text="#{FormBean.status.replied}">replied</span>
+                    <span th:case="3" th:text="#{FormBean.status.success}">success</span>
+                </td>
                 <td>
-                   <a href="edit.html" th:href="@{/form/__${form.id}__}"
-                       class="btn btn-sm btn-default">
-                       <span class="glyphicon glyphicon-edit"></span>&nbsp;
-                        <span th:text="#{button.edit}">button.edit</span>
-                   </a>
+                    <a class="btn btn-sm btn-info"
+                       th:href="@{/form/__${form.id}__}" >
+                       <span class="glyphicon glyphicon-new-window"></span>&nbsp;
+                       <span th:text="#{button.view}">button.view</span>
+                    </a>
                 </td>
               </tr>
             </table>

@@ -11,6 +11,7 @@ import jp.pcaie.service.FormService;
 import jp.pcaie.support.Paginate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +29,8 @@ public class FormController {
 
     @Autowired
     private FormService formService = null;
+    @Autowired
+    private final MessageSource messageSource = null;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(@RequestParam(required = false) final String email,
@@ -68,6 +71,19 @@ public class FormController {
     }
 
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
+    public String doGetView(@PathVariable final Integer id, final Model model) {
+        final FormBean formBean = this.formService.getFormById(id);
+        if (formBean == null) {
+            throw new PageNotFoundException();
+        } else if (formBean.getStatus() == FormBean.STATUS_UNREAD) {
+            formBean.setStatus(FormBean.STATUS_READ);
+            this.formService.update(formBean);
+        }
+        model.addAttribute("formBean", formBean);
+        return "form/view";
+    }
+
+    @RequestMapping(value = "/{id:\\d+}/edit", method = RequestMethod.GET)
     public String doGetEdit(@PathVariable final Integer id, final Model model) {
         final FormBean formBean = this.formService.getFormById(id);
         if (formBean == null) {
@@ -77,7 +93,7 @@ public class FormController {
         return "form/edit";
     }
 
-    @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id:\\d+}/edit", method = RequestMethod.POST)
     public String doPostEdit(@PathVariable final Integer id,
                              @ModelAttribute final FormBean inputFormBean,
                              final Model model,
@@ -97,10 +113,24 @@ public class FormController {
 
         if (this.formService.validate(formBean, model, locale)) {
             this.formService.update(formBean);
+            final String message = this.messageSource.getMessage("admin.form.edit.message",
+                                                                 null,
+                                                                 locale);
+            redirectAttributes.addFlashAttribute("message", message);
             return "redirect:/form/" + id;
         }
         model.addAttribute("formBean", formBean);
         return "form/edit";
     }
 
+    @RequestMapping(value = "/{id:\\d+}/reply", method = RequestMethod.GET)
+    public String doGetReply(@PathVariable final Integer id, final Model model) {
+        final FormBean formBean = this.formService.getFormById(id);
+        if (formBean == null) {
+            throw new PageNotFoundException();
+        }
+        formBean.setStatus(FormBean.STATUS_REPLIED);
+        this.formService.update(formBean);
+        return "redirect:/form/" + id;
+    }
 }

@@ -13,7 +13,13 @@ public class FormBean extends DtoBean {
 
     public static final int CONTACT_BY_TEL = 1;
 
-    public static final int STATUS_WAITING = 0;
+    public static final int STATUS_UNREAD = 0;
+
+    public static final int STATUS_READ = 1;
+
+    public static final int STATUS_REPLIED = 2;
+
+    public static final int STATUS_SUCCESS = 3;
 
     private CustomerBean customerBean = new CustomerBean();
 
@@ -25,7 +31,7 @@ public class FormBean extends DtoBean {
 
     private String content;
 
-    private Integer status = STATUS_WAITING;
+    private Integer status = STATUS_UNREAD;
 
     private Date createDate = null;
 

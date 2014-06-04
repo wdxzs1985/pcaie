@@ -12,8 +12,20 @@
         <h1 th:text="#{admin.form.edit}">admin.form.edit</h1>
     </div>
     <div layout:fragment="content">
+    <div class="row" th:unless="${#strings.isEmpty(message)}">
+        <div class="col-sm-6 col-sm-offset-4 col-md-offset-3">
+            <div class="alert alert-success">
+                <ul>
+                    <li th:text="${message}">
+                        message
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <form class="form-horizontal" method="POST"
-          action="edit.html" th:action="@{/form/__${formBean.id}__/edit}" >
+          action="edit.html" th:action="@{/form/__${formBean.id}__}" >
       <div class="form-group">
           <label for="inputName" class="control-label col-sm-4 col-md-3" >
              <span th:text="#{CustomerBean.name}">CustomerBean.name</span>
@@ -152,7 +164,7 @@
             <span th:text="#{button.save}">button.save</span>
           </button>
           <a class="btn btn-default"
-             th:href="@{/form/__${formBean.id}__}">
+             href="index.html" th:href="@{/form}">
             <span class="glyphicon glyphicon-remove"></span>&nbsp;
             <span th:text="#{button.cancel}">button.cancel</span> 
           </a>

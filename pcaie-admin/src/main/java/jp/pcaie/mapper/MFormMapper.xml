@@ -109,6 +109,7 @@
             form.maker = #{maker},
             form.model = #{model},
             form.content = #{content},
+            form.status = #{status},
         </set>
         WHERE
             form.id = #{id}

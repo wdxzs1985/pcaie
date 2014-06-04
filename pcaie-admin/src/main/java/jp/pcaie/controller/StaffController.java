@@ -80,7 +80,7 @@ public class StaffController {
                                                                model,
                                                                locale);
         if (isUpdated) {
-            final String message = this.messageSource.getMessage("user.edit.message",
+            final String message = this.messageSource.getMessage("admin.staff.edit.message",
                                                                  null,
                                                                  locale);
             redirectAttributes.addFlashAttribute("message", message);
