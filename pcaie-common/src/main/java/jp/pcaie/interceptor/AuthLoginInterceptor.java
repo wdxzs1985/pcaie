@@ -7,17 +7,23 @@ import javax.servlet.http.HttpSession;
 import jp.pcaie.domain.UserBean;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 
     public static final String LOGIN_USER = "LOGIN_USER";
 
-    public static final String COOKIE_LOGIN_USER = "COOKIE_LOGIN_USER";
-
     private String forward = null;
 
     @Override
-    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
+    public boolean preHandle(final HttpServletRequest request,
+                             final HttpServletResponse response,
+                             final Object handler) throws Exception {
+
+        if (handler instanceof ResourceHttpRequestHandler) {
+            return true;
+        }
+
         final HttpSession session = request.getSession();
         final UserBean loginUser = (UserBean) session.getAttribute(LOGIN_USER);
         if (loginUser != null) {

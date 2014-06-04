@@ -13,6 +13,15 @@
             <exclude-mapping path="/resources/**"/>
             <beans:bean class="jp.pcaie.interceptor.AccessLogInterceptor" />
         </interceptor>
+        <interceptor>
+            <mapping path="/**"/>
+            <exclude-mapping path="/login"/>
+            <exclude-mapping path="/logout"/>
+            <exclude-mapping path="/resources/**"/>
+            <beans:bean class="jp.pcaie.interceptor.AuthLoginInterceptor" >
+                <beans:property name="forward" value="/login" />
+            </beans:bean>
+        </interceptor>
     </interceptors>
     
     <beans:bean id="characterEncodingFilter" class="org.springframework.web.filter.CharacterEncodingFilter">

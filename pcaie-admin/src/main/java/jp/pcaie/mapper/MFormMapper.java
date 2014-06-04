@@ -14,4 +14,8 @@ public interface MFormMapper {
 
     List<StaffBean> fetchList(Map<String, Object> params);
 
+    FormBean fetchBean(Map<String, Object> param);
+
+    void update(FormBean formBean);
+
 }

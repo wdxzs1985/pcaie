@@ -145,7 +145,7 @@
       </div>
       
       <div class="form-group ">
-        <label for="inputTel" class="control-label col-sm-4 col-md-3" 
+        <label for="inputMaker" class="control-label col-sm-4 col-md-3" 
                th:text="#{FormBean.maker}">FormBean.maker</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" 
@@ -158,7 +158,7 @@
         </div>
       </div>
       <div class="form-group ">
-        <label for="inputTel" class="control-label col-sm-4 col-md-3" 
+        <label for="inputModel" class="control-label col-sm-4 col-md-3" 
                th:text="#{FormBean.model}">FormBean.model</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" 
@@ -178,7 +178,7 @@
             <textarea class="form-control" rows="10"
                       id="inputContent" name="content"
                       th:placeholder="#{FormBean.content}" 
-                      th:value="${formBean.content}" ></textarea>
+                      th:text="${formBean.content}" ></textarea>
             <span class="help-block help-block-danger"
                 th:unless="${#strings.isEmpty(contentError)}"
                 th:text="${contentError}">contentError</span>

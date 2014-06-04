@@ -76,4 +76,41 @@
         order by form.id desc
         limit #{start}, #{pageSize}
     </select>
+    
+    <select id="fetchBean" resultType="FormBean">
+        SELECT 
+            form.ID             AS `id`,
+            customer.id         AS `customerBean.id`,
+            customer.name       AS `customerBean.name`,
+            customer.kana       AS `customerBean.kana`,
+            customer.email      AS `customerBean.email`,
+            customer.tel        AS `customerBean.tel`,
+            customer.employment AS `customerBean.employment`,
+            customer.department AS `customerBean.department`,
+            form.CONTACT_BY     AS `contactBy`,
+            form.MAKER          AS `maker`,
+            form.MODEL          AS `model`,
+            form.CONTENT        AS `content`,
+            form.STATUS         AS `status`,
+            form.CREATE_DATE    AS `createDate`
+        FROM
+            m_form form
+        LEFT JOIN m_customer customer 
+        ON form.customer_id = customer.id
+        WHERE
+            form.id = #{id}
+    </select>
+    
+    <update id="update">
+        UPDATE 
+            m_form form
+        <set>
+            form.contact_by = #{contactBy},
+            form.maker = #{maker},
+            form.model = #{model},
+            form.content = #{content},
+        </set>
+        WHERE
+            form.id = #{id}
+    </update>
 </mapper>

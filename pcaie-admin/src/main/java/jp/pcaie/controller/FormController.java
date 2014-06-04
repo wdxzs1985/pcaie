@@ -3,8 +3,10 @@ package jp.pcaie.controller;
 import java.util.Locale;
 import java.util.Map;
 
+import jp.pcaie.domain.CustomerBean;
 import jp.pcaie.domain.FormBean;
 import jp.pcaie.domain.StaffBean;
+import jp.pcaie.exception.PageNotFoundException;
 import jp.pcaie.service.FormService;
 import jp.pcaie.support.Paginate;
 
@@ -53,29 +55,52 @@ public class FormController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String doPostCreate(@ModelAttribute final FormBean formBean,
+    public String doPostCreate(@ModelAttribute final FormBean inputFormBean,
                                final Model model,
                                final Locale locale,
                                final RedirectAttributes redirectAttributes) {
-        if (this.formService.validate(formBean, model, locale)) {
-            this.formService.save(formBean);
+        if (this.formService.validate(inputFormBean, model, locale)) {
+            this.formService.save(inputFormBean);
             return "redirect:/form";
         }
-        model.addAttribute("formBean", formBean);
+        model.addAttribute("formBean", inputFormBean);
         return "form/create";
     }
 
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
     public String doGetEdit(@PathVariable final Integer id, final Model model) {
+        final FormBean formBean = this.formService.getFormById(id);
+        if (formBean == null) {
+            throw new PageNotFoundException();
+        }
+        model.addAttribute("formBean", formBean);
         return "form/edit";
     }
 
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.POST)
     public String doPostEdit(@PathVariable final Integer id,
+                             @ModelAttribute final FormBean inputFormBean,
                              final Model model,
                              final Locale locale,
                              final RedirectAttributes redirectAttributes) {
-        return "redirect:/form/" + id;
+        final FormBean formBean = this.formService.getFormById(id);
+        if (formBean == null) {
+            throw new PageNotFoundException();
+        }
+        // for validate
+        final CustomerBean customerBean = formBean.getCustomerBean();
+        customerBean.setEmail2(customerBean.getEmail());
+        //
+        formBean.setMaker(inputFormBean.getMaker());
+        formBean.setModel(inputFormBean.getModel());
+        formBean.setContent(inputFormBean.getContent());
+
+        if (this.formService.validate(formBean, model, locale)) {
+            this.formService.update(formBean);
+            return "redirect:/form/" + id;
+        }
+        model.addAttribute("formBean", formBean);
+        return "form/edit";
     }
 
 }

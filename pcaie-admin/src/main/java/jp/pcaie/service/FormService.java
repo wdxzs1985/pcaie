@@ -122,4 +122,15 @@ public class FormService {
         paginate.setItems(items);
     }
 
+    public FormBean getFormById(final Integer id) {
+        final Map<String, Object> param = new HashMap<String, Object>();
+        param.put("id", id);
+        return this.mFormMapper.fetchBean(param);
+    }
+
+    @Transactional
+    public void update(final FormBean formBean) {
+        this.mFormMapper.update(formBean);
+    }
+
 }
