@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+<head>
+    <title th:inline="text">[[#{admin.customer}]]</title>
+</head>
+<body>
+<div class="container">
+    <div class="page-header" layout:fragment="header">
+        <h1 th:text="#{admin.customer}">admin.customer</h1>
+    </div>
+    <div layout:fragment="content">
+        <form method="GET" class="form-horizontal"
+            action="../customer/index.html" th:action="@{/customer}">
+            <div class="form-group">
+                <label class="control-label col-sm-4 col-md-3" for="inputMail"
+                    th:text="#{CustomerBean.email}">
+                    CustomerBean.email
+                </label>
+                <div class="col-sm-6">
+                    <input type="text" id="inputMail" name="email" class="form-control"
+                    placeholder="CustomerBean.email" 
+                    th:placeholder="#{CustomerBean.email}"
+                    th:value="${paginate.params[email]}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4 col-md-3" for="inputName"
+                    th:text="#{CustomerBean.name}">
+                    CustomerBean.name
+                </label>
+                <div class="col-sm-4">
+                    <input type="text" id="inputName" name="name" class="form-control"
+                        placeholder="CustomerBean.name" 
+                        th:placeholder="#{CustomerBean.name}"
+                        th:value="${paginate.params[name]}" />
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-block btn-default">
+                        <span class="glyphicon glyphicon-search"></span>&nbsp;
+                        <span th:text="#{button.search}">button.search</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <hr />
+        <div th:if="${#lists.isEmpty(paginate.items)}">
+            <div class="alert alert-default">
+                <p th:text="#{application.nodata}">application.nodata</p>
+            </div>
+        </div>
+        <div th:unless="${#lists.isEmpty(paginate.items)}">
+            <table class="table table-bordered table-hover">
+              <tr>
+                <th th:text="#{CustomerBean.name}" style="width:226px;">
+                    CustomerBean.name
+                </th>
+                <th th:text="#{CustomerBean.email}">CustomerBean.email</th>
+                <th style="width:86px;" class="text-center"
+                    th:text="#{application.operation}">
+                    application.operation
+                </th>
+              </tr>
+              <tr th:each="customer : ${paginate.items}">
+                <td>
+                    <a href="edit.html" th:href="@{/customer/__${customer.id}__}"
+                        title="customer.name"
+                        th:title="${customer.name}"
+                        th:text="${customer.name}">
+                        customer.name
+                    </a>
+                </td>
+                <td th:text="${customer.email}">customer.email</td>
+                <td>
+                   <a href="edit.html" th:href="@{/customer/__${customer.id}__}"
+                       class="btn btn-sm btn-info">
+                       <span class="glyphicon glyphicon-new-window"></span>&nbsp;
+                        <span th:text="#{button.view}">button.view</span>
+                   </a>
+                </td>
+              </tr>
+            </table>
+            
+            <div class="">
+                <p th:text="#{paginate.title(${paginate.itemCount}, ${paginate.start + 1}, ${paginate.end + 1})}">
+                    paginate.title
+                </p>
+                <ul class="pagination">
+                    <li th:unless="${paginate.first}">
+                        <a th:href="@{/customer(page=1, email=${paginate.params[email]}, name=${paginate.params[name]})}">
+                            <span th:text="#{button.firstpage}">button.firstpage</span>
+                        </a>
+                    </li>
+                    <th:block th:each="i : ${#numbers.sequence(1, paginate.pageCount)}"
+                        th:switch="paginate.page">
+                        <li th:case="${i + 5}" class="disabled">
+                            <span>...</span>
+                        </li>
+                        <li th:case="${i - 5}" class="disabled">
+                            <span>...</span>
+                        </li>
+	                    <li th:case="*" class="${i == paginate.page} ? 'active'">
+	                        <a th:href="@{/customer(page=${i}, email=${paginate.params[email]}, name=${paginate.params[name]})}">
+	                            <span th:text="${i}">i</span>
+	                        </a>
+	                    </li>
+                    </th:block>
+                    <li th:unless="${paginate.last}">
+                        <a th:href="@{/customer(page=${paginate.pageCount}, email=${paginate.params[email]}, name=${paginate.params.[name]})}">
+                            <span th:text="#{button.lastpage}">button.lastpage</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+<script type="text/javascript" th:inline="javascript">
+</script>
+</th:block>
+</body>
+</html>

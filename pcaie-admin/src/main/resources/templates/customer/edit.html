@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title th:inline="text">[[#{admin.customer.edit}]]</title>
+    <link rel="stylesheet" th:href="@{/common/css/form.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="page-header" layout:fragment="header">
+        <h1 th:text="#{admin.customer.edit}">admin.customer.edit</h1>
+    </div>
+    <div layout:fragment="content">
+    <form class="form-horizontal" method="POST"
+          th:action="@{/customer/__${customerBean.id}__/edit}" >
+    <div class="form-group required"
+           th:class="${#strings.isEmpty(nameError)} ? 'form-group required' : 'form-group required has-error'">
+          <label for="inputName" class="control-label col-sm-4 col-md-3" >
+             <span class="glyphicon glyphicon-exclamation-sign"></span>
+             <span class="glyphicon glyphicon-ok"></span>
+             <span th:text="#{CustomerBean.name}">CustomerBean.name</span>
+          </label>
+          <div class="col-sm-4">
+              <input type="text" class="form-control " 
+                     id="inputName" name="name"
+                     th:placeholder="#{CustomerBean.name}"
+                     th:value="${customerBean.name}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(nameError)}"
+                  th:text="${nameError}">nameError</span>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="inputKana" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{CustomerBean.kana}">CustomerBean.kana</label>
+          <div class="col-sm-4">
+              <input type="text" class="form-control col-sm-6" 
+                     id="inputKana" name="kana"
+                     th:placeholder="#{CustomerBean.kana}"
+                     th:value="${customerBean.kana}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(kanaError)}"
+                  th:text="${kanaError}">kanaError</span>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="inputEmployment" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{CustomerBean.employment}">CustomerBean.employment</label>
+          <div class="col-sm-4">
+              <input type="text" class="form-control" 
+                     id="inputEmployment" name="employment"
+                     th:placeholder="#{CustomerBean.employment}"
+                     th:value="${customerBean.employment}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(employmentError)}"
+                  th:text="${employmentError}">employmentError</span>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="inputDepartment" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{CustomerBean.department}">CustomerBean.department</label>
+          <div class="col-sm-4">
+              <input type="text" class="form-control" 
+                     id="inputDepartment" name="department"
+                     th:placeholder="#{CustomerBean.department}"
+                     th:value="${customerBean.department}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(departmentError)}"
+                  th:text="${departmentError}">departmentError</span>
+          </div>
+      </div>
+      
+      <div id="contact-by-email">
+        <div class="form-group">
+          <label for="inputEmail" class="control-label col-sm-4 col-md-3" >
+            <span th:text="#{CustomerBean.email}">CustomerBean.email</span>
+          </label>
+          <div class="col-sm-6">
+              <input type="email" class="form-control" 
+                     id="inputEmail" name="email"
+                     th:placeholder="#{CustomerBean.email}"
+                     th:value="${customerBean.email}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(emailError)}"
+                  th:text="${emailError}">emailError</span>
+          </div>
+        </div>
+      </div>
+      
+      <div id="contact-by-tel">
+        <div class="form-group">
+          <label for="inputTel" class="control-label col-sm-4 col-md-3">
+            <span th:text="#{CustomerBean.tel}">CustomerBean.tel</span>
+          </label>
+          <div class="col-sm-4">
+              <input type="tel" class="form-control" 
+                     id="inputTel" name="tel"
+                     th:placeholder="#{CustomerBean.tel}"
+                     th:value="${customerBean.tel}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(telError)}"
+                  th:text="${telError}">telError</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-4 col-md-offset-3">
+          <button type="submit" class="btn btn-success">
+            <span class="glyphicon glyphicon-ok"></span>&nbsp;
+            <span th:text="#{button.save}">button.save</span>
+          </button>
+          <a class="btn btn-default"
+             th:href="@{/customer/__${customerBean.id}__}">
+            <span class="glyphicon glyphicon-remove"></span>&nbsp;
+            <span th:text="#{button.cancel}">button.cancel</span> 
+          </a>
+        </div>
+      </div>
+    </form>
+    </div>
+</div>
+<th:block layout:fragment="scripts">
+<script th:src="@{/common/js/form-required.js}"></script>
+</th:block>
+</body>
+</html>

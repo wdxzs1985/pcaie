@@ -107,22 +107,6 @@
                   th:text="${emailError}">emailError</span>
           </div>
         </div>
-        <div class="form-group required">
-          <label for="inputEmail2" class="control-label col-sm-4 col-md-3" >
-            <span class="glyphicon glyphicon-exclamation-sign"></span>
-            <span class="glyphicon glyphicon-ok"></span>
-            <span th:text="#{CustomerBean.email2}">CustomerBean.email2</span>
-          </label>
-          <div class="col-sm-6">
-              <input type="email" class="form-control" 
-                     id="inputEmail2" name="customerBean.email2"
-                     th:placeholder="#{CustomerBean.email2}"
-                     th:value="${formBean.customerBean.email2}" />
-              <span class="help-block help-block-danger"
-                  th:unless="${#strings.isEmpty(email2Error)}"
-                  th:text="${email2Error}">email2Error</span>
-          </div>
-        </div>
       </div>
       
       <div id="contact-by-tel">

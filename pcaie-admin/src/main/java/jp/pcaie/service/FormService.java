@@ -8,7 +8,6 @@ import java.util.Map;
 
 import jp.pcaie.domain.CustomerBean;
 import jp.pcaie.domain.FormBean;
-import jp.pcaie.domain.StaffBean;
 import jp.pcaie.mapper.MCustomerMapper;
 import jp.pcaie.mapper.MFormMapper;
 import jp.pcaie.support.Paginate;
@@ -55,7 +54,7 @@ public class FormService {
         switch (formBean.getContactBy()) {
         case FormBean.CONTACT_BY_EMAIL:
             isValid = this.customerBeanValidator.validateInputEmail(customerBean.getEmail(),
-                                                                    customerBean.getEmail2(),
+                                                                    customerBean.getEmail(),
                                                                     model,
                                                                     locale) && isValid;
             break;
@@ -94,9 +93,10 @@ public class FormService {
         params.put("email", formBean.getCustomerBean().getEmail());
         params.put("tel", formBean.getCustomerBean().getTel());
 
-        final CustomerBean customerBean = this.mCustomerMapper.fetchBean(params);
+        CustomerBean customerBean = this.mCustomerMapper.fetchBean(params);
         if (customerBean == null) {
-            this.mCustomerMapper.insert(formBean.getCustomerBean());
+            customerBean = formBean.getCustomerBean();
+            this.mCustomerMapper.insert(customerBean);
         } else {
             formBean.setCustomerBean(customerBean);
         }
@@ -106,14 +106,14 @@ public class FormService {
         this.mFormMapper.insert(formBean);
     }
 
-    public void doSearch(final Paginate<StaffBean> paginate) {
+    public void doSearch(final Paginate<FormBean> paginate) {
         final Map<String, Object> params = paginate.getParams();
         final int itemCount = this.mFormMapper.count(params);
 
         paginate.setItemCount(itemCount);
         paginate.compute();
 
-        List<StaffBean> items = null;
+        List<FormBean> items = null;
         if (itemCount == 0) {
             items = Collections.emptyList();
         } else {

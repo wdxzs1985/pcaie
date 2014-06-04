@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import jp.pcaie.domain.FormBean;
-import jp.pcaie.domain.StaffBean;
 
 public interface MFormMapper {
 
@@ -12,7 +11,7 @@ public interface MFormMapper {
 
     int count(Map<String, Object> params);
 
-    List<StaffBean> fetchList(Map<String, Object> params);
+    List<FormBean> fetchList(Map<String, Object> params);
 
     FormBean fetchBean(Map<String, Object> param);
 

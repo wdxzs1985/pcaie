@@ -3,9 +3,7 @@ package jp.pcaie.controller;
 import java.util.Locale;
 import java.util.Map;
 
-import jp.pcaie.domain.CustomerBean;
 import jp.pcaie.domain.FormBean;
-import jp.pcaie.domain.StaffBean;
 import jp.pcaie.exception.PageNotFoundException;
 import jp.pcaie.service.FormService;
 import jp.pcaie.support.Paginate;
@@ -19,12 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping(value = "/form")
-@SessionAttributes("LOGIN_USER")
 public class FormController {
 
     @Autowired
@@ -37,7 +33,7 @@ public class FormController {
                         @RequestParam(required = false) final String name,
                         @RequestParam(required = false, defaultValue = "1") final int page,
                         final Model model) {
-        final Paginate<StaffBean> paginate = new Paginate<StaffBean>();
+        final Paginate<FormBean> paginate = new Paginate<FormBean>();
         paginate.setPage(page);
 
         final Map<String, Object> params = paginate.getParams();
@@ -103,9 +99,6 @@ public class FormController {
         if (formBean == null) {
             throw new PageNotFoundException();
         }
-        // for validate
-        final CustomerBean customerBean = formBean.getCustomerBean();
-        customerBean.setEmail2(customerBean.getEmail());
         //
         formBean.setMaker(inputFormBean.getMaker());
         formBean.setModel(inputFormBean.getModel());

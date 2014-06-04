@@ -6,14 +6,19 @@
     
     <select id="fetchBean" resultType="CustomerBean">
         SELECT 
-            customer.ID AS id,
-            customer.NAME AS name,
-            customer.KANA AS kana,
-            customer.EMAIL AS email,
-            customer.TEL AS tel
+            customer.id         AS `id`,
+            customer.name       AS `name`,
+            customer.kana       AS `kana`,
+            customer.email      AS `email`,
+            customer.tel        AS `tel`,
+            customer.employment AS `employment`,
+            customer.department AS `department`
         FROM
             m_customer customer
         <where>
+            <if test="id != null">
+            AND customer.id = #{id}
+            </if>
             <if test="name != null">
             AND customer.name = #{name}
             </if>
@@ -47,4 +52,58 @@
         </selectKey>
     </insert>
 
+    <select id="count" resultType="int">
+        SELECT 
+            count(customer.id)
+        FROM
+            m_customer customer
+        <where>
+            <if test="email != null">
+            AND customer.email LIKE CONCAT('%', #{email}, '%')
+            </if>
+            <if test="name != null">
+            AND customer.NAME LIKE CONCAT('%', #{name}, '%')
+            </if>
+            AND customer.DEL_FLG = '0'
+        </where>
+    </select>
+    
+    <select id="fetchList" resultType="CustomerBean">
+        SELECT 
+            customer.id         AS `id`,
+            customer.name       AS `name`,
+            customer.kana       AS `kana`,
+            customer.email      AS `email`,
+            customer.tel        AS `tel`,
+            customer.employment AS `employment`,
+            customer.department AS `department`
+        FROM
+            m_customer customer 
+        <where>
+            <if test="email != null">
+            AND customer.email LIKE CONCAT('%', #{email}, '%')
+            </if>
+            <if test="name != null">
+            AND customer.NAME LIKE CONCAT('%', #{name}, '%')
+            </if>
+            AND customer.DEL_FLG = '0'
+        </where>
+        order by customer.id desc
+        limit #{start}, #{pageSize}
+    </select>
+    
+    <update id="update">
+        UPDATE 
+            m_customer customer 
+        <set>
+            customer.name = #{name},
+            customer.kana = #{kana},
+            customer.email = #{email},
+            customer.tel = #{tel},
+            customer.employment = #{employment},
+            customer.department = #{department},
+        </set>
+        WHERE
+            customer.id = #{id}
+    </update>
 </mapper>
