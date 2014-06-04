@@ -5,11 +5,15 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-@ImportResource("app-config.xml")
+@EnableTransactionManagement
+@ImportResource({ "config/app-config.xml",
+        "config/mybatis-config.xml",
+        "config/mvc-config.xml" })
 public class Application {
 
     public static void main(final String[] args) {
