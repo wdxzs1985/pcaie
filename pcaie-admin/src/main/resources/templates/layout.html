@@ -18,30 +18,43 @@
           </a>
         </div>
           <ul class="nav navbar-nav navbar-left"
-            th:if="${session.LOGIN_USER}">
+              th:if="${session.LOGIN_USER}">
             <li>
               <a href="staff/index.html" th:href="@{/staff}"
-                th:text="#{admin.staff}">
-                admin.staff
+                 th:text="#{admin.staff}">
+                 admin.staff
               </a>
             </li>
             <li>
               <a href="form/index.html" th:href="@{/form}"
-                th:text="#{admin.form}">
-                admin.form
+                 th:text="#{admin.form}">
+                 admin.form
               </a>
             </li>
             <li>
               <a href="customer/index.html" th:href="@{/customer}"
-                th:text="#{admin.customer}">
-                admin.customer
+                 th:text="#{admin.customer}">
+                 admin.customer
               </a>
             </li>
-            <li>
-              <a href="shop/index.html" th:href="@{/shop}"
-                th:text="#{admin.shop}">
-                admin.shop
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span th:text="#{admin.shop}"></span> <b class="caret"></b>
               </a>
+              <ul class="dropdown-menu">
+                <li>
+                    <a href="#" th:href="@{/stock}"
+                       th:text="#{admin.stock}">
+                       admin.stock
+                    </a>
+                </li>
+                <li>
+                    <a href="#" th:href="@{/order}"
+                       th:text="#{admin.order}">
+                       admin.order
+                    </a>
+                </li>
+              </ul>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -62,7 +75,7 @@
     </div>
     <div class="container">
         <div class="page-header fade" layout:fragment="header">
-            <h1 th:text="#{application.name}">application.name</h1>
+            <h1 th:text="#{application.name}" >application.name</h1>
         </div>
         <div layout:fragment="content">content</div>
     </div>

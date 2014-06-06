@@ -20,7 +20,6 @@ public class CustomerBeanValidator {
 
     @Autowired
     private MessageSource messageSource = null;
-
     @Autowired
     private EmailValidator emailValidator = null;
 

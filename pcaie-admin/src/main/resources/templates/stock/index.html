@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+<head>
+    <title th:inline="text">[[#{admin.stock}]]</title>
+</head>
+<body>
+<div class="container">
+    <div class="page-header" layout:fragment="header">
+        <div class="pull-right">
+            <a class="btn btn-success"
+               href="create.html" th:href="@{/stock/create}"
+               th:text="#{admin.stock.create}">
+                admin.stock.create
+            </a>
+        </div>
+        <h1 th:text="#{admin.stock}">admin.stock</h1>
+    </div>
+    <div layout:fragment="content">
+        <form method="GET" class="form-horizontal"
+            action="index.html" th:action="@{/stock}">
+            <div class="form-group">
+                <label class="control-label col-sm-4 col-md-3" for="inputName"
+                    th:text="#{ProductBean.name}">
+                    ProductBean.name
+                </label>
+                <div class="col-sm-4">
+                    <input type="text" id="inputName" name="name" class="form-control"
+                        placeholder="ProductBean.name" 
+                        th:placeholder="#{ProductBean.name}"
+                        th:value="${paginate.params[name]}" />
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-block btn-default">
+                        <span class="glyphicon glyphicon-search"></span>&nbsp;
+                        <span th:text="#{button.search}">button.search</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <hr />
+        <div th:if="${#lists.isEmpty(paginate.items)}">
+            <div class="alert alert-default">
+                <p th:text="#{application.nodata}">
+                    application.nodata
+                </p>
+            </div>
+        </div>
+        <div th:unless="${#lists.isEmpty(paginate.items)}">
+            <table class="table table-bordered table-hover">
+              <tr>
+                <th th:text="#{ProductBean.name}" >
+                    ProductBean.name
+                </th>
+                <th style="width:226px;"
+                    th:text="#{StockBean.stock}">
+                    StockBean.stock
+                </th>
+                <th style="width:86px;" class="text-center"
+                    th:text="#{application.operation}" >
+                    application.operation
+                </th>
+              </tr>
+              <tr th:each="stock : ${paginate.items}">
+                <td th:text="${stock.productBean.name}">
+                        stock.productBean.name
+                </td>
+                <td th:text="${stock.stock}">
+                    stock.stock
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-success"
+                       th:href="@{/stock/__${stock.id}__}" >
+                       <span class="glyphicon glyphicon-edit"></span>&nbsp;
+                       <span th:text="#{button.edit}">button.edit</span>
+                    </a>
+                </td>
+              </tr>
+            </table>
+            
+            <div class="">
+                <p th:text="#{paginate.title(${paginate.itemCount}, ${paginate.start + 1}, ${paginate.end + 1})}">
+                    paginate.title
+                </p>
+                <ul class="pagination">
+                    <li th:unless="${paginate.first}">
+                        <a th:href="@{/stock(page=1, name=${paginate.params[name]})}">
+                            <span th:text="#{button.firstpage}">button.firstpage</span>
+                        </a>
+                    </li>
+                    <th:block th:each="i : ${#numbers.sequence(1, paginate.pageCount)}"
+                        th:switch="paginate.page">
+                        <li th:case="${i + 5}" class="disabled">
+                            <span>...</span>
+                        </li>
+                        <li th:case="${i - 5}" class="disabled">
+                            <span>...</span>
+                        </li>
+	                    <li th:case="*" class="${i == paginate.page} ? 'active'">
+	                        <a th:href="@{/stock(page=${i}, name=${paginate.params[name]})}">
+	                            <span th:text="${i}">i</span>
+	                        </a>
+	                    </li>
+                    </th:block>
+                    <li th:unless="${paginate.last}">
+                        <a th:href="@{/stock(page=${paginate.pageCount}, name=${paginate.params[name]})}">
+                            <span th:text="#{button.lastpage}">button.lastpage</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+</th:block>
+</body>
+</html>

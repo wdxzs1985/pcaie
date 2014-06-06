@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.pcaie.mapper.MStockMapper">
+    
+    <insert id="insert" useGeneratedKeys="true">
+        INSERT INTO m_stock (
+            product_id
+        ,   stock
+        ,   safe_stock
+        ,   notification_email
+        ) VALUES (
+            #{productBean.id}
+        ,   #{stock}
+        ,   #{safeStock}
+        ,   #{notificationEmail}
+        )
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+    </insert>
+
+    
+    <select id="count" resultType="int">
+        SELECT 
+            count(stock.id)
+        FROM
+            m_stock stock
+        LEFT JOIN m_product product 
+        ON stock.product_id = product.id
+        <where>
+            <if test="name != null">
+            AND product.NAME LIKE CONCAT('%', #{name}, '%')
+            </if>
+            AND stock.DEL_FLG = '0'
+        </where>
+    </select>
+    
+    <select id="fetchList" resultType="StockBean">
+        SELECT 
+            stock.ID                    AS `id`,
+            product.id                  AS `productBean.id`,
+            product.name                AS `productBean.name`,
+            product.content             AS `productBean.kana`,
+            stock.STOCK                 AS `stock`,
+            stock.SAFE_STOCK            AS `safeStock`,
+            stock.NOTIFICATION_EMAIL    AS `notificationEmail`
+        FROM
+            m_stock stock
+        LEFT JOIN m_product product 
+        ON stock.product_id = product.id
+        <where>
+            <if test="name != null">
+            AND product.NAME LIKE CONCAT('%', #{name}, '%')
+            </if>
+            AND stock.DEL_FLG = '0'
+        </where>
+        order by stock.id desc
+        limit #{start}, #{pageSize}
+    </select>
+    
+    <select id="fetchBean" resultType="StockBean">
+        SELECT 
+            stock.ID                    AS `id`,
+            product.id                  AS `productBean.id`,
+            product.name                AS `productBean.name`,
+            product.content             AS `productBean.kana`,
+            stock.STOCK                 AS `stock`,
+            stock.SAFE_STOCK            AS `safeStock`,
+            stock.NOTIFICATION_EMAIL    AS `notificationEmail`
+        FROM
+            m_stock stock
+        LEFT JOIN m_product product 
+        ON stock.product_id = product.id
+        WHERE
+            stock.id = #{id}
+    </select>
+    
+    <update id="update">
+        UPDATE 
+            m_stock stock
+        <set>
+            stock.stock = #{stock},
+            stock.safe_stock = #{safeStock},
+            stock.notification_email = #{notificationEmail},
+        </set>
+        WHERE
+            stock.id = #{id}
+    </update>
+</mapper>

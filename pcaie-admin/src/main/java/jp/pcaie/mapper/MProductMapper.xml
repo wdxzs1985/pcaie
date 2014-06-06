@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.pcaie.mapper.MProductMapper">
+    
+    <insert id="insert" useGeneratedKeys="true">
+        INSERT INTO m_product (
+            name
+        ,   content
+        ) VALUES (
+            #{name}
+        ,   #{content}
+        )
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+    </insert>
+
+    <select id="fetchBean" resultType="ProductBean">
+        SELECT 
+            product.ID              AS `id`,
+            product.NAME            AS `name`,
+            product.CONTENT         AS `content`
+        FROM
+            m_product product
+        WHERE
+            product.id = #{id}
+    </select>
+    
+    <update id="update">
+        UPDATE 
+            m_product product
+        <set>
+            product.name = #{name},
+            product.content = #{content},
+        </set>
+        WHERE
+            product.id = #{id}
+    </update>
+</mapper>
