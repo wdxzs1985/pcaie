@@ -5,13 +5,15 @@ public class StockBean extends DtoBean {
     /**
      * 
      */
-    private static final long serialVersionUID = -2289155782965096875L;
+    private static final long serialVersionUID = 6650673688967807327L;
 
     private ProductBean productBean = new ProductBean();
 
     private Integer stock;
 
     private Integer safeStock;
+
+    private Integer price;
 
     private String notificationEmail;
 
@@ -45,5 +47,13 @@ public class StockBean extends DtoBean {
 
     public void setNotificationEmail(final String notificationEmail) {
         this.notificationEmail = notificationEmail;
+    }
+
+    public Integer getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(final Integer price) {
+        this.price = price;
     }
 }

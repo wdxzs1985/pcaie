@@ -11,6 +11,8 @@
             customer.kana       AS `kana`,
             customer.email      AS `email`,
             customer.tel        AS `tel`,
+            customer.zip_code   AS `zipCode`,
+            customer.address    AS `address`,
             customer.employment AS `employment`,
             customer.department AS `department`
         FROM
@@ -41,11 +43,19 @@
         ,   kana
         ,   email
         ,   tel
+        ,   zip_code
+        ,   address
+        ,   employment
+        ,   department
         ) VALUES (
             #{name}
         ,   #{kana}
         ,   #{email}
         ,   #{tel}
+        ,   #{zipCode}
+        ,   #{address}
+        ,   #{employment}
+        ,   #{department}
         )
         <selectKey resultType="int" keyProperty="id" order="AFTER">
             SELECT @@IDENTITY
@@ -75,6 +85,8 @@
             customer.kana       AS `kana`,
             customer.email      AS `email`,
             customer.tel        AS `tel`,
+            customer.zip_code   AS `zipCode`,
+            customer.address    AS `address`,
             customer.employment AS `employment`,
             customer.department AS `department`
         FROM
@@ -100,6 +112,8 @@
             customer.kana = #{kana},
             customer.email = #{email},
             customer.tel = #{tel},
+            customer.zip_code = #{zipCode},
+            customer.address = #{address},
             customer.employment = #{employment},
             customer.department = #{department},
         </set>

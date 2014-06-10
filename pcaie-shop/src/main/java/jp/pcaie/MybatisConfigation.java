@@ -1,4 +1,4 @@
-package jp.pcaie.shop;
+package jp.pcaie;
 
 import javax.sql.DataSource;
 

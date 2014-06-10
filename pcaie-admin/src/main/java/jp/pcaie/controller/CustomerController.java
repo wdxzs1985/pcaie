@@ -79,6 +79,8 @@ public class CustomerController {
 
         customerBean.setName(inputCustomerBean.getName());
         customerBean.setKana(inputCustomerBean.getKana());
+        customerBean.setZipCode(inputCustomerBean.getZipCode());
+        customerBean.setAddress(inputCustomerBean.getAddress());
         customerBean.setEmployment(inputCustomerBean.getEmployment());
         customerBean.setDepartment(inputCustomerBean.getDepartment());
         customerBean.setEmail(inputCustomerBean.getEmail());

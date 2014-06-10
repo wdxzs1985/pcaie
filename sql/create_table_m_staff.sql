@@ -7,7 +7,7 @@ CREATE TABLE `pcaie`.`m_staff` (
   `name` varchar(45) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `role` int(11) NOT NULL DEFAULT '0',
+  `role` int(1) NOT NULL DEFAULT '0',
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `del_flg` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)

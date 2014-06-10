@@ -58,7 +58,9 @@ public class StockService {
         isValid = this.productBeanValidator.validateInputName(productBean.getName(),
                                                               model,
                                                               locale) && isValid;
-
+        isValid = this.stockBeanValidator.validateInputPrice(stockBean.getPrice(),
+                                                             model,
+                                                             locale) && isValid;
         isValid = this.stockBeanValidator.validateInputStock(stockBean.getStock(),
                                                              model,
                                                              locale) && isValid;
@@ -66,6 +68,7 @@ public class StockService {
                                                                  model,
                                                                  locale) && isValid;
         isValid = this.stockBeanValidator.validateInputNotificationEmail(stockBean.getNotificationEmail(),
+                                                                         stockBean.getSafeStock(),
                                                                          model,
                                                                          locale) && isValid;
         return isValid;

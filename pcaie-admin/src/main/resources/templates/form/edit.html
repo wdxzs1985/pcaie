@@ -3,7 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title th:inline="text">[[#{admin.form.edit}]]</title>
     <link rel="stylesheet" th:href="@{/common/css/form.css}"/>
 </head>
 <body>
@@ -37,6 +36,30 @@
                </p>
           </div>
       </div>
+      
+      <div class="form-group" 
+           th:unless="${#strings.isEmpty(formBean.customerBean.zipCode)}">
+          <label for="inputZipCode" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{CustomerBean.zipCode}">CustomerBean.zipCode</label>
+          <div class="col-sm-4">
+               <p class="form-control-static"
+                  th:text="${formBean.customerBean.zipCode}" >
+                  formBean.customerBean.zipCode
+               </p>
+          </div>
+      </div>
+      <div class="form-group" 
+           th:unless="${#strings.isEmpty(formBean.customerBean.address)}">
+          <label for="inputAddress" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{CustomerBean.address}">CustomerBean.address</label>
+          <div class="col-sm-4">
+               <p class="form-control-static"
+                  th:text="${formBean.customerBean.address}" >
+                  formBean.customerBean.address
+               </p>
+          </div>
+      </div>
+            
       <div class="form-group">
           <label for="inputEmployment" class="control-label col-sm-4 col-md-3" 
                  th:text="#{CustomerBean.employment}">CustomerBean.employment</label>

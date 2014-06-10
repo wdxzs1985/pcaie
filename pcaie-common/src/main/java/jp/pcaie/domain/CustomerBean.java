@@ -1,12 +1,11 @@
 package jp.pcaie.domain;
 
-
 public class CustomerBean extends DtoBean {
 
     /**
      * 
      */
-    private static final long serialVersionUID = -5928364611016970537L;
+    private static final long serialVersionUID = 6690459641663293003L;
 
     private String name;
 
@@ -15,6 +14,10 @@ public class CustomerBean extends DtoBean {
     private String employment;
 
     private String department;
+
+    private String zipCode;
+
+    private String address;
 
     private String email;
 
@@ -76,6 +79,22 @@ public class CustomerBean extends DtoBean {
 
     public void setTel(final String tel) {
         this.tel = tel;
+    }
+
+    public String getZipCode() {
+        return this.zipCode;
+    }
+
+    public void setZipCode(final String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(final String address) {
+        this.address = address;
     }
 
 }

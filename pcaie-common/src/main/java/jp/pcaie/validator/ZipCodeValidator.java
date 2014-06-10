@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmailValidator implements Validator<String> {
+public class ZipCodeValidator implements Validator<String> {
 
-    private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9\\-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private static final String ZIPCODE_PATTERN = "^[0-9]{3}-?[0-9]{4}$";
 
-    private final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+    private final Pattern pattern = Pattern.compile(ZIPCODE_PATTERN);
 
     @Override
     public boolean validate(final String value) {

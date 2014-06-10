@@ -13,6 +13,7 @@ public class CustomerBeanValidator {
 
     public static final int MAX_NAME_LENGTH = 45;
     public static final int MAX_KANA_LENGTH = 45;
+    public static final int MAX_ADDRESS_LENGTH = 200;
     public static final int MAX_EMPLOYMENT_LENGTH = 45;
     public static final int MAX_DEPARTMENT_LENGTH = 45;
     public static final int MAX_MAIL_LENGTH = 100;
@@ -22,6 +23,8 @@ public class CustomerBeanValidator {
     private MessageSource messageSource = null;
     @Autowired
     private EmailValidator emailValidator = null;
+    @Autowired
+    private ZipCodeValidator zipCodeValidator = null;
 
     public boolean validateInputName(final String inputName,
                                      final Model model,
@@ -60,6 +63,43 @@ public class CustomerBeanValidator {
                                                                          MAX_KANA_LENGTH },
                                                                  locale);
             model.addAttribute("kanaError", message);
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    public boolean validateInputZipCode(final String inputZipCode,
+                                        final Model model,
+                                        final Locale locale) {
+        boolean isValid = true;
+        final String fieldName = this.messageSource.getMessage("CustomerBean.zipCode",
+                                                               null,
+                                                               locale);
+        if (StringUtils.isNotBlank(inputZipCode)) {
+            if (!this.zipCodeValidator.validate(inputZipCode)) {
+                final String message = this.messageSource.getMessage("validate.unavailable",
+                                                                     new Object[] { fieldName },
+                                                                     locale);
+                model.addAttribute("zipCodeError", message);
+                isValid = false;
+            }
+        }
+        return isValid;
+    }
+
+    public boolean validateInputAddress(final String inputAddress,
+                                        final Model model,
+                                        final Locale locale) {
+        boolean isValid = true;
+        final String fieldName = this.messageSource.getMessage("CustomerBean.address",
+                                                               null,
+                                                               locale);
+        if (StringUtils.length(inputAddress) > MAX_ADDRESS_LENGTH) {
+            final String message = this.messageSource.getMessage("validate.tooLong",
+                                                                 new Object[] { fieldName,
+                                                                         MAX_ADDRESS_LENGTH },
+                                                                 locale);
+            model.addAttribute("addressError", message);
             isValid = false;
         }
         return isValid;

@@ -3,7 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title th:inline="text">[[#{admin.form.edit}]]</title>
     <link rel="stylesheet" th:href="@{/common/css/form.css}"/>
 </head>
 <body>
@@ -12,20 +11,7 @@
         <h1 th:text="#{admin.form.edit}">admin.form.edit</h1>
     </div>
     <div layout:fragment="content">
-        <div class="row" th:unless="${#strings.isEmpty(message)}">
-            <div class="col-sm-6 col-sm-offset-4 col-md-offset-3">
-                <div class="alert alert-success">
-                    <ul>
-                        <li th:text="${message}">
-                            message
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    
         <form class="form-horizontal">
-            <h3>123</h3>
             <div class="form-group">
                 <label for="inputName" class="control-label col-sm-4 col-md-3" >
                    <span th:text="#{CustomerBean.name}">CustomerBean.name</span>
@@ -47,6 +33,28 @@
                      <p class="form-control-static"
                         th:text="${formBean.customerBean.kana}" >
                         formBean.customerBean.kana
+                     </p>
+                </div>
+            </div>
+            <div class="form-group" 
+                 th:unless="${#strings.isEmpty(formBean.customerBean.zipCode)}">
+                <label for="inputZipCode" class="control-label col-sm-4 col-md-3" 
+                       th:text="#{CustomerBean.zipCode}">CustomerBean.zipCode</label>
+                <div class="col-sm-4">
+                     <p class="form-control-static"
+                        th:text="${formBean.customerBean.zipCode}" >
+                        formBean.customerBean.zipCode
+                     </p>
+                </div>
+            </div>
+            <div class="form-group" 
+                 th:unless="${#strings.isEmpty(formBean.customerBean.address)}">
+                <label for="inputAddress" class="control-label col-sm-4 col-md-3" 
+                       th:text="#{CustomerBean.address}">CustomerBean.address</label>
+                <div class="col-sm-4">
+                     <p class="form-control-static"
+                        th:text="${formBean.customerBean.address}" >
+                        formBean.customerBean.address
                      </p>
                 </div>
             </div>
@@ -102,7 +110,6 @@
         </form>
         <hr />
         <form class="form-horizontal">
-            <h3>123</h3>
             <div class="form-group" >
                 <label class="control-label col-sm-4 col-md-3"
                        th:text="#{FormBean.contactBy}">

@@ -10,12 +10,15 @@ $(function(){
                 $helpBlockDanger.show();
             };
         } else {
-            $formGroup.addClass('required-success');
-            var $helpBlockDanger = $formGroup.find('.help-block-danger');
-            if($helpBlockDanger.length > 0) {
-                $formGroup.removeClass('has-error');
-                $helpBlockDanger.hide();
-            };
+        	if(!$formGroup.hasClass('has-error')) {
+        		$formGroup.addClass('required-success');
+        	}
+//          $formGroup.addClass('required-success');
+//            var $helpBlockDanger = $formGroup.find('.help-block-danger');
+//            if($helpBlockDanger.length > 0) {
+//                $formGroup.removeClass('has-error');
+//                $helpBlockDanger.hide();
+//            };
         }
     });
     $('.form-group .form-control').trigger('change');

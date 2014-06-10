@@ -3,7 +3,6 @@
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="layout">
 <head>
-    <title th:inline="text">[[#{admin.staff}]]</title>
     <style>
         a.role {
             text-decoration: none;
@@ -119,23 +118,24 @@
                 </p>
                 <ul class="pagination">
                     <li th:unless="${paginate.first}">
-                        <a th:href="@{/staff(page=1, email=${paginate.params[email]}, name=${paginate.params[name]})}">
-                            <span th:text="#{button.firstpage}">button.firstpage</span>
+                        <a th:href="@{/staff(page=1, email=${paginate.params[email]}, name=${paginate.params[name]})}"
+                           th:title="#{button.firstpage}">
+                           &laquo;
                         </a>
                     </li>
-                    <th:block th:each="i : ${#numbers.sequence(1, paginate.pageCount)}"
-                        th:switch="paginate.page">
-                        <li th:case="${i + 5}" class="disabled">
+                    <th:block th:each="i : ${#numbers.sequence(1, paginate.pageCount)}">
+                        <li th:if="${i eq (paginate.page - 5)}" class="disabled">
                             <span>...</span>
                         </li>
-                        <li th:case="${i - 5}" class="disabled">
+                        <li th:if="${i gt (paginate.page - 5)} and ${i lt (paginate.page + 5)}"
+                            th:class="${i eq paginate.page} ? 'active'">
+                            <a th:href="@{/staff(page=${i}, email=${paginate.params[email]}, name=${paginate.params[name]})}">
+                                <span th:text="${i}">i</span>
+                            </a>
+                        </li>
+	                    <li th:if="${i eq (paginate.page + 5)}" class="disabled">
                             <span>...</span>
                         </li>
-	                    <li th:case="*" class="${i == paginate.page} ? 'active'">
-	                        <a th:href="@{/staff(page=${i}, email=${paginate.params[email]}, name=${paginate.params[name]})}">
-	                            <span th:text="${i}">i</span>
-	                        </a>
-	                    </li>
                     </th:block>
                     <li th:unless="${paginate.last}">
                         <a th:href="@{/staff(page=${paginate.pageCount}, email=${paginate.params[email]}, name=${paginate.params.[name]})}">

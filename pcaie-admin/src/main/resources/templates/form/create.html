@@ -3,7 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title th:inline="text">[[#{admin.form.create}]]</title>
     <link rel="stylesheet" th:href="@{/common/css/form.css}"/>
 </head>
 <body>
@@ -42,6 +41,32 @@
               <span class="help-block help-block-danger"
                   th:unless="${#strings.isEmpty(kanaError)}"
                   th:text="${kanaError}">kanaError</span>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="inputZipCode" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{CustomerBean.zipCode}">CustomerBean.zipCode</label>
+          <div class="col-sm-4">
+              <input type="text" class="form-control" 
+                     id="inputZipCode" name="customerBean.zipCode"
+                     th:placeholder="#{CustomerBean.zipCode}"
+                     th:value="${formBean.customerBean.zipCode}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(zipCodeError)}"
+                  th:text="${zipCodeError}">zipCodeError</span>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="inputAddress" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{CustomerBean.address}">CustomerBean.address</label>
+          <div class="col-sm-4">
+              <input type="text" class="form-control" 
+                     id="inputAddress" name="customerBean.address"
+                     th:placeholder="#{CustomerBean.address}"
+                     th:value="${formBean.customerBean.address}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(addressError)}"
+                  th:text="${addressError}">addressError</span>
           </div>
       </div>
       <div class="form-group">

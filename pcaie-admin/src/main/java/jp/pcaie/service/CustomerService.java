@@ -58,6 +58,12 @@ public class CustomerService {
         isValid = this.customerBeanValidator.validateInputKana(customerBean.getKana(),
                                                                model,
                                                                locale) && isValid;
+        isValid = this.customerBeanValidator.validateInputZipCode(customerBean.getZipCode(),
+                                                                  model,
+                                                                  locale) && isValid;
+        isValid = this.customerBeanValidator.validateInputAddress(customerBean.getAddress(),
+                                                                  model,
+                                                                  locale) && isValid;
         isValid = this.customerBeanValidator.validateInputEmployment(customerBean.getEmployment(),
                                                                      model,
                                                                      locale) && isValid;

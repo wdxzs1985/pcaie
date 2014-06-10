@@ -3,6 +3,7 @@ package jp.pcaie.controller;
 import java.util.Locale;
 import java.util.Map;
 
+import jp.pcaie.domain.ProductBean;
 import jp.pcaie.domain.StockBean;
 import jp.pcaie.exception.PageNotFoundException;
 import jp.pcaie.service.StockService;
@@ -84,14 +85,19 @@ public class StockController {
         if (stockBean == null) {
             throw new PageNotFoundException();
         }
+        final ProductBean productBean = stockBean.getProductBean();
+        final ProductBean inputProductBean = inputStockBean.getProductBean();
+        productBean.setName(inputProductBean.getName());
+        productBean.setContent(inputProductBean.getContent());
         //
+        stockBean.setPrice(inputStockBean.getPrice());
         stockBean.setStock(inputStockBean.getStock());
         stockBean.setSafeStock(inputStockBean.getSafeStock());
         stockBean.setNotificationEmail(inputStockBean.getNotificationEmail());
 
         if (this.stockService.validate(stockBean, model, locale)) {
             this.stockService.update(stockBean);
-            final String message = this.messageSource.getMessage("admin.form.edit.message",
+            final String message = this.messageSource.getMessage("admin.stock.edit.message",
                                                                  null,
                                                                  locale);
             redirectAttributes.addFlashAttribute("message", message);

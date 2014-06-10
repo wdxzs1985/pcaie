@@ -36,11 +36,15 @@
         ,   kana
         ,   email
         ,   tel
+        ,   employment
+        ,   department
         ) VALUES (
             #{name}
         ,   #{kana}
         ,   #{email}
         ,   #{tel}
+        ,   #{employment}
+        ,   #{department}
         )
         <selectKey resultType="int" keyProperty="id" order="AFTER">
             SELECT @@IDENTITY

@@ -7,11 +7,13 @@
     <insert id="insert" useGeneratedKeys="true">
         INSERT INTO m_stock (
             product_id
+        ,   price
         ,   stock
         ,   safe_stock
         ,   notification_email
         ) VALUES (
             #{productBean.id}
+        ,   #{price}
         ,   #{stock}
         ,   #{safeStock}
         ,   #{notificationEmail}
@@ -43,6 +45,7 @@
             product.id                  AS `productBean.id`,
             product.name                AS `productBean.name`,
             product.content             AS `productBean.kana`,
+            stock.PRICE                 AS `price`,
             stock.STOCK                 AS `stock`,
             stock.SAFE_STOCK            AS `safeStock`,
             stock.NOTIFICATION_EMAIL    AS `notificationEmail`
@@ -66,6 +69,7 @@
             product.id                  AS `productBean.id`,
             product.name                AS `productBean.name`,
             product.content             AS `productBean.kana`,
+            stock.PRICE                 AS `price`,
             stock.STOCK                 AS `stock`,
             stock.SAFE_STOCK            AS `safeStock`,
             stock.NOTIFICATION_EMAIL    AS `notificationEmail`
@@ -81,6 +85,7 @@
         UPDATE 
             m_stock stock
         <set>
+            stock.price = #{price},
             stock.stock = #{stock},
             stock.safe_stock = #{safeStock},
             stock.notification_email = #{notificationEmail},

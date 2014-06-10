@@ -11,12 +11,39 @@ import org.springframework.ui.Model;
 @Component
 public class StockBeanValidator {
 
+    public static final int MIN_PRICE = 0;
+    public static final int MIN_STOCK = 0;
+    public static final int MIN_SAFE_STOCK = 0;
     public static final int MAX_MAIL_LENGTH = 100;
 
     @Autowired
     private MessageSource messageSource = null;
     @Autowired
     private EmailValidator emailValidator = null;
+
+    public boolean validateInputPrice(final Integer inputPrice,
+                                      final Model model,
+                                      final Locale locale) {
+        boolean isValid = true;
+        final String fieldName = this.messageSource.getMessage("StockBean.price",
+                                                               null,
+                                                               locale);
+        if (inputPrice == null) {
+            final String message = this.messageSource.getMessage("validate.empty",
+                                                                 new Object[] { fieldName },
+                                                                 locale);
+            model.addAttribute("priceError", message);
+            isValid = false;
+        } else if (inputPrice < MIN_PRICE) {
+            final String message = this.messageSource.getMessage("validate.tooSmall",
+                                                                 new Object[] { fieldName,
+                                                                         MIN_PRICE },
+                                                                 locale);
+            model.addAttribute("priceError", message);
+            isValid = false;
+        }
+        return isValid;
+    }
 
     public boolean validateInputStock(final Integer inputStock,
                                       final Model model,
@@ -31,10 +58,10 @@ public class StockBeanValidator {
                                                                  locale);
             model.addAttribute("stockError", message);
             isValid = false;
-        } else if (inputStock < 0) {
+        } else if (inputStock < MIN_STOCK) {
             final String message = this.messageSource.getMessage("validate.tooSmall",
                                                                  new Object[] { fieldName,
-                                                                         1 },
+                                                                         MIN_STOCK },
                                                                  locale);
             model.addAttribute("stockError", message);
             isValid = false;
@@ -55,10 +82,10 @@ public class StockBeanValidator {
                                                                  locale);
             model.addAttribute("safeStockError", message);
             isValid = false;
-        } else if (inputSafeStock < 0) {
+        } else if (inputSafeStock < MIN_SAFE_STOCK) {
             final String message = this.messageSource.getMessage("validate.tooSmall",
                                                                  new Object[] { fieldName,
-                                                                         0 },
+                                                                         MIN_SAFE_STOCK },
                                                                  locale);
             model.addAttribute("safeStockError", message);
             isValid = false;
@@ -67,13 +94,22 @@ public class StockBeanValidator {
     }
 
     public boolean validateInputNotificationEmail(final String inputNotificationEmail,
+                                                  final Integer inputSafeStock,
                                                   final Model model,
                                                   final Locale locale) {
         boolean isValid = true;
-        if (StringUtils.isNotBlank(inputNotificationEmail)) {
-            final String fieldName = this.messageSource.getMessage("StockBean.notificationEmail",
-                                                                   null,
-                                                                   locale);
+        final String fieldName = this.messageSource.getMessage("StockBean.notificationEmail",
+                                                               null,
+                                                               locale);
+        if (StringUtils.isBlank(inputNotificationEmail)) {
+            if (inputSafeStock != null && inputSafeStock > 0) {
+                final String message = this.messageSource.getMessage("validate.empty",
+                                                                     new Object[] { fieldName },
+                                                                     locale);
+                model.addAttribute("notificationEmailError", message);
+                isValid = false;
+            }
+        } else {
             if (StringUtils.length(inputNotificationEmail) > MAX_MAIL_LENGTH) {
                 final String message = this.messageSource.getMessage("validate.tooLong",
                                                                      new Object[] { fieldName,

@@ -1,4 +1,4 @@
-package jp.pcaie.shop.mapper;
+package jp.pcaie.mapper;
 
 public interface MCustomerMapper {
 

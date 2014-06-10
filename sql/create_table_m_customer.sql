@@ -6,6 +6,8 @@ CREATE TABLE `pcaie`.`m_customer` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(45) NOT NULL,
     `kana` varchar(45) DEFAULT NULL,
+    `zip_code` varchar(10) DEFAULT NULL,
+    `address` varchar(200) DEFAULT NULL,
     `employment` varchar(45) DEFAULT NULL,
     `department` varchar(45) DEFAULT NULL,
     `email` varchar(100) DEFAULT NULL,

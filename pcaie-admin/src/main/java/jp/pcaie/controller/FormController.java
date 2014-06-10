@@ -103,7 +103,7 @@ public class FormController {
         formBean.setMaker(inputFormBean.getMaker());
         formBean.setModel(inputFormBean.getModel());
         formBean.setContent(inputFormBean.getContent());
-
+        //
         if (this.formService.validate(formBean, model, locale)) {
             this.formService.update(formBean);
             final String message = this.messageSource.getMessage("admin.form.edit.message",
