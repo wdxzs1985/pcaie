@@ -19,7 +19,7 @@ public class CartController {
         return "cart/index";
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
     public List<Object> getList() {
         return Collections.emptyList();
@@ -47,6 +47,21 @@ public class CartController {
     @ResponseBody
     public String clear() {
         return "ok";
+    }
+
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
+    public String confirm() {
+        return "cart/confirm";
+    }
+
+    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    public String order() {
+        return "redirect:/cart/finish";
+    }
+
+    @RequestMapping(value = "/finish", method = RequestMethod.GET)
+    public String finish() {
+        return "cart/finish";
     }
 
 }

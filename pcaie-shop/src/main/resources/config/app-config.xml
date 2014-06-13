@@ -38,11 +38,14 @@
          <property name="bcc" value="shop@pcaie.jp"/>
      </bean>
      
+     <!-- 
     <bean id="passwordChangedNotification" class="jp.pcaie.mail.PasswordChangedNotification">
         <property name="template" value="password-changed-notification.vm"/>
     </bean>
-    
+     -->
+     <!-- 
     <bean id="signupNotification" class="jp.pcaie.mail.SignupNotification">
         <property name="template" value="signup-notification.vm"/>
     </bean>
+     -->
 </beans>
