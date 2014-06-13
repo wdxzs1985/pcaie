@@ -5,7 +5,7 @@ public class UserBean extends DtoBean {
     /**
      * 
      */
-    private static final long serialVersionUID = 5451974491866159547L;
+    private static final long serialVersionUID = 155639178921209663L;
 
     private String name;
 
@@ -14,6 +14,8 @@ public class UserBean extends DtoBean {
     private String password;
 
     private String password2;
+
+    private boolean login;
 
     public String getEmail() {
         return this.email;
@@ -45,6 +47,14 @@ public class UserBean extends DtoBean {
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    public boolean isLogin() {
+        return this.login;
+    }
+
+    public void setLogin(final boolean login) {
+        this.login = login;
     }
 
 }

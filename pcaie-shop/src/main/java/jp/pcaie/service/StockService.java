@@ -22,7 +22,6 @@ public class StockService {
     private StockBean dummyStock() {
         final StockBean stockBean = new StockBean();
         stockBean.setId(1);
-        stockBean.setPrice(16800);
         stockBean.setProductBean(this.dummyProduct());
         return stockBean;
     }
@@ -30,6 +29,7 @@ public class StockService {
     private ProductBean dummyProduct() {
         final ProductBean productBean = new ProductBean();
         productBean.setId(1);
+        productBean.setPrice(16800);
         productBean.setName("OS X Mavericks‎");
         productBean.setContent("新しい機能、アプリケーション、テクノロジーがつまった新しいOS Xは、できることがさらに広がるパワーに満ちています。Macのエネルギー効率も、これまで以上に優れたものになります。");
         return productBean;

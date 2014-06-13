@@ -89,8 +89,8 @@ public class StockController {
         final ProductBean inputProductBean = inputStockBean.getProductBean();
         productBean.setName(inputProductBean.getName());
         productBean.setContent(inputProductBean.getContent());
+        productBean.setPrice(inputProductBean.getPrice());
         //
-        stockBean.setPrice(inputStockBean.getPrice());
         stockBean.setStock(inputStockBean.getStock());
         stockBean.setSafeStock(inputStockBean.getSafeStock());
         stockBean.setNotificationEmail(inputStockBean.getNotificationEmail());

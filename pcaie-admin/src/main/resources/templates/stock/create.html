@@ -49,13 +49,13 @@
         <label for="inputPrice" class="control-label col-sm-4 col-md-3" >
             <span class="glyphicon glyphicon-exclamation-sign"></span>
             <span class="glyphicon glyphicon-ok"></span>
-            <span th:text="#{StockBean.price}">StockBean.price</span>
+            <span th:text="#{ProductBean.price}">ProductBean.price</span>
         </label>
         <div class="col-sm-4">
             <input type="number" class="form-control" 
-                   id="inputPrice" name="price"
-                   th:placeholder="#{StockBean.price}"
-                   th:value="${stockBean.price}" />
+                   id="inputPrice" name="productBean.price"
+                   th:placeholder="#{ProductBean.price}"
+                   th:value="${stockBean.productBean.price}" />
             <span class="help-block help-block-danger"
                 th:unless="${#strings.isEmpty(priceError)}"
                 th:text="${priceError}">priceError</span>

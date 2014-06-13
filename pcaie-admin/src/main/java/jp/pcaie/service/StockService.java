@@ -58,9 +58,14 @@ public class StockService {
         isValid = this.productBeanValidator.validateInputName(productBean.getName(),
                                                               model,
                                                               locale) && isValid;
-        isValid = this.stockBeanValidator.validateInputPrice(stockBean.getPrice(),
-                                                             model,
-                                                             locale) && isValid;
+
+        isValid = this.productBeanValidator.validateInputContent(productBean.getContent(),
+                                                                 model,
+                                                                 locale) && isValid;
+
+        isValid = this.productBeanValidator.validateInputPrice(productBean.getPrice(),
+                                                               model,
+                                                               locale) && isValid;
         isValid = this.stockBeanValidator.validateInputStock(stockBean.getStock(),
                                                              model,
                                                              locale) && isValid;

@@ -53,8 +53,8 @@
                     ProductBean.name
                 </th>
                 <th style="width:86px;" class="text-center"
-                    th:text="#{StockBean.price}" >
-                    StockBean.price
+                    th:text="#{ProductBean.price}" >
+                    ProductBean.price
                 </th>
                 <th style="width:86px;"
                     th:text="#{StockBean.stock}">
@@ -70,8 +70,8 @@
                         stock.productBean.name
                 </td>
                 <td class="text-right"
-                    th:text="${#numbers.formatDecimal(stock.price, 0, 'COMMA', 0, 'POINT')}">
-                    stock.price
+                    th:text="${#numbers.formatDecimal(stock.productBean.price, 0, 'COMMA', 0, 'POINT')}">
+                    stock.productBean.price
                 </td>
                 <td class="text-right"
                     th:text="${#numbers.formatDecimal(stock.stock, 0, 'COMMA', 0, 'POINT')}">

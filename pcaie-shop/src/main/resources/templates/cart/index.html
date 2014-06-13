@@ -5,18 +5,39 @@
   <body>
     <div class="container">
         <div layout:fragment="content">
-            <div class="row"
-                 th:unless="${#lists.isEmpty(recommand)}">
-                <div class="col-xs-4 col-sm-3 col-md-2"
-                     th:each="stock : ${recommand}">
-                    <a class="thumbnail" 
-                       th:href="@{/p/__${stock.id}__}"
-                       th:title="${stock.productBean.name}">
-                      <img src="http://placehold.it/400x400" th:alt-title="${stock.productBean.name}" />
-                    </a>
-                </div>
-            </div>
+            <ul id="shoppingCartList" class="list-group">
+              <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+              </li>
+            </ul>
         </div>
     </div>
+    
+    
+<th:block layout:fragment="scripts">
+    
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+$(function(){
+    var url = /*[[@{/cart/get}]]*/'/cart/get';
+	$.get(url).success(function(response){
+        var $shoppingCartList = $('#shoppingCartList');
+        $.each(response, function(index, orderItem){
+        	var $listGroupItem = $('<li class="list-group-item"></li>');
+        	$listGroupItem.text(orderItem.productBean.name);
+        	
+            var $badge = $('<span class="badge"></span>');
+            $badge.text(orderItem.quantity);
+            
+            $listGroupItem.append($badge);
+        	$shoppingCartList.append($listGroupItem);
+        });
+    });
+
+});
+/*]]>*/
+</script>
+</th:block>
   </body>
 </html>

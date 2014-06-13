@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 @Component
 public class StockBeanValidator {
 
-    public static final int MIN_PRICE = 0;
     public static final int MIN_STOCK = 0;
     public static final int MIN_SAFE_STOCK = 0;
     public static final int MAX_MAIL_LENGTH = 100;
@@ -20,30 +19,6 @@ public class StockBeanValidator {
     private MessageSource messageSource = null;
     @Autowired
     private EmailValidator emailValidator = null;
-
-    public boolean validateInputPrice(final Integer inputPrice,
-                                      final Model model,
-                                      final Locale locale) {
-        boolean isValid = true;
-        final String fieldName = this.messageSource.getMessage("StockBean.price",
-                                                               null,
-                                                               locale);
-        if (inputPrice == null) {
-            final String message = this.messageSource.getMessage("validate.empty",
-                                                                 new Object[] { fieldName },
-                                                                 locale);
-            model.addAttribute("priceError", message);
-            isValid = false;
-        } else if (inputPrice < MIN_PRICE) {
-            final String message = this.messageSource.getMessage("validate.tooSmall",
-                                                                 new Object[] { fieldName,
-                                                                         MIN_PRICE },
-                                                                 locale);
-            model.addAttribute("priceError", message);
-            isValid = false;
-        }
-        return isValid;
-    }
 
     public boolean validateInputStock(final Integer inputStock,
                                       final Model model,

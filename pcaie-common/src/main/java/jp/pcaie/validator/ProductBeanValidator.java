@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 @Component
 public class ProductBeanValidator {
 
+    public static final int MIN_PRICE = 0;
     public static final int MAX_NAME_LENGTH = 45;
     public static final int MAX_CONTENT_LENGTH = 500;
 
@@ -54,6 +55,30 @@ public class ProductBeanValidator {
                                                                          MAX_CONTENT_LENGTH },
                                                                  locale);
             model.addAttribute("contentError", message);
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    public boolean validateInputPrice(final Integer inputPrice,
+                                      final Model model,
+                                      final Locale locale) {
+        boolean isValid = true;
+        final String fieldName = this.messageSource.getMessage("ProductBean.price",
+                                                               null,
+                                                               locale);
+        if (inputPrice == null) {
+            final String message = this.messageSource.getMessage("validate.empty",
+                                                                 new Object[] { fieldName },
+                                                                 locale);
+            model.addAttribute("priceError", message);
+            isValid = false;
+        } else if (inputPrice < MIN_PRICE) {
+            final String message = this.messageSource.getMessage("validate.tooSmall",
+                                                                 new Object[] { fieldName,
+                                                                         MIN_PRICE },
+                                                                 locale);
+            model.addAttribute("priceError", message);
             isValid = false;
         }
         return isValid;

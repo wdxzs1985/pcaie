@@ -18,7 +18,7 @@
           </a>
         </div>
           <ul class="nav navbar-nav navbar-left"
-              th:if="${session.LOGIN_USER}">
+              th:if="${session.LOGIN_USER.login}">
             <li>
               <a href="staff/index.html" th:href="@{/staff}"
                  th:text="#{admin.staff}">
@@ -58,13 +58,13 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li th:unless="${session.LOGIN_USER}">
+            <li th:unless="${session.LOGIN_USER.login}">
               <a href="login.html" th:href="@{/login}"
                 th:text="#{user.login}">
                 user.login
               </a>
             </li>
-            <li th:if="${session.LOGIN_USER}">
+            <li th:if="${session.LOGIN_USER.login}">
               <a href="login.html" th:href="@{/logout}"
                 th:text="#{user.logout}">
                 user.logout

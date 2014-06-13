@@ -4,16 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.pcaie.domain.ShopUserBean;
 import jp.pcaie.domain.UserBean;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
-public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
+public class DefaultUserInterceptor extends HandlerInterceptorAdapter {
 
     public static final String LOGIN_USER = "LOGIN_USER";
-
-    private String forward = null;
 
     @Override
     public boolean preHandle(final HttpServletRequest request,
@@ -26,19 +25,10 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 
         final HttpSession session = request.getSession();
         final UserBean loginUser = (UserBean) session.getAttribute(LOGIN_USER);
-        if (loginUser != null && loginUser.isLogin()) {
-            return true;
+        if (loginUser == null) {
+            session.setAttribute(LOGIN_USER, new ShopUserBean());
         }
-        request.getRequestDispatcher(this.forward).forward(request, response);
-        return false;
-    }
-
-    public String getForward() {
-        return this.forward;
-    }
-
-    public void setForward(final String forward) {
-        this.forward = forward;
+        return true;
     }
 
 }

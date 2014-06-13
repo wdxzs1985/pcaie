@@ -13,8 +13,6 @@ public class StockBean extends DtoBean {
 
     private Integer safeStock;
 
-    private Integer price;
-
     private String notificationEmail;
 
     public ProductBean getProductBean() {
@@ -49,11 +47,4 @@ public class StockBean extends DtoBean {
         this.notificationEmail = notificationEmail;
     }
 
-    public Integer getPrice() {
-        return this.price;
-    }
-
-    public void setPrice(final Integer price) {
-        this.price = price;
-    }
 }

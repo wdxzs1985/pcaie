@@ -11,6 +11,8 @@ public class ProductBean extends DtoBean {
 
     private String content;
 
+    private Integer price;
+
     public String getName() {
         return this.name;
     }
@@ -25,6 +27,14 @@ public class ProductBean extends DtoBean {
 
     public void setContent(final String content) {
         this.content = content;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
 }
