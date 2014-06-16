@@ -8,7 +8,7 @@ import jp.pcaie.domain.StaffBean;
 import jp.pcaie.mapper.MStaffMapper;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
