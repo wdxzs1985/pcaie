@@ -6,13 +6,29 @@
     
     <insert id="insert" useGeneratedKeys="true">
         INSERT INTO m_form (
-            customer_id
+            name
+        ,   kana
+        ,   contact_by
+        ,   email
+        ,   tel
+        ,   zip_code
+        ,   address
+        ,   employment
+        ,   department
         ,   maker
         ,   model
         ,   content
         ,   create_date
         ) VALUES (
-            #{customerBean.id}
+            #{name}
+        ,   #{kana}
+        ,   #{contactBy}
+        ,   #{email}
+        ,   #{tel}
+        ,   #{zipCode}
+        ,   #{address}
+        ,   #{employment}
+        ,   #{department}
         ,   #{maker}
         ,   #{model}
         ,   #{content}
@@ -29,14 +45,12 @@
             count(form.id)
         FROM
             m_form form
-        LEFT JOIN m_customer customer 
-        ON form.customer_id = customer.id
         <where>
             <if test="email != null">
-            AND customer.email LIKE CONCAT('%', #{email}, '%')
+            AND email LIKE CONCAT('%', #{email}, '%')
             </if>
             <if test="name != null">
-            AND customer.NAME LIKE CONCAT('%', #{name}, '%')
+            AND NAME LIKE CONCAT('%', #{name}, '%')
             </if>
             AND form.DEL_FLG = '0'
         </where>
@@ -45,16 +59,15 @@
     <select id="fetchList" resultType="FormBean">
         SELECT 
             form.ID             AS `id`,
-            customer.id         AS `customerBean.id`,
-            customer.name       AS `customerBean.name`,
-            customer.kana       AS `customerBean.kana`,
-            customer.CONTACT_BY AS `customerBean.contactBy`,
-            customer.email      AS `customerBean.email`,
-            customer.tel        AS `customerBean.tel`,
-            customer.zip_code   AS `customerBean.zipCode`,
-            customer.address    AS `customerBean.address`,
-            customer.employment AS `customerBean.employment`,
-            customer.department AS `customerBean.department`,
+            name       AS `name`,
+            kana       AS `kana`,
+            CONTACT_BY AS `contactBy`,
+            email      AS `email`,
+            tel        AS `tel`,
+            zip_code   AS `zipCode`,
+            address    AS `address`,
+            employment AS `employment`,
+            department AS `department`,
             form.MAKER          AS `maker`,
             form.MODEL          AS `model`,
             form.CONTENT        AS `content`,
@@ -62,14 +75,12 @@
             form.CREATE_DATE    AS `createDate`
         FROM
             m_form form
-        LEFT JOIN m_customer customer 
-        ON form.customer_id = customer.id
         <where>
             <if test="email != null">
-            AND customer.email LIKE CONCAT('%', #{email}, '%')
+            AND email LIKE CONCAT('%', #{email}, '%')
             </if>
             <if test="name != null">
-            AND customer.NAME LIKE CONCAT('%', #{name}, '%')
+            AND NAME LIKE CONCAT('%', #{name}, '%')
             </if>
             AND form.DEL_FLG = '0'
         </where>
@@ -80,16 +91,15 @@
     <select id="fetchBean" resultType="FormBean">
         SELECT 
             form.ID             AS `id`,
-            customer.id         AS `customerBean.id`,
-            customer.name       AS `customerBean.name`,
-            customer.kana       AS `customerBean.kana`,
-            customer.CONTACT_BY AS `customerBean.contactBy`,
-            customer.email      AS `customerBean.email`,
-            customer.tel        AS `customerBean.tel`,
-            customer.zip_code   AS `customerBean.zipCode`,
-            customer.address    AS `customerBean.address`,
-            customer.employment AS `customerBean.employment`,
-            customer.department AS `customerBean.department`,
+            name       AS `name`,
+            kana       AS `kana`,
+            CONTACT_BY AS `contactBy`,
+            email      AS `email`,
+            tel        AS `tel`,
+            zip_code   AS `zipCode`,
+            address    AS `address`,
+            employment AS `employment`,
+            department AS `department`,
             form.MAKER          AS `maker`,
             form.MODEL          AS `model`,
             form.CONTENT        AS `content`,
@@ -97,8 +107,6 @@
             form.CREATE_DATE    AS `createDate`
         FROM
             m_form form
-        LEFT JOIN m_customer customer 
-        ON form.customer_id = customer.id
         WHERE
             form.id = #{id}
     </select>
@@ -107,6 +115,15 @@
         UPDATE 
             m_form form
         <set>
+            form.name = #{name},
+            form.kana = #{kana},
+            form.CONTACT_BY = #{contactBy},
+            form.email = #{email},
+            form.tel = #{tel},
+            form.zip_code = #{zipCode},
+            form.address = #{address},
+            form.employment = #{employment},
+            form.department = #{department},
             form.maker = #{maker},
             form.model = #{model},
             form.content = #{content},

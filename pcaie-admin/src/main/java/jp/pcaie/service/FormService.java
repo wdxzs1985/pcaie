@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import jp.pcaie.domain.CustomerBean;
+import jp.pcaie.domain.EstimateBean;
 import jp.pcaie.domain.FormBean;
-import jp.pcaie.mapper.MCustomerMapper;
+import jp.pcaie.mapper.DEstimateMapper;
 import jp.pcaie.mapper.MFormMapper;
 import jp.pcaie.support.Paginate;
-import jp.pcaie.validator.CustomerBeanValidator;
+import jp.pcaie.validator.EstimateBeanValidator;
 import jp.pcaie.validator.FormBeanValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,43 +25,41 @@ public class FormService {
     @Autowired
     private FormBeanValidator formBeanValidator = null;
     @Autowired
-    private CustomerBeanValidator customerBeanValidator = null;
-    @Autowired
-    private MCustomerMapper mCustomerMapper = null;
+    private EstimateBeanValidator estimateBeanValidator = null;
     @Autowired
     private MFormMapper mFormMapper = null;
+    @Autowired
+    private DEstimateMapper dEstimateMapper = null;
 
     public boolean validate(final FormBean formBean,
                             final Model model,
                             final Locale locale) {
         boolean isValid = true;
 
-        final CustomerBean customerBean = formBean.getCustomerBean();
+        isValid = this.formBeanValidator.validateInputName(formBean.getName(),
+                                                           model,
+                                                           locale) && isValid;
+        isValid = this.formBeanValidator.validateInputKana(formBean.getKana(),
+                                                           model,
+                                                           locale) && isValid;
+        isValid = this.formBeanValidator.validateInputEmployment(formBean.getEmployment(),
+                                                                 model,
+                                                                 locale) && isValid;
+        isValid = this.formBeanValidator.validateInputDepartment(formBean.getDepartment(),
+                                                                 model,
+                                                                 locale) && isValid;
 
-        isValid = this.customerBeanValidator.validateInputName(customerBean.getName(),
-                                                               model,
-                                                               locale) && isValid;
-        isValid = this.customerBeanValidator.validateInputKana(customerBean.getKana(),
-                                                               model,
-                                                               locale) && isValid;
-        isValid = this.customerBeanValidator.validateInputEmployment(customerBean.getEmployment(),
-                                                                     model,
-                                                                     locale) && isValid;
-        isValid = this.customerBeanValidator.validateInputDepartment(customerBean.getDepartment(),
-                                                                     model,
-                                                                     locale) && isValid;
-
-        switch (customerBean.getContactBy()) {
-        case CustomerBean.CONTACT_BY_EMAIL:
-            isValid = this.customerBeanValidator.validateInputEmail(customerBean.getEmail(),
-                                                                    customerBean.getEmail(),
-                                                                    model,
-                                                                    locale) && isValid;
+        switch (formBean.getContactBy()) {
+        case FormBean.CONTACT_BY_EMAIL:
+            isValid = this.formBeanValidator.validateInputEmail(formBean.getEmail(),
+                                                                formBean.getEmail(),
+                                                                model,
+                                                                locale) && isValid;
             break;
-        case CustomerBean.CONTACT_BY_TEL:
-            isValid = this.customerBeanValidator.validateInputTel(customerBean.getTel(),
-                                                                  model,
-                                                                  locale) && isValid;
+        case FormBean.CONTACT_BY_TEL:
+            isValid = this.formBeanValidator.validateInputTel(formBean.getTel(),
+                                                              model,
+                                                              locale) && isValid;
             break;
         default:
             isValid = false;
@@ -82,28 +80,11 @@ public class FormService {
 
     @Transactional
     public void save(final FormBean formBean) {
-        this.saveCustomer(formBean);
-        this.saveForm(formBean);
-    }
-
-    private void saveCustomer(final FormBean formBean) {
-        final Map<String, Object> params = new HashMap<String, Object>();
-        params.put("name", formBean.getCustomerBean().getName());
-        params.put("kana", formBean.getCustomerBean().getKana());
-        params.put("email", formBean.getCustomerBean().getEmail());
-        params.put("tel", formBean.getCustomerBean().getTel());
-
-        CustomerBean customerBean = this.mCustomerMapper.fetchBean(params);
-        if (customerBean == null) {
-            customerBean = formBean.getCustomerBean();
-            this.mCustomerMapper.insert(customerBean);
+        if (formBean.getId() == null) {
+            this.mFormMapper.insert(formBean);
         } else {
-            formBean.setCustomerBean(customerBean);
+            this.mFormMapper.update(formBean);
         }
-    }
-
-    private void saveForm(final FormBean formBean) {
-        this.mFormMapper.insert(formBean);
     }
 
     public void doSearch(final Paginate<FormBean> paginate) {
@@ -128,9 +109,117 @@ public class FormService {
         return this.mFormMapper.fetchBean(param);
     }
 
+    public EstimateBean getEstimateById(final int id) {
+        final Map<String, Object> param = new HashMap<String, Object>();
+        param.put("id", id);
+        return this.dEstimateMapper.fetchBean(param);
+    }
+
     @Transactional
-    public void update(final FormBean formBean) {
+    public void save(final FormBean formBean, final EstimateBean estimateBean) {
+        int total = 0;
+        total += estimateBean.getUnit1Price();
+        total += estimateBean.getUnit2Price();
+        total += estimateBean.getUnit3Price();
+        total += estimateBean.getUnit4Price();
+        total += estimateBean.getUnit5Price();
+        total += estimateBean.getUnit6Price();
+        total += estimateBean.getUnit7Price();
+        total += estimateBean.getUnit8Price();
+        total += estimateBean.getUnit9Price();
+        estimateBean.setTotal(total);
+
+        this.dEstimateMapper.delete(estimateBean);
+        this.dEstimateMapper.insert(estimateBean);
+
         this.mFormMapper.update(formBean);
     }
 
+    public boolean validate(final EstimateBean estimateBean,
+                            final Model model,
+                            final Locale locale) {
+        boolean isValid = true;
+
+        isValid = this.estimateBeanValidator.validateInputPrice(estimateBean.getUnit1Price(),
+                                                                "unit1PriceError",
+                                                                model,
+                                                                locale) && isValid;
+        isValid = this.estimateBeanValidator.validateInputComment(estimateBean.getUnit1Comment(),
+                                                                  "unit1CommentError",
+                                                                  model,
+                                                                  locale) && isValid;
+
+        isValid = this.estimateBeanValidator.validateInputPrice(estimateBean.getUnit2Price(),
+                                                                "unit2PriceError",
+                                                                model,
+                                                                locale) && isValid;
+        isValid = this.estimateBeanValidator.validateInputComment(estimateBean.getUnit2Comment(),
+                                                                  "unit2CommentError",
+                                                                  model,
+                                                                  locale) && isValid;
+
+        isValid = this.estimateBeanValidator.validateInputPrice(estimateBean.getUnit3Price(),
+                                                                "unit3PriceError",
+                                                                model,
+                                                                locale) && isValid;
+        isValid = this.estimateBeanValidator.validateInputComment(estimateBean.getUnit3Comment(),
+                                                                  "unit3CommentError",
+                                                                  model,
+                                                                  locale) && isValid;
+
+        isValid = this.estimateBeanValidator.validateInputPrice(estimateBean.getUnit4Price(),
+                                                                "unit4PriceError",
+                                                                model,
+                                                                locale) && isValid;
+        isValid = this.estimateBeanValidator.validateInputComment(estimateBean.getUnit4Comment(),
+                                                                  "unit4CommentError",
+                                                                  model,
+                                                                  locale) && isValid;
+
+        isValid = this.estimateBeanValidator.validateInputPrice(estimateBean.getUnit5Price(),
+                                                                "unit5PriceError",
+                                                                model,
+                                                                locale) && isValid;
+        isValid = this.estimateBeanValidator.validateInputComment(estimateBean.getUnit5Comment(),
+                                                                  "unit5CommentError",
+                                                                  model,
+                                                                  locale) && isValid;
+
+        isValid = this.estimateBeanValidator.validateInputPrice(estimateBean.getUnit6Price(),
+                                                                "unit6PriceError",
+                                                                model,
+                                                                locale) && isValid;
+        isValid = this.estimateBeanValidator.validateInputComment(estimateBean.getUnit6Comment(),
+                                                                  "unit6CommentError",
+                                                                  model,
+                                                                  locale) && isValid;
+
+        isValid = this.estimateBeanValidator.validateInputPrice(estimateBean.getUnit7Price(),
+                                                                "unit7PriceError",
+                                                                model,
+                                                                locale) && isValid;
+        isValid = this.estimateBeanValidator.validateInputComment(estimateBean.getUnit7Comment(),
+                                                                  "unit7CommentError",
+                                                                  model,
+                                                                  locale) && isValid;
+
+        isValid = this.estimateBeanValidator.validateInputPrice(estimateBean.getUnit8Price(),
+                                                                "unit8PriceError",
+                                                                model,
+                                                                locale) && isValid;
+        isValid = this.estimateBeanValidator.validateInputComment(estimateBean.getUnit8Comment(),
+                                                                  "unit8CommentError",
+                                                                  model,
+                                                                  locale) && isValid;
+
+        isValid = this.estimateBeanValidator.validateInputPrice(estimateBean.getUnit9Price(),
+                                                                "unit9PriceError",
+                                                                model,
+                                                                locale) && isValid;
+        isValid = this.estimateBeanValidator.validateInputComment(estimateBean.getUnit9Comment(),
+                                                                  "unit9CommentError",
+                                                                  model,
+                                                                  locale) && isValid;
+        return isValid;
+    }
 }

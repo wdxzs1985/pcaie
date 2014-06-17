@@ -21,7 +21,7 @@ public class FormNotification {
     private String template;
 
     public void send(final FormBean formBean, final Locale locale) {
-        final String[] toAddressArray = { formBean.getCustomerBean().getEmail() };
+        final String[] toAddressArray = { formBean.getEmail() };
 
         final String subject = this.messageSource.getMessage("form.mail.subject",
                                                              null,

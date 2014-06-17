@@ -10,17 +10,17 @@ public abstract class DtoBean implements Serializable {
      */
     private static final long serialVersionUID = 3788480701876184382L;
 
-    private long id;
+    private Integer id;
 
     private Date updDate;
 
     private int delFlg;
 
-    public long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(final long id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 

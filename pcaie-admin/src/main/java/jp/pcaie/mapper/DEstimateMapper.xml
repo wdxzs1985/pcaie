@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.pcaie.mapper.DEstimateMapper">
+    
+    <insert id="insert" useGeneratedKeys="true">
+        INSERT INTO d_estimate (
+            id
+        ,   unit1_price
+        ,   unit1_comment
+        ,   unit2_price
+        ,   unit2_comment
+        ,   unit3_price
+        ,   unit3_comment
+        ,   unit4_price
+        ,   unit4_comment
+        ,   unit5_price
+        ,   unit5_comment
+        ,   unit6_price
+        ,   unit6_comment
+        ,   unit7_price
+        ,   unit7_comment
+        ,   unit8_price
+        ,   unit8_comment
+        ,   unit9_price
+        ,   unit9_comment
+        ,   total
+        ) VALUES (
+            #{id}
+        ,   #{unit1Price}
+        ,   #{unit1Comment}
+        ,   #{unit2Price}
+        ,   #{unit2Comment}
+        ,   #{unit3Price}
+        ,   #{unit3Comment}
+        ,   #{unit4Price}
+        ,   #{unit4Comment}
+        ,   #{unit5Price}
+        ,   #{unit5Comment}
+        ,   #{unit6Price}
+        ,   #{unit6Comment}
+        ,   #{unit7Price}
+        ,   #{unit7Comment}
+        ,   #{unit8Price}
+        ,   #{unit8Comment}
+        ,   #{unit9Price}
+        ,   #{unit9Comment}
+        ,   #{total}
+        )
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+    </insert>
+
+    <select id="fetchBean" resultType="EstimateBean">
+        SELECT 
+            ID                  AS `id`,
+            unit1_price         AS `unit1Price`,
+            unit1_comment       AS `unit1Comment`,
+            unit2_price         AS `unit2Price`,
+            unit2_comment       AS `unit2Comment`,
+            unit3_price         AS `unit3Price`,
+            unit3_comment       AS `unit3Comment`,
+            unit4_price         AS `unit4Price`,
+            unit4_comment       AS `unit4Comment`,
+            unit5_price         AS `unit5Price`,
+            unit5_comment       AS `unit5Comment`,
+            unit6_price         AS `unit6Price`,
+            unit6_comment       AS `unit6Comment`,
+            unit7_price         AS `unit7Price`,
+            unit7_comment       AS `unit7Comment`,
+            unit8_price         AS `unit8Price`,
+            unit8_comment       AS `unit8Comment`,
+            unit9_price         AS `unit9Price`,
+            unit9_comment       AS `unit9Comment`
+        ,   total
+        FROM
+            d_estimate
+        WHERE
+            id = #{id}
+    </select>
+    
+    <update id="delete">
+        DELETE FROM 
+            d_estimate
+        WHERE
+            id = #{id}
+    </update>
+</mapper>

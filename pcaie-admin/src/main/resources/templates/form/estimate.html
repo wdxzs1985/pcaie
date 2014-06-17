@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <link rel="stylesheet" th:href="@{/common/css/form.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="page-header" layout:fragment="header">
+        <h1 th:text="#{admin.form.edit}">admin.form.edit</h1>
+    </div>
+    <div layout:fragment="content">
+    <form class="form-horizontal" method="POST"
+          action="edit.html" th:action="@{/form/__${formBean.id}__/estimate}" >
+      <div class="form-group"
+           th:unless="${#strings.isEmpty(formBean.maker)}">
+        <label class="control-label col-sm-4 col-md-3" 
+             th:text="#{FormBean.maker}">FormBean.maker</label>
+        <div class="col-sm-6">
+            <p class="form-control-static"
+               th:text="${formBean.maker}" >formBean.maker</p>
+        </div>
+      </div>
+      <div class="form-group"
+           th:unless="${#strings.isEmpty(formBean.model)}">
+        <label for="inputTel" class="control-label col-sm-4 col-md-3" 
+             th:text="#{FormBean.model}">FormBean.model</label>
+        <div class="col-sm-6">
+            <p class="form-control-static"
+               th:text="${formBean.model}" >formBean.model</p>
+        </div>
+      </div>
+      <hr />
+      
+      <div class="form-group"><!-- unit1 start -->
+          <label for="inputUnit1Price" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{admin.form.estimate.unit1}">admin.form.estimate.unit1</label>
+          <div class="col-sm-8 col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                  <input type="number" class="form-control text-right" step="100"
+                         id="inputUnit1Price" name="unit1Price"
+                         th:placeholder="#{EstimateBean.price}"
+                         th:value="${estimateBean.unit1Price}" />
+              </div>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control" 
+                         id="inputUnit1Comment" name="unit1Comment"
+                         th:placeholder="#{EstimateBean.comment}"
+                         th:value="${estimateBean.unit1Comment}" />
+              </div>
+	          <div class="col-sm-12">
+	              <span class="help-block help-block-danger"
+	                  th:unless="${#strings.isEmpty(unit1PriceError)}"
+	                  th:text="${unit1PriceError}">unit1PriceError</span>
+                  <span class="help-block help-block-danger"
+                      th:unless="${#strings.isEmpty(unit1CommentError)}"
+                      th:text="${unit1CommentError}">unit1CommentError</span>
+	          </div>
+	        </div>
+          </div>
+      </div><!-- unit1 end -->
+      
+      <div class="form-group"><!-- unit2 start -->
+          <label for="inputUnit2Price" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{admin.form.estimate.unit2}">admin.form.estimate.unit2</label>
+          <div class="col-sm-8 col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                  <input type="number" class="form-control text-right" step="100"
+                         id="inputUnit2Price" name="unit2Price"
+                         th:placeholder="#{EstimateBean.price}"
+                         th:value="${estimateBean.unit2Price}" />
+              </div>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control" 
+                         id="inputUnit2Comment" name="unit2Comment"
+                         th:placeholder="#{EstimateBean.comment}"
+                         th:value="${estimateBean.unit2Comment}" />
+              </div>
+              <div class="col-sm-12">
+	              <span class="help-block help-block-danger"
+	                  th:unless="${#strings.isEmpty(unit2PriceError)}"
+	                  th:text="${unit2PriceError}">unit2PriceError</span>
+                  <span class="help-block help-block-danger"
+                      th:unless="${#strings.isEmpty(unit2CommentError)}"
+                      th:text="${unit2CommentError}">unit2CommentError</span>
+              </div>
+            </div>
+          </div>
+      </div><!-- unit2 end -->
+      
+      <div class="form-group"><!-- unit3 start -->
+          <label for="inputUnit3Price" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{admin.form.estimate.unit3}">admin.form.estimate.unit3</label>
+          <div class="col-sm-8 col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                  <input type="number" class="form-control text-right" step="100"
+                         id="inputUnit3Price" name="unit3Price"
+                         th:placeholder="#{EstimateBean.price}"
+                         th:value="${estimateBean.unit3Price}" />
+              </div>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control" 
+                         id="inputUnit3Comment" name="unit3Comment"
+                         th:placeholder="#{EstimateBean.comment}"
+                         th:value="${estimateBean.unit3Comment}" />
+              </div>
+              <div class="col-sm-12">
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(unit3PriceError)}"
+                  th:text="${unit3PriceError}">unit3PriceError</span>
+                  <span class="help-block help-block-danger"
+                      th:unless="${#strings.isEmpty(unit3CommentError)}"
+                      th:text="${unit3CommentError}">unit3CommentError</span>
+              </div>
+            </div>
+          </div>
+      </div><!-- unit3 end -->
+      
+      <div class="form-group"><!-- unit4 start -->
+          <label for="inputUnit4Price" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{admin.form.estimate.unit4}">admin.form.estimate.unit4</label>
+          <div class="col-sm-8 col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                  <input type="number" class="form-control text-right" step="100"
+                         id="inputUnit4Price" name="unit4Price"
+                         th:placeholder="#{EstimateBean.price}"
+                         th:value="${estimateBean.unit4Price}" />
+              </div>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control" 
+                         id="inputUnit4Comment" name="unit4Comment"
+                         th:placeholder="#{EstimateBean.comment}"
+                         th:value="${estimateBean.unit4Comment}" />
+              </div>
+              <div class="col-sm-12">
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(unit4PriceError)}"
+                  th:text="${unit4PriceError}">unit4PriceError</span>
+              </div>
+            </div>
+          </div>
+      </div><!-- unit4 end -->
+      
+      <div class="form-group"><!-- unit5 start -->
+          <label for="inputUnit5Price" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{admin.form.estimate.unit5}">admin.form.estimate.unit5</label>
+          <div class="col-sm-8 col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                  <input type="number" class="form-control text-right" step="100"
+                         id="inputUnit5Price" name="unit5Price"
+                         th:placeholder="#{EstimateBean.price}"
+                         th:value="${estimateBean.unit5Price}" />
+              </div>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control" 
+                         id="inputUnit5Comment" name="unit5Comment"
+                         th:placeholder="#{EstimateBean.comment}"
+                         th:value="${estimateBean.unit5Comment}" />
+              </div>
+              <div class="col-sm-12">
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(unit5PriceError)}"
+                  th:text="${unit5PriceError}">unit5PriceError</span>
+                  <span class="help-block help-block-danger"
+                      th:unless="${#strings.isEmpty(unit5CommentError)}"
+                      th:text="${unit5CommentError}">unit5CommentError</span>
+              </div>
+            </div>
+          </div>
+      </div><!-- unit5 end -->
+      
+      <div class="form-group"><!-- unit6 start -->
+          <label for="inputUnit6Price" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{admin.form.estimate.unit6}">admin.form.estimate.unit6</label>
+          <div class="col-sm-8 col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                  <input type="number" class="form-control text-right" step="100"
+                         id="inputUnit6Price" name="unit6Price"
+                         th:placeholder="#{EstimateBean.price}"
+                         th:value="${estimateBean.unit6Price}" />
+              </div>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control" 
+                         id="inputUnit6Comment" name="unit6Comment"
+                         th:placeholder="#{EstimateBean.comment}"
+                         th:value="${estimateBean.unit6Comment}" />
+              </div>
+              <div class="col-sm-12">
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(unit6PriceError)}"
+                  th:text="${unit6PriceError}">unit6PriceError</span>
+                  <span class="help-block help-block-danger"
+                      th:unless="${#strings.isEmpty(unit6CommentError)}"
+                      th:text="${unit6CommentError}">unit6CommentError</span>
+              </div>
+            </div>
+          </div>
+      </div><!-- unit6 end -->
+      
+      <div class="form-group"><!-- unit7 start -->
+          <label for="inputUnit7Price" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{admin.form.estimate.unit7}">admin.form.estimate.unit7</label>
+          <div class="col-sm-8 col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                  <input type="number" class="form-control text-right" step="100"
+                         id="inputUnit7Price" name="unit7Price"
+                         th:placeholder="#{EstimateBean.price}"
+                         th:value="${estimateBean.unit7Price}" />
+              </div>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control" 
+                         id="inputUnit7Comment" name="unit7Comment"
+                         th:placeholder="#{EstimateBean.comment}"
+                         th:value="${estimateBean.unit7Comment}" />
+              </div>
+              <div class="col-sm-12">
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(unit7PriceError)}"
+                  th:text="${unit7PriceError}">unit7PriceError</span>
+                  <span class="help-block help-block-danger"
+                      th:unless="${#strings.isEmpty(unit7CommentError)}"
+                      th:text="${unit7CommentError}">unit7CommentError</span>
+              </div>
+            </div>
+          </div>
+      </div><!-- unit7 end -->
+      
+      <div class="form-group"><!-- unit8 start -->
+          <label for="inputUnit8Price" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{admin.form.estimate.unit8}">admin.form.estimate.unit8</label>
+          <div class="col-sm-8 col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                  <input type="number" class="form-control text-right" step="100"
+                         id="inputUnit8Price" name="unit8Price"
+                         th:placeholder="#{EstimateBean.price}"
+                         th:value="${estimateBean.unit8Price}" />
+              </div>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control" 
+                         id="inputUnit8Comment" name="unit8Comment"
+                         th:placeholder="#{EstimateBean.comment}"
+                         th:value="${estimateBean.unit8Comment}" />
+              </div>
+              <div class="col-sm-12">
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(unit8PriceError)}"
+                  th:text="${unit8PriceError}">unit8PriceError</span>
+                  <span class="help-block help-block-danger"
+                      th:unless="${#strings.isEmpty(unit8CommentError)}"
+                      th:text="${unit8CommentError}">unit8CommentError</span>
+              </div>
+            </div>
+          </div>
+      </div><!-- unit8 end -->
+      
+      <div class="form-group"><!-- unit9 start -->
+          <label for="inputUnit9Price" class="control-label col-sm-4 col-md-3" 
+                 th:text="#{admin.form.estimate.unit9}">admin.form.estimate.unit9</label>
+          <div class="col-sm-8 col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                  <input type="number" class="form-control text-right" step="100"
+                         id="inputUnit9Price" name="unit9Price"
+                         th:placeholder="#{EstimateBean.price}"
+                         th:value="${estimateBean.unit9Price}" />
+              </div>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control" 
+                         id="inputUnit9Comment" name="unit9Comment"
+                         th:placeholder="#{EstimateBean.comment}"
+                         th:value="${estimateBean.unit9Comment}" />
+              </div>
+              <div class="col-sm-12">
+                  <span class="help-block help-block-danger"
+                      th:unless="${#strings.isEmpty(unit9PriceError)}"
+                      th:text="${unit9PriceError}">unit9PriceError</span>
+                  <span class="help-block help-block-danger"
+                      th:unless="${#strings.isEmpty(unit9CommentError)}"
+                      th:text="${unit9CommentError}">unit9CommentError</span>
+              </div>
+            </div>
+          </div>
+      </div><!-- unit9 end -->
+      
+      <hr />
+      
+      <div class="form-group"><!-- unit9 start -->
+          <label class="control-label col-sm-4 col-md-3" 
+                 th:text="#{EstimateBean.total}">EstimateBean.total</label>
+          <div class="col-sm-8 col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                <p id="inputTotal" class="form-control-static text-right" >
+                   0
+                </p>
+              </div>
+            </div>
+          </div>
+      </div><!-- unit9 end -->
+      
+      
+      <hr />
+      
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-4 col-md-offset-3">
+          <button type="submit" class="btn btn-success">
+            <span class="glyphicon glyphicon-ok"></span>&nbsp;
+            <span th:text="#{button.save}">button.save</span>
+          </button>
+          <a class="btn btn-default"
+             th:href="@{/form/__${formBean.id}__}">
+            <span class="glyphicon glyphicon-remove"></span>&nbsp;
+            <span th:text="#{button.cancel}">button.cancel</span> 
+          </a>
+        </div>
+      </div>
+    </form>
+    </div>
+</div>
+<th:block layout:fragment="scripts">
+<script th:src="@{/common/js/form-required.js}"></script>
+<script type="text/javascript">
+$(function(){
+	$('input[type="number"]').change(function() {
+		var total = 0;
+		var $inputTotal = $('#inputTotal');
+		$('input[type="number"]').each(function(index, element) {
+			total += Number($(element).val());
+			$inputTotal.text(total);
+		});
+        $inputTotal.text(total);
+	}).trigger('change');
+});
+</script>
+</th:block>
+</body>
+</html>

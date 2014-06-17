@@ -15,116 +15,116 @@
                   action="finish.html" th:action="@{/form/finish}">
                 <div class="form-group">
                     <label class="control-label col-sm-4 col-md-3" 
-                           th:text="#{CustomerBean.name}">
-                           CustomerBean.name
+                           th:text="#{FormBean.name}">
+                           FormBean.name
                     </label>
                     <div class="col-sm-6">
                         <p class="form-control-static"
-                           th:text="${formBean.customerBean.name}" >
-                           formBean.customerBean.name
+                           th:text="${formBean.name}" >
+                           formBean.name
                         </p>
-                        <input type="hidden" name="customerBean.name"
-                               th:value="${formBean.customerBean.name}" />
+                        <input type="hidden" name="name"
+                               th:value="${formBean.name}" />
                     </div>
                 </div>
                 <div class="form-group" 
-                     th:unless="${#strings.isEmpty(formBean.customerBean.kana)}">
+                     th:unless="${#strings.isEmpty(formBean.kana)}">
                     <label class="control-label col-sm-4 col-md-3" 
-                           th:text="#{CustomerBean.kana}">
-                           CustomerBean.kana
+                           th:text="#{FormBean.kana}">
+                           FormBean.kana
                      </label>
                     <div class="col-sm-6">
                         <p class="form-control-static"
-                           th:text="${formBean.customerBean.kana}" >
-                           formBean.customerBean.kana
+                           th:text="${formBean.kana}" >
+                           formBean.kana
                         </p>
-                        <input type="hidden" name="customerBean.kana"
-                               th:value="${formBean.customerBean.kana}" />
+                        <input type="hidden" name="kana"
+                               th:value="${formBean.kana}" />
                     </div>
                 </div>
                 <div class="form-group" 
-                     th:unless="${#strings.isEmpty(formBean.customerBean.employment)}">
+                     th:unless="${#strings.isEmpty(formBean.employment)}">
                     <label class="control-label col-sm-4 col-md-3" 
-                           th:text="#{CustomerBean.employment}">
-                           CustomerBean.employment
+                           th:text="#{FormBean.employment}">
+                           FormBean.employment
                     </label>
                     <div class="col-sm-6">
                         <p class="form-control-static"
-                           th:text="${formBean.customerBean.employment}" >
-                           formBean.customerBean.employment
+                           th:text="${formBean.employment}" >
+                           formBean.employment
                         </p>
-                        <input type="hidden" name="customerBean.employment"
-                               th:value="${formBean.customerBean.employment}" />
+                        <input type="hidden" name="employment"
+                               th:value="${formBean.employment}" />
                     </div>
                 </div>
                 <div class="form-group" 
-                     th:unless="${#strings.isEmpty(formBean.customerBean.department)}">
+                     th:unless="${#strings.isEmpty(formBean.department)}">
                     <label class=" control-label col-sm-4 col-md-3" 
-                           th:text="#{CustomerBean.department}">
+                           th:text="#{FormBean.department}">
                            FormBean.department
                     </label>
                     <div class="col-sm-6">
                         <p class="form-control-static"
-                           th:text="${formBean.customerBean.department}" >
-                           formBean.customerBean.department
+                           th:text="${formBean.department}" >
+                           formBean.department
                         </p>
-                        <input type="hidden" name="customerBean.department"
-                               th:value="${formBean.customerBean.department}" />
+                        <input type="hidden" name="department"
+                               th:value="${formBean.department}" />
                     </div>
                 </div>
               
                 <div class="form-group" >
                     <label class="control-label col-sm-4 col-md-3"
-                           th:text="#{CustomerBean.contactBy}">
-                           CustomerBean.contactBy
+                           th:text="#{FormBean.contactBy}">
+                           FormBean.contactBy
                     </label>
                     <div class="col-sm-6">
                         <p class="form-control-static"
-                           th:if="${formBean.customerBean.contactBy eq 0 }"
-                           th:text="#{CustomerBean.contactBy.email}">
-                           CustomerBean.contactBy.email
+                           th:if="${formBean.contactBy eq 0 }"
+                           th:text="#{FormBean.contactBy.email}">
+                           FormBean.contactBy.email
                         </p>
                         <p class="form-control-static"
-                           th:if="${formBean.customerBean.contactBy eq 1 }"
-                           th:text="#{CustomerBean.contactBy.tel}">
-                           CustomerBean.contactBy.tel
+                           th:if="${formBean.contactBy eq 1 }"
+                           th:text="#{FormBean.contactBy.tel}">
+                           FormBean.contactBy.tel
                         </p>
                         <input type="hidden" name="contactBy"
-                               th:value="${formBean.customerBean.contactBy}" />
+                               th:value="${formBean.contactBy}" />
                     </div>
                 </div>
               
               <div id="contact-by-email" class="form-group"
-                   th:if="${formBean.customerBean.contactBy eq 0 }">
+                   th:if="${formBean.contactBy eq 0 }">
                   <label class=" control-label col-sm-4 col-md-3" 
-                         th:text="#{CustomerBean.email}">
-                         CustomerBean.email
+                         th:text="#{FormBean.email}">
+                         FormBean.email
                   </label>
                   <div class="col-sm-6">
                       <p class="form-control-static"
-                         th:text="${formBean.customerBean.email}" >
-                         formBean.customerBean.email
+                         th:text="${formBean.email}" >
+                         formBean.email
                       </p>
-                      <input type="hidden" name="customerBean.email"
-                             th:value="${formBean.customerBean.email}" />
-                      <input type="hidden" name="customerBean.email2"
-                             th:value="${formBean.customerBean.email2}" />
+                      <input type="hidden" name="email"
+                             th:value="${formBean.email}" />
+                      <input type="hidden" name="email2"
+                             th:value="${formBean.email2}" />
                   </div>
               </div>
               
               <div id="contact-by-tel" class="form-group"
-                   th:if="${formBean.customerBean.contactBy eq 1 }">
+                   th:if="${formBean.contactBy eq 1 }">
                   <label class="control-label col-sm-4 col-md-3" 
-                         th:text="#{CustomerBean.tel}">
-                         CustomerBean.tel
+                         th:text="#{FormBean.tel}">
+                         FormBean.tel
                   </label>
                   <div class="col-sm-6">
                       <p class="form-control-static"
-                         th:text="${formBean.customerBean.tel}" >
-                         formBean.customerBean.tel
+                         th:text="${formBean.tel}" >
+                         formBean.tel
                       </p>
-                      <input type="hidden" name="customerBean.tel"
-                             th:value="${formBean.customerBean.tel}" />
+                      <input type="hidden" name="tel"
+                             th:value="${formBean.tel}" />
                   </div>
               </div>
               

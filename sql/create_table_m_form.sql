@@ -4,7 +4,15 @@ DROP TABLE IF EXISTS `pcaie`.`m_form`$$
 
 CREATE TABLE `pcaie`.`m_form` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(11) NOT NULL,
+    `name` varchar(45) NOT NULL,
+    `kana` varchar(45) DEFAULT NULL,
+    `zip_code` varchar(10) DEFAULT NULL,
+    `address` varchar(200) DEFAULT NULL,
+    `employment` varchar(45) DEFAULT NULL,
+    `department` varchar(45) DEFAULT NULL,
+    `contact_by` int(1) NOT NULL DEFAULT '0',
+    `email` varchar(100) DEFAULT NULL,
+    `tel` varchar(20) DEFAULT NULL,
   `maker` varchar(45) DEFAULT NULL,
   `model` varchar(45) DEFAULT NULL,
   `content` text,

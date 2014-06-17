@@ -19,13 +19,13 @@
                   <label for="inputName" class="control-label col-sm-4 col-md-3" >
                      <span class="glyphicon glyphicon-exclamation-sign"></span>
                      <span class="glyphicon glyphicon-ok"></span>
-                     <span th:text="#{CustomerBean.name}">CustomerBean.name</span>
+                     <span th:text="#{FormBean.name}">FormBean.name</span>
                   </label>
                   <div class="col-sm-4 col-md-3">
                       <input type="text" class="form-control " 
-                             id="inputName" name="customerBean.name"
-                             th:placeholder="#{CustomerBean.name}"
-                             th:value="${formBean.customerBean.name}" />
+                             id="inputName" name="name"
+                             th:placeholder="#{FormBean.name}"
+                             th:value="${formBean.name}" />
                       <span class="help-block help-block-danger"
                           th:unless="${#strings.isEmpty(nameError)}"
                           th:text="${nameError}">nameError</span>
@@ -34,12 +34,12 @@
               <div class="form-group"
                    th:class="${#strings.isEmpty(kanaError)} ? 'form-group' : 'form-group has-error'">
                   <label for="inputKana" class="control-label col-sm-4 col-md-3" 
-                         th:text="#{CustomerBean.kana}">CustomerBean.kana</label>
+                         th:text="#{FormBean.kana}">FormBean.kana</label>
                   <div class="col-sm-4 col-md-3">
                       <input type="text" class="form-control col-sm-6" 
-                             id="inputKana" name="customerBean.kana"
-                             th:placeholder="#{CustomerBean.kana}"
-                             th:value="${formBean.customerBean.kana}" />
+                             id="inputKana" name="kana"
+                             th:placeholder="#{FormBean.kana}"
+                             th:value="${formBean.kana}" />
                       <span class="help-block help-block-danger"
                           th:unless="${#strings.isEmpty(kanaError)}"
                           th:text="${kanaError}">kanaError</span>
@@ -48,12 +48,12 @@
               <div class="form-group"
                    th:class="${#strings.isEmpty(employmentError)} ? 'form-group' : 'form-group has-error'">
                   <label for="inputEmployment" class="control-label col-sm-4 col-md-3" 
-                         th:text="#{CustomerBean.employment}">CustomerBean.employment</label>
+                         th:text="#{FormBean.employment}">FormBean.employment</label>
                   <div class="col-sm-4 col-md-3">
                       <input type="text" class="form-control" 
-                             id="inputEmployment" name="customerBean.employment"
-                             th:placeholder="#{CustomerBean.employment}"
-                             th:value="${formBean.customerBean.employment}" />
+                             id="inputEmployment" name="employment"
+                             th:placeholder="#{FormBean.employment}"
+                             th:value="${formBean.employment}" />
                       <span class="help-block help-block-danger"
                           th:unless="${#strings.isEmpty(employmentError)}"
                           th:text="${employmentError}">employmentError</span>
@@ -67,12 +67,12 @@
               <div class="form-group"
                    th:class="${#strings.isEmpty(departmentError)} ? 'form-group' : 'form-group has-error'">
                   <label for="inputDepartment" class="control-label col-sm-4 col-md-3" 
-                         th:text="#{CustomerBean.department}">CustomerBean.department</label>
+                         th:text="#{FormBean.department}">FormBean.department</label>
                   <div class="col-sm-4 col-md-3">
                       <input type="text" class="form-control" 
-                             id="inputDepartment" name="customerBean.department"
-                             th:placeholder="#{CustomerBean.department}"
-                             th:value="${formBean.customerBean.department}" />
+                             id="inputDepartment" name="department"
+                             th:placeholder="#{FormBean.department}"
+                             th:value="${formBean.department}" />
                       <span class="help-block help-block-danger"
                           th:unless="${#strings.isEmpty(departmentError)}"
                           th:text="${departmentError}">departmentError</span>
@@ -81,19 +81,19 @@
               
               <div id="contact-by" class="form-group">
                 <label class="control-label col-sm-4 col-md-3" for="radioContactByEmail"
-                       th:text="#{CustomerBean.contactBy}">CustomerBean.contactBy</label>
+                       th:text="#{FormBean.contactBy}">FormBean.contactBy</label>
                 <div class="col-sm-8">
                     <label class="radio-inline">
                         <input type="radio" 
-                               id="radioContactByEmail" name="customerBean.contactBy" 
-                               value="0" th:checked="${formBean.customerBean.contactBy == 0 }" />
-                        <span th:text="#{CustomerBean.contactBy.email}">CustomerBean.contactBy.email</span> 
+                               id="radioContactByEmail" name="contactBy" 
+                               value="0" th:checked="${formBean.contactBy == 0 }" />
+                        <span th:text="#{FormBean.contactBy.email}">FormBean.contactBy.email</span> 
                     </label>
                     <label class="radio-inline">
                         <input type="radio" 
-                               id="radioContactByTel" name="customerBean.contactBy" 
-                               value="1" th:checked="${formBean.customerBean.contactBy == 1 }" /> 
-                        <span th:text="#{CustomerBean.contactBy.tel}">CustomerBean.contactBy.tel</span> 
+                               id="radioContactByTel" name="contactBy" 
+                               value="1" th:checked="${formBean.contactBy == 1 }" /> 
+                        <span th:text="#{FormBean.contactBy.tel}">FormBean.contactBy.tel</span> 
                     </label>
                 </div>
               </div>
@@ -104,13 +104,13 @@
                   <label for="inputEmail" class="control-label col-sm-4 col-md-3" >
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
                     <span class="glyphicon glyphicon-ok"></span>
-                    <span th:text="#{CustomerBean.email}">CustomerBean.email</span>
+                    <span th:text="#{FormBean.email}">FormBean.email</span>
                   </label>
                   <div class="col-sm-6">
                       <input type="email" class="form-control" 
-                             id="inputEmail" name="customerBean.email"
-                             th:placeholder="#{CustomerBean.email}"
-                             th:value="${formBean.customerBean.email}" />
+                             id="inputEmail" name="email"
+                             th:placeholder="#{FormBean.email}"
+                             th:value="${formBean.email}" />
                       <span class="help-block help-block-danger"
                           th:unless="${#strings.isEmpty(emailError)}"
                           th:text="${emailError}">emailError</span>
@@ -121,13 +121,13 @@
                   <label for="inputEmail2" class="control-label col-sm-4 col-md-3" >
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
                     <span class="glyphicon glyphicon-ok"></span>
-                    <span th:text="#{CustomerBean.email2}">CustomerBean.email2</span>
+                    <span th:text="#{FormBean.email2}">FormBean.email2</span>
                   </label>
                   <div class="col-sm-6">
                       <input type="email" class="form-control" 
-                             id="inputEmail2" name="customerBean.email2"
-                             th:placeholder="#{CustomerBean.email2}"
-                             th:value="${formBean.customerBean.email2}" />
+                             id="inputEmail2" name="email2"
+                             th:placeholder="#{FormBean.email2}"
+                             th:value="${formBean.email2}" />
                       <span class="help-block help-block-danger"
                           th:unless="${#strings.isEmpty(email2Error)}"
                           th:text="${email2Error}">email2Error</span>
@@ -141,13 +141,13 @@
                   <label for="inputTel" class="control-label col-sm-4 col-md-3">
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
                     <span class="glyphicon glyphicon-ok"></span>
-                    <span th:text="#{CustomerBean.tel}">CustomerBean.tel</span>
+                    <span th:text="#{FormBean.tel}">FormBean.tel</span>
                   </label>
                   <div class="col-sm-6">
                       <input type="tel" class="form-control" 
-                             id="inputTel" name="customerBean.tel"
-                             th:placeholder="#{CustomerBean.tel}"
-                             th:value="${formBean.customerBean.tel}" />
+                             id="inputTel" name="tel"
+                             th:placeholder="#{FormBean.tel}"
+                             th:value="${formBean.tel}" />
                       <span class="help-block help-block-danger"
                           th:unless="${#strings.isEmpty(telError)}"
                           th:text="${telError}">telError</span>

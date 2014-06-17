@@ -8,126 +8,129 @@
 <body>
 <div class="container">
     <div class="page-header" layout:fragment="header">
+        <a class="btn btn-default pull-right"
+           href="index.html" th:href="@{/form}" >
+          <span th:text="#{button.back}">button.back</span> 
+        </a>
         <h1 th:text="#{admin.form.edit}">admin.form.edit</h1>
     </div>
     <div layout:fragment="content">
         <form class="form-horizontal">
             <div class="form-group">
                 <label for="inputName" class="control-label col-sm-4 col-md-3" >
-                   <span th:text="#{CustomerBean.name}">CustomerBean.name</span>
+                   <span th:text="#{FormBean.name}">FormBean.name</span>
                 </label>
                 <div class="col-sm-4">
-                   <p class="form-control-static">
-                      <a th:href="@{/customer/__${formBean.customerBean.id}__}"
-                         th:text="${formBean.customerBean.name}">
-                         formBean.customerBean.name
-                      </a>
+                   <p class="form-control-static" th:text="${formBean.name}">>
+                         formBean.name
                    </p>
                 </div>
             </div>
             <div class="form-group" 
-                 th:unless="${#strings.isEmpty(formBean.customerBean.kana)}">
+                 th:unless="${#strings.isEmpty(formBean.kana)}">
                 <label for="inputKana" class="control-label col-sm-4 col-md-3" 
-                       th:text="#{CustomerBean.kana}">CustomerBean.kana</label>
+                       th:text="#{FormBean.kana}">FormBean.kana</label>
                 <div class="col-sm-4">
                      <p class="form-control-static"
-                        th:text="${formBean.customerBean.kana}" >
-                        formBean.customerBean.kana
+                        th:text="${formBean.kana}" >
+                        formBean.kana
                      </p>
                 </div>
             </div>
             <div class="form-group" 
-                 th:unless="${#strings.isEmpty(formBean.customerBean.zipCode)}">
+                 th:unless="${#strings.isEmpty(formBean.zipCode)}">
                 <label for="inputZipCode" class="control-label col-sm-4 col-md-3" 
-                       th:text="#{CustomerBean.zipCode}">CustomerBean.zipCode</label>
+                       th:text="#{FormBean.zipCode}">FormBean.zipCode</label>
                 <div class="col-sm-4">
                      <p class="form-control-static"
-                        th:text="${formBean.customerBean.zipCode}" >
-                        formBean.customerBean.zipCode
+                        th:text="${formBean.zipCode}" >
+                        formBean.zipCode
                      </p>
                 </div>
             </div>
             <div class="form-group" 
-                 th:unless="${#strings.isEmpty(formBean.customerBean.address)}">
+                 th:unless="${#strings.isEmpty(formBean.address)}">
                 <label for="inputAddress" class="control-label col-sm-4 col-md-3" 
-                       th:text="#{CustomerBean.address}">CustomerBean.address</label>
+                       th:text="#{FormBean.address}">FormBean.address</label>
                 <div class="col-sm-4">
                      <p class="form-control-static"
-                        th:text="${formBean.customerBean.address}" >
-                        formBean.customerBean.address
+                        th:text="${formBean.address}" >
+                        formBean.address
                      </p>
                 </div>
             </div>
             <div class="form-group" 
-                 th:unless="${#strings.isEmpty(formBean.customerBean.employment)}">
+                 th:unless="${#strings.isEmpty(formBean.employment)}">
                 <label for="inputEmployment" class="control-label col-sm-4 col-md-3" 
-                       th:text="#{CustomerBean.employment}">CustomerBean.employment</label>
+                       th:text="#{FormBean.employment}">FormBean.employment</label>
                 <div class="col-sm-4">
                      <p class="form-control-static"
-                        th:text="${formBean.customerBean.employment}" >
-                        formBean.customerBean.employment
+                        th:text="${formBean.employment}" >
+                        formBean.employment
                      </p>
                 </div>
             </div>
         
             <div class="form-group" 
-                 th:unless="${#strings.isEmpty(formBean.customerBean.department)}">
+                 th:unless="${#strings.isEmpty(formBean.department)}">
                 <label for="inputDepartment" class="control-label col-sm-4 col-md-3" 
-                       th:text="#{CustomerBean.department}">CustomerBean.department</label>
+                       th:text="#{FormBean.department}">FormBean.department</label>
                 <div class="col-sm-4">
                      <p class="form-control-static"
-                        th:text="${formBean.customerBean.department}" >
-                        formBean.customerBean.department
+                        th:text="${formBean.department}" >
+                        formBean.department
                      </p>
                 </div>
             </div>
             <div class="form-group" >
                 <label class="control-label col-sm-4 col-md-3"
-                       th:text="#{CustomerBean.contactBy}">
+                       th:text="#{FormBean.contactBy}">
                        FormBean.contactBy
                 </label>
                 <div class="col-sm-6">
                     <p class="form-control-static"
-                       th:if="${formBean.customerBean.contactBy eq 0 }"
-                       th:text="#{CustomerBean.contactBy.email}">
-                       CustomerBean.contactBy.email
+                       th:if="${formBean.contactBy eq 0 }"
+                       th:text="#{FormBean.contactBy.email}">
+                       FormBean.contactBy.email
                     </p>
                     <p class="form-control-static"
-                       th:if="${formBean.customerBean.contactBy eq 1 }"
-                       th:text="#{CustomerBean.contactBy.tel}">
-                       CustomerBean.contactBy.tel
+                       th:if="${formBean.contactBy eq 1 }"
+                       th:text="#{FormBean.contactBy.tel}">
+                       FormBean.contactBy.tel
                     </p>
                 </div>
             </div>
             <div id="contact-by-email" class="form-group"
-                 th:if="${formBean.customerBean.contactBy eq 0 }">
+                 th:if="${formBean.contactBy eq 0 }">
                 <label class=" control-label col-sm-4 col-md-3" 
-                       th:text="#{CustomerBean.email}">
-                       CustomerBean.email
+                       th:text="#{FormBean.email}">
+                       FormBean.email
                 </label>
                 <div class="col-sm-6">
                     <p class="form-control-static"
-                       th:text="${formBean.customerBean.email}" >
-                       formBean.customerBean.email
+                       th:text="${formBean.email}" >
+                       formBean.email
                     </p>
                 </div>
             </div>
             <div id="contact-by-tel" class="form-group"
-                 th:if="${formBean.customerBean.contactBy eq 1 }">
+                 th:if="${formBean.contactBy eq 1 }">
                 <label class="control-label col-sm-4 col-md-3" 
-                       th:text="#{CustomerBean.tel}">
-                       CustomerBean.tel
+                       th:text="#{FormBean.tel}">
+                       FormBean.tel
                 </label>
                 <div class="col-sm-6">
                     <p class="form-control-static"
-                       th:text="${formBean.customerBean.tel}" >
-                       formBean.customerBean.tel
+                       th:text="${formBean.tel}" >
+                       formBean.tel
                     </p>
                 </div>
             </div>
-        </form>
-        <hr />
-        <form class="form-horizontal">
+            <hr />
+            
+            <!--  -->
+            
+            <hr />
             <div class="form-group"
                  th:unless="${#strings.isEmpty(formBean.maker)}">
               <label class="control-label col-sm-4 col-md-3" 
@@ -155,29 +158,44 @@
                    th:text="${formBean.content}" >formBean.content</pre>
               </div>
             </div>
+            <hr />
             <div class="form-group">
               <div class="col-sm-6 col-sm-offset-4 col-md-offset-3">
-                <a class="btn btn-primary"
-                   th:href="@{/form/__${formBean.id}__/reply}"
-                   th:if="${formBean.status} lt 2">
-                  <span class="glyphicon glyphicon-share-alt"></span>&nbsp;
-                  <span th:text="#{admin.form.reply}">admin.form.reply</span> 
-                </a>
-                <a class="btn btn-success"
-                   th:href="@{/form/__${formBean.id}__/request}"
-                   th:if="${formBean.status} eq 2">
-                  <span class="glyphicon glyphicon-ok"></span>&nbsp;
-                  <span th:text="#{admin.form.request}">admin.form.request</span> 
-                </a>
-                <a class="btn btn-warning"
-                   th:href="@{/form/__${formBean.id}__/edit}">
+                <a class="btn btn-default"
+                   th:href="@{/form/__${formBean.id}__/edit}"
+                   th:if="${formBean.status} lt 3">
                   <span class="glyphicon glyphicon-edit"></span>&nbsp;
                   <span th:text="#{button.edit}">button.edit</span> 
                 </a>
-                <a class="btn btn-default"
-                   href="index.html" th:href="@{/form}" >
+                <a class="btn btn-success"
+                   th:href="@{/form/__${formBean.id}__/receive}"
+                   th:if="${formBean.status} eq 0">
+                  <span class="glyphicon glyphicon-inbox"></span>&nbsp;
+                  <span th:text="#{admin.form.receive}">admin.form.receive</span> 
+                </a>
+                <a class="btn btn-primary"
+                   th:href="@{/form/__${formBean.id}__/estimate}"
+                   th:if="${formBean.status} eq 1 or ${formBean.status} eq 2">
+                  <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                  <span th:text="#{admin.form.estimate}">admin.form.estimate</span> 
+                </a>
+                <a class="btn btn-success"
+                   th:href="@{/form/__${formBean.id}__/pay}"
+                   th:if="${formBean.status} eq 2">
+                  <span class="glyphicon glyphicon-usd"></span>&nbsp;
+                  <span th:text="#{admin.form.pay}">admin.form.pay</span> 
+                </a>
+                <a class="btn btn-success"
+                   th:href="@{/form/__${formBean.id}__/return}"
+                   th:if="${formBean.status} eq 3">
+                  <span class="glyphicon glyphicon-check"></span>&nbsp;
+                  <span th:text="#{admin.form.return}">admin.form.return</span> 
+                </a>
+                <a class="btn btn-danger"
+                   th:href="@{/form/__${formBean.id}__/cancel}"
+                   th:if="${formBean.status} lt 4">
                   <span class="glyphicon glyphicon-remove"></span>&nbsp;
-                  <span th:text="#{button.back}">button.back</span> 
+                  <span th:text="#{application.cancel}">application.cancel</span> 
                 </a>
               </div>
             </div>

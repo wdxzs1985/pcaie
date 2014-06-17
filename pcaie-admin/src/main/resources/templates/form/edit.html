@@ -13,123 +13,159 @@
     <div layout:fragment="content">
     <form class="form-horizontal" method="POST"
           action="edit.html" th:action="@{/form/__${formBean.id}__/edit}" >
-      <div class="form-group">
+      <div class="form-group required"
+           th:class="${#strings.isEmpty(nameError)} ? 'form-group required' : 'form-group required has-error'">
           <label for="inputName" class="control-label col-sm-4 col-md-3" >
-             <span th:text="#{CustomerBean.name}">CustomerBean.name</span>
+             <span class="glyphicon glyphicon-exclamation-sign"></span>
+             <span class="glyphicon glyphicon-ok"></span>
+             <span th:text="#{FormBean.name}">FormBean.name</span>
           </label>
           <div class="col-sm-4">
-             <p class="form-control-static">
-                <a th:href="@{/customer/__${formBean.customerBean.id}__}"
-                   th:text="${formBean.customerBean.name}">
-                   formBean.customerBean.name
-                </a>
-             </p>
+              <input type="text" class="form-control " 
+                     id="inputName" name="name"
+                     th:placeholder="#{FormBean.name}"
+                     th:value="${formBean.name}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(nameError)}"
+                  th:text="${nameError}">nameError</span>
           </div>
       </div>
-      <div class="form-group">
+      <div class="form-group"
+           th:class="${#strings.isEmpty(kanaError)} ? 'form-group' : 'form-group has-error'">
           <label for="inputKana" class="control-label col-sm-4 col-md-3" 
-                 th:text="#{CustomerBean.kana}">CustomerBean.kana</label>
+                 th:text="#{FormBean.kana}">FormBean.kana</label>
           <div class="col-sm-4">
-               <p class="form-control-static"
-                  th:text="${formBean.customerBean.kana}" >
-                  formBean.customerBean.kana
-               </p>
+              <input type="text" class="form-control col-sm-6" 
+                     id="inputKana" name="kana"
+                     th:placeholder="#{FormBean.kana}"
+                     th:value="${formBean.kana}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(kanaError)}"
+                  th:text="${kanaError}">kanaError</span>
           </div>
       </div>
-      
-      <div class="form-group" 
-           th:unless="${#strings.isEmpty(formBean.customerBean.zipCode)}">
+      <div class="form-group">
           <label for="inputZipCode" class="control-label col-sm-4 col-md-3" 
-                 th:text="#{CustomerBean.zipCode}">CustomerBean.zipCode</label>
+                 th:text="#{FormBean.zipCode}">FormBean.zipCode</label>
           <div class="col-sm-4">
-               <p class="form-control-static"
-                  th:text="${formBean.customerBean.zipCode}" >
-                  formBean.customerBean.zipCode
-               </p>
+              <input type="text" class="form-control" 
+                     id="inputZipCode" name="zipCode"
+                     th:placeholder="#{FormBean.zipCode}"
+                     th:value="${formBean.zipCode}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(zipCodeError)}"
+                  th:text="${zipCodeError}">zipCodeError</span>
           </div>
       </div>
-      <div class="form-group" 
-           th:unless="${#strings.isEmpty(formBean.customerBean.address)}">
+      <div class="form-group">
           <label for="inputAddress" class="control-label col-sm-4 col-md-3" 
-                 th:text="#{CustomerBean.address}">CustomerBean.address</label>
+                 th:text="#{FormBean.address}">FormBean.address</label>
           <div class="col-sm-4">
-               <p class="form-control-static"
-                  th:text="${formBean.customerBean.address}" >
-                  formBean.customerBean.address
-               </p>
+              <input type="text" class="form-control" 
+                     id="inputAddress" name="address"
+                     th:placeholder="#{FormBean.address}"
+                     th:value="${formBean.address}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(addressError)}"
+                  th:text="${addressError}">addressError</span>
           </div>
       </div>
-            
-      <div class="form-group">
+      <div class="form-group"
+           th:class="${#strings.isEmpty(employmentError)} ? 'form-group' : 'form-group has-error'">
           <label for="inputEmployment" class="control-label col-sm-4 col-md-3" 
-                 th:text="#{CustomerBean.employment}">CustomerBean.employment</label>
+                 th:text="#{FormBean.employment}">FormBean.employment</label>
           <div class="col-sm-4">
-               <p class="form-control-static"
-                  th:text="${formBean.customerBean.employment}" >
-                  formBean.customerBean.employment
-               </p>
+              <input type="text" class="form-control" 
+                     id="inputEmployment" name="employment"
+                     th:placeholder="#{FormBean.employment}"
+                     th:value="${formBean.employment}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(employmentError)}"
+                  th:text="${employmentError}">employmentError</span>
           </div>
       </div>
-      <div class="form-group">
+      <div class="form-group"
+           th:class="${#strings.isEmpty(departmentError)} ? 'form-group' : 'form-group has-error'">
           <label for="inputDepartment" class="control-label col-sm-4 col-md-3" 
-                 th:text="#{CustomerBean.department}">CustomerBean.department</label>
+                 th:text="#{FormBean.department}">FormBean.department</label>
           <div class="col-sm-4">
-               <p class="form-control-static"
-                  th:text="${formBean.customerBean.department}" >
-                  formBean.customerBean.department
-               </p>
+              <input type="text" class="form-control" 
+                     id="inputDepartment" name="department"
+                     th:placeholder="#{FormBean.department}"
+                     th:value="${formBean.department}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(departmentError)}"
+                  th:text="${departmentError}">departmentError</span>
           </div>
       </div>
-      <div class="form-group" >
-          <label class="control-label col-sm-4 col-md-3"
-                 th:text="#{CustomerBean.contactBy}">
-                 FormBean.contactBy
+      
+      
+      <div class="form-group" id="contact-by">
+        <label class="control-label col-sm-4 col-md-3" for="radioContactByEmail"
+               th:text="#{FormBean.contactBy}">FormBean.contactBy</label>
+        <div class="col-sm-6">
+            <label class="radio-inline">
+                <input type="radio" 
+                       id="radioContactByEmail" name="contactBy" 
+                       value="0" th:checked="${formBean.contactBy == 0 }" />
+                <span th:text="#{FormBean.contactBy.email}">FormBean.contactBy.email</span> 
+            </label>
+            <label class="radio-inline">
+                <input type="radio" 
+                       id="radioContactByTel" name="contactBy" 
+                       value="1" th:checked="${formBean.contactBy == 1 }" /> 
+                <span th:text="#{FormBean.contactBy.tel}">FormBean.contactBy.tel</span> 
+            </label>
+        </div>
+      </div>
+      
+      <div id="contact-by-email">
+        <div class="form-group required"
+           th:class="${#strings.isEmpty(emailError)} ? 'form-group required' : 'form-group required has-error'">
+          <label for="inputEmail" class="control-label col-sm-4 col-md-3" >
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="glyphicon glyphicon-ok"></span>
+            <span th:text="#{FormBean.email}">FormBean.email</span>
           </label>
           <div class="col-sm-6">
-              <p class="form-control-static"
-                 th:if="${formBean.customerBean.contactBy eq 0 }"
-                 th:text="#{CustomerBean.contactBy.email}">
-                 CustomerBean.contactBy.email
-              </p>
-              <p class="form-control-static"
-                 th:if="${formBean.customerBean.contactBy eq 1 }"
-                 th:text="#{CustomerBean.contactBy.tel}">
-                 CustomerBean.contactBy.tel
-              </p>
+              <input type="email" class="form-control" 
+                     id="inputEmail" name="email"
+                     th:placeholder="#{FormBean.email}"
+                     th:value="${formBean.email}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(emailError)}"
+                  th:text="${emailError}">emailError</span>
           </div>
+        </div>
       </div>
       
-      <div id="contact-by-email" class="form-group">
-          <label class=" control-label col-sm-4 col-md-3" 
-                 th:text="#{CustomerBean.email}">
-                 CustomerBean.email
+      <div id="contact-by-tel">
+        <div class="form-group required"
+           th:class="${#strings.isEmpty(telError)} ? 'form-group required' : 'form-group required has-error'">
+          <label for="inputTel" class="control-label col-sm-4 col-md-3">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="glyphicon glyphicon-ok"></span>
+            <span th:text="#{FormBean.tel}">FormBean.tel</span>
           </label>
-          <div class="col-sm-6">
-              <p class="form-control-static"
-                 th:text="${formBean.customerBean.email}" >
-                 formBean.customerBean.email
-              </p>
+          <div class="col-sm-4">
+              <input type="tel" class="form-control" 
+                     id="inputTel" name="tel"
+                     th:placeholder="#{FormBean.tel}"
+                     th:value="${formBean.tel}" />
+              <span class="help-block help-block-danger"
+                  th:unless="${#strings.isEmpty(telError)}"
+                  th:text="${telError}">telError</span>
           </div>
+        </div>
       </div>
       
-      <div id="contact-by-tel" class="form-group">
-          <label class="control-label col-sm-4 col-md-3" 
-                 th:text="#{CustomerBean.tel}">
-                 CustomerBean.tel
-          </label>
-          <div class="col-sm-6">
-              <p class="form-control-static"
-                 th:text="${formBean.customerBean.tel}" >
-                 formBean.customerBean.tel
-              </p>
-          </div>
-      </div>
-      
-      <hr />
-      
-      <div class="form-group ">
-        <label for="inputMaker" class="control-label col-sm-4 col-md-3" 
-               th:text="#{FormBean.maker}">FormBean.maker</label>
+      <div class="form-group required"
+         th:class="${#strings.isEmpty(makerError)} ? 'form-group required' : 'form-group required has-error'">
+        <label for="inputMaker" class="control-label col-sm-4 col-md-3">
+          <span class="glyphicon glyphicon-exclamation-sign"></span>
+          <span class="glyphicon glyphicon-ok"></span>
+          <span th:text="#{FormBean.maker}">FormBean.maker</span>
+        </label>
         <div class="col-sm-6">
             <input type="text" class="form-control" 
                    id="inputMaker" name="maker"
@@ -140,7 +176,8 @@
                 th:text="${makerError}">makerError</span>
         </div>
       </div>
-      <div class="form-group ">
+      <div class="form-group"
+         th:class="${#strings.isEmpty(modelError)} ? 'form-group' : 'form-group has-error'">
         <label for="inputModel" class="control-label col-sm-4 col-md-3" 
                th:text="#{FormBean.model}">FormBean.model</label>
         <div class="col-sm-6">
@@ -154,9 +191,13 @@
         </div>
       </div>
       
-      <div class="form-group">
-        <label for="inputContent" class="control-label col-sm-4 col-md-3" 
-               th:text="#{FormBean.content}">FormBean.content</label>
+      <div class="form-group required"
+         th:class="${#strings.isEmpty(contentError)} ? 'form-group required' : 'form-group required has-error'">
+        <label for="inputContent" class="control-label col-sm-4 col-md-3">
+          <span class="glyphicon glyphicon-exclamation-sign"></span>
+          <span class="glyphicon glyphicon-ok"></span>
+          <span th:text="#{FormBean.content}">FormBean.content</span>
+        </label>
         <div class="col-sm-6">
             <textarea class="form-control" rows="10"
                       id="inputContent" name="content"

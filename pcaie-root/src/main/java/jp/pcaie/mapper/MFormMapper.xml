@@ -6,13 +6,29 @@
     
     <insert id="insert" useGeneratedKeys="true">
         INSERT INTO m_form (
-            customer_id
+            name
+        ,   kana
+        ,   contact_by
+        ,   email
+        ,   tel
+        ,   zip_code
+        ,   address
+        ,   employment
+        ,   department
         ,   maker
         ,   model
         ,   content
         ,   create_date
         ) VALUES (
-            #{customerBean.id}
+            #{name}
+        ,   #{kana}
+        ,   #{contactBy}
+        ,   #{email}
+        ,   #{tel}
+        ,   #{zipCode}
+        ,   #{address}
+        ,   #{employment}
+        ,   #{department}
         ,   #{maker}
         ,   #{model}
         ,   #{content}
