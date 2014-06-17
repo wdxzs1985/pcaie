@@ -3,7 +3,6 @@ package jp.pcaie.controller;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.pcaie.domain.StaffBean;
@@ -18,9 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
+@SessionAttributes("LOGIN_USER")
 public class LoginController {
 
     @Autowired
@@ -58,7 +59,7 @@ public class LoginController {
                                                                  locale);
             if (loginUser != null) {
                 loginUser.setLogin(true);
-                session.setAttribute("LOGIN_USER", loginUser);
+                model.addAttribute("LOGIN_USER", loginUser);
                 if (StringUtils.contains(referer, request.getRequestURI())) {
                     return "redirect:/";
                 } else {
@@ -72,10 +73,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String doGetLogout(final Model model,
-                              final SessionStatus status,
-                              final HttpServletRequest request,
-                              final HttpServletResponse response) {
+    public String doGetLogout(final Model model, final SessionStatus status) {
         status.setComplete();
         return "redirect:/";
     }

@@ -17,7 +17,7 @@ public class OrderSerivce {
                     final OrderItemBean orderBean) {
         boolean isFound = false;
         for (final OrderItemBean item : this.shoppingCart) {
-            if (item.getId() == orderBean.getId()) {
+            if (item.getId().equals(orderBean.getId())) {
                 isFound = true;
                 int quantity = item.getQuantity();
                 quantity += orderBean.getQuantity();

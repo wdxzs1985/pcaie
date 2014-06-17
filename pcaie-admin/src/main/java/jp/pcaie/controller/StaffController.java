@@ -86,7 +86,7 @@ public class StaffController {
             redirectAttributes.addFlashAttribute("message", message);
             final StaffBean loginUser = (StaffBean) model.asMap()
                                                          .get("LOGIN_USER");
-            if (id == loginUser.getId()) {
+            if (loginUser.getId().equals(id)) {
                 loginUser.setEmail(email);
                 loginUser.setName(name);
                 loginUser.setRole(role);

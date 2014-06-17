@@ -40,10 +40,10 @@ public class StaffBeanValidator {
                                                                  locale);
             model.addAttribute("emailError", message);
             isValid = false;
-        } else if (StringUtils.length(email) > MAX_MAIL_LENGTH) {
+        } else if (StringUtils.length(email) > StaffBeanValidator.MAX_MAIL_LENGTH) {
             final String message = this.messageSource.getMessage("validate.tooLong",
                                                                  new Object[] { fieldName,
-                                                                         MAX_MAIL_LENGTH },
+                                                                               StaffBeanValidator.MAX_MAIL_LENGTH },
                                                                  locale);
             model.addAttribute("emailError", message);
             isValid = false;
@@ -64,7 +64,7 @@ public class StaffBeanValidator {
         boolean isValid = true;
         final String mail = userBean.getEmail();
         final StaffBean existUser = this.getUserByEmail(mail);
-        if (existUser != null && existUser.getId() != userBean.getId()) {
+        if (existUser != null && !existUser.getId().equals(userBean.getId())) {
             final String fieldName = this.messageSource.getMessage("StaffBean.email",
                                                                    null,
                                                                    locale);
@@ -146,7 +146,7 @@ public class StaffBeanValidator {
         if (!StringUtils.equals(password, password2)) {
             final String message = this.messageSource.getMessage("validate.notSame",
                                                                  new Object[] { fieldName,
-                                                                         fieldName2 },
+                                                                               fieldName2 },
                                                                  locale);
             model.addAttribute("password2Error", message);
             isValid = false;
@@ -167,10 +167,10 @@ public class StaffBeanValidator {
                                                                  locale);
             model.addAttribute("nameError", message);
             isValid = false;
-        } else if (StringUtils.length(name) > MAX_NAME_LENGTH) {
+        } else if (StringUtils.length(name) > StaffBeanValidator.MAX_NAME_LENGTH) {
             final String message = this.messageSource.getMessage("validate.tooLong",
                                                                  new Object[] { fieldName,
-                                                                         MAX_NAME_LENGTH },
+                                                                               StaffBeanValidator.MAX_NAME_LENGTH },
                                                                  locale);
             model.addAttribute("nameError", message);
             isValid = false;
