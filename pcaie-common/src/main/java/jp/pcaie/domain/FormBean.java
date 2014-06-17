@@ -9,10 +9,6 @@ public class FormBean extends DtoBean {
      */
     private static final long serialVersionUID = -3908089675700714078L;
 
-    public static final int CONTACT_BY_EMAIL = 0;
-
-    public static final int CONTACT_BY_TEL = 1;
-
     public static final int STATUS_UNREAD = 0;
 
     public static final int STATUS_READ = 1;
@@ -22,8 +18,6 @@ public class FormBean extends DtoBean {
     public static final int STATUS_SUCCESS = 3;
 
     private CustomerBean customerBean = new CustomerBean();
-
-    private Integer contactBy = CONTACT_BY_EMAIL;
 
     private String maker;
 
@@ -57,14 +51,6 @@ public class FormBean extends DtoBean {
 
     public void setContent(final String content) {
         this.content = content;
-    }
-
-    public Integer getContactBy() {
-        return this.contactBy;
-    }
-
-    public void setContactBy(final Integer contactBy) {
-        this.contactBy = contactBy;
     }
 
     public CustomerBean getCustomerBean() {

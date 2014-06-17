@@ -75,27 +75,27 @@
               
                 <div class="form-group" >
                     <label class="control-label col-sm-4 col-md-3"
-                           th:text="#{FormBean.contactBy}">
-                           FormBean.contactBy
+                           th:text="#{CustomerBean.contactBy}">
+                           CustomerBean.contactBy
                     </label>
                     <div class="col-sm-6">
                         <p class="form-control-static"
-                           th:if="${formBean.contactBy == 0 }"
-                           th:text="#{FormBean.contactBy.email}">
-                           FormBean.contactBy.email
+                           th:if="${formBean.customerBean.contactBy eq 0 }"
+                           th:text="#{CustomerBean.contactBy.email}">
+                           CustomerBean.contactBy.email
                         </p>
                         <p class="form-control-static"
-                           th:if="${formBean.contactBy == 1 }"
-                           th:text="#{FormBean.contactBy.tel}">
-                           FormBean.contactBy.tel
+                           th:if="${formBean.customerBean.contactBy eq 1 }"
+                           th:text="#{CustomerBean.contactBy.tel}">
+                           CustomerBean.contactBy.tel
                         </p>
                         <input type="hidden" name="contactBy"
-                               th:value="${formBean.contactBy}" />
+                               th:value="${formBean.customerBean.contactBy}" />
                     </div>
                 </div>
               
               <div id="contact-by-email" class="form-group"
-                   th:if="${formBean.contactBy == 0 }">
+                   th:if="${formBean.customerBean.contactBy eq 0 }">
                   <label class=" control-label col-sm-4 col-md-3" 
                          th:text="#{CustomerBean.email}">
                          CustomerBean.email
@@ -113,7 +113,7 @@
               </div>
               
               <div id="contact-by-tel" class="form-group"
-                   th:if="${formBean.contactBy == 1 }">
+                   th:if="${formBean.customerBean.contactBy eq 1 }">
                   <label class="control-label col-sm-4 col-md-3" 
                          th:text="#{CustomerBean.tel}">
                          CustomerBean.tel

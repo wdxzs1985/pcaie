@@ -10,6 +10,7 @@ CREATE TABLE `pcaie`.`m_customer` (
     `address` varchar(200) DEFAULT NULL,
     `employment` varchar(45) DEFAULT NULL,
     `department` varchar(45) DEFAULT NULL,
+    `contact_by` int(1) NOT NULL DEFAULT '0',
     `email` varchar(100) DEFAULT NULL,
     `tel` varchar(20) DEFAULT NULL,
     `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

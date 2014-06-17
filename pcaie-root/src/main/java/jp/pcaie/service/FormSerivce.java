@@ -48,14 +48,14 @@ public class FormSerivce {
                                                                      model,
                                                                      locale) && isValid;
 
-        switch (formBean.getContactBy()) {
-        case FormBean.CONTACT_BY_EMAIL:
+        switch (customerBean.getContactBy()) {
+        case CustomerBean.CONTACT_BY_EMAIL:
             isValid = this.customerBeanValidator.validateInputEmail(customerBean.getEmail(),
                                                                     customerBean.getEmail2(),
                                                                     model,
                                                                     locale) && isValid;
             break;
-        case FormBean.CONTACT_BY_TEL:
+        case CustomerBean.CONTACT_BY_TEL:
             isValid = this.customerBeanValidator.validateInputTel(customerBean.getTel(),
                                                                   model,
                                                                   locale) && isValid;

@@ -7,6 +7,10 @@ public class CustomerBean extends DtoBean {
      */
     private static final long serialVersionUID = 6690459641663293003L;
 
+    public static final int CONTACT_BY_EMAIL = 0;
+
+    public static final int CONTACT_BY_TEL = 1;
+
     private String name;
 
     private String kana;
@@ -18,6 +22,8 @@ public class CustomerBean extends DtoBean {
     private String zipCode;
 
     private String address;
+
+    private Integer contactBy = CONTACT_BY_EMAIL;
 
     private String email;
 
@@ -95,6 +101,14 @@ public class CustomerBean extends DtoBean {
 
     public void setAddress(final String address) {
         this.address = address;
+    }
+
+    public Integer getContactBy() {
+        return this.contactBy;
+    }
+
+    public void setContactBy(final Integer contactBy) {
+        this.contactBy = contactBy;
     }
 
 }

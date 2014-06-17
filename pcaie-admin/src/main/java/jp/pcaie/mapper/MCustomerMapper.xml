@@ -9,6 +9,7 @@
             customer.id         AS `id`,
             customer.name       AS `name`,
             customer.kana       AS `kana`,
+            customer.CONTACT_BY AS `contactBy`,
             customer.email      AS `email`,
             customer.tel        AS `tel`,
             customer.zip_code   AS `zipCode`,
@@ -41,6 +42,7 @@
         INSERT INTO m_customer (
             name
         ,   kana
+        ,   contact_by
         ,   email
         ,   tel
         ,   zip_code
@@ -50,6 +52,7 @@
         ) VALUES (
             #{name}
         ,   #{kana}
+        ,   #{contactBy}
         ,   #{email}
         ,   #{tel}
         ,   #{zipCode}
@@ -83,6 +86,7 @@
             customer.id         AS `id`,
             customer.name       AS `name`,
             customer.kana       AS `kana`,
+            customer.CONTACT_BY AS `contactBy`,
             customer.email      AS `email`,
             customer.tel        AS `tel`,
             customer.zip_code   AS `zipCode`,
@@ -110,6 +114,7 @@
         <set>
             customer.name = #{name},
             customer.kana = #{kana},
+            customer.CONTACT_BY = #{contactBy},
             customer.email = #{email},
             customer.tel = #{tel},
             customer.zip_code = #{zipCode},

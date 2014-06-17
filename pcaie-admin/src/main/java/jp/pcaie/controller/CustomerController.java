@@ -83,6 +83,7 @@ public class CustomerController {
         customerBean.setAddress(inputCustomerBean.getAddress());
         customerBean.setEmployment(inputCustomerBean.getEmployment());
         customerBean.setDepartment(inputCustomerBean.getDepartment());
+        customerBean.setContactBy(inputCustomerBean.getContactBy());
         customerBean.setEmail(inputCustomerBean.getEmail());
         customerBean.setTel(inputCustomerBean.getTel());
 

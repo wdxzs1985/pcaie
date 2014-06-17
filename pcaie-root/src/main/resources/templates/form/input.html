@@ -31,7 +31,8 @@
                           th:text="${nameError}">nameError</span>
                   </div>
               </div>
-              <div class="form-group">
+              <div class="form-group"
+                   th:class="${#strings.isEmpty(kanaError)} ? 'form-group' : 'form-group has-error'">
                   <label for="inputKana" class="control-label col-sm-4 col-md-3" 
                          th:text="#{CustomerBean.kana}">CustomerBean.kana</label>
                   <div class="col-sm-4 col-md-3">
@@ -44,7 +45,8 @@
                           th:text="${kanaError}">kanaError</span>
                   </div>
               </div>
-              <div class="form-group">
+              <div class="form-group"
+                   th:class="${#strings.isEmpty(employmentError)} ? 'form-group' : 'form-group has-error'">
                   <label for="inputEmployment" class="control-label col-sm-4 col-md-3" 
                          th:text="#{CustomerBean.employment}">CustomerBean.employment</label>
                   <div class="col-sm-4 col-md-3">
@@ -62,7 +64,8 @@
                       </p>
                   </div>
               </div>
-              <div class="form-group">
+              <div class="form-group"
+                   th:class="${#strings.isEmpty(departmentError)} ? 'form-group' : 'form-group has-error'">
                   <label for="inputDepartment" class="control-label col-sm-4 col-md-3" 
                          th:text="#{CustomerBean.department}">CustomerBean.department</label>
                   <div class="col-sm-4 col-md-3">
@@ -76,27 +79,28 @@
                   </div>
               </div>
               
-              <div class="form-group" id="contact-by">
+              <div id="contact-by" class="form-group">
                 <label class="control-label col-sm-4 col-md-3" for="radioContactByEmail"
-                       th:text="#{FormBean.contactBy}">FormBean.contactBy</label>
+                       th:text="#{CustomerBean.contactBy}">CustomerBean.contactBy</label>
                 <div class="col-sm-8">
                     <label class="radio-inline">
                         <input type="radio" 
-                               id="radioContactByEmail" name="contactBy" 
-                               value="0" th:checked="${formBean.contactBy == 0 }" />
-                        <span th:text="#{FormBean.contactBy.email}">FormBean.contactBy.email</span> 
+                               id="radioContactByEmail" name="customerBean.contactBy" 
+                               value="0" th:checked="${formBean.customerBean.contactBy == 0 }" />
+                        <span th:text="#{CustomerBean.contactBy.email}">CustomerBean.contactBy.email</span> 
                     </label>
                     <label class="radio-inline">
                         <input type="radio" 
-                               id="radioContactByTel" name="contactBy" 
-                               value="1" th:checked="${formBean.contactBy == 1 }" /> 
-                        <span th:text="#{FormBean.contactBy.tel}">FormBean.contactBy.tel</span> 
+                               id="radioContactByTel" name="customerBean.contactBy" 
+                               value="1" th:checked="${formBean.customerBean.contactBy == 1 }" /> 
+                        <span th:text="#{CustomerBean.contactBy.tel}">CustomerBean.contactBy.tel</span> 
                     </label>
                 </div>
               </div>
               
               <div id="contact-by-email">
-                <div class="form-group required">
+              <div class="form-group required"
+                   th:class="${#strings.isEmpty(emailError)} ? 'form-group required' : 'form-group required has-error'">
                   <label for="inputEmail" class="control-label col-sm-4 col-md-3" >
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
                     <span class="glyphicon glyphicon-ok"></span>
@@ -112,7 +116,8 @@
                           th:text="${emailError}">emailError</span>
                   </div>
                 </div>
-                <div class="form-group required">
+              <div class="form-group required"
+                   th:class="${#strings.isEmpty(email2Error)} ? 'form-group required' : 'form-group required has-error'">
                   <label for="inputEmail2" class="control-label col-sm-4 col-md-3" >
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
                     <span class="glyphicon glyphicon-ok"></span>
@@ -131,7 +136,8 @@
               </div>
               
               <div id="contact-by-tel">
-                <div class="form-group required">
+                <div class="form-group required"
+                   th:class="${#strings.isEmpty(telError)} ? 'form-group required' : 'form-group required has-error'">
                   <label for="inputTel" class="control-label col-sm-4 col-md-3">
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
                     <span class="glyphicon glyphicon-ok"></span>
@@ -149,9 +155,13 @@
                 </div>
               </div>
               
-              <div class="form-group ">
-                <label for="inputTel" class="control-label col-sm-4 col-md-3" 
-                       th:text="#{FormBean.maker}">FormBean.maker</label>
+              <div class="form-group required"
+                   th:class="${#strings.isEmpty(makerError)} ? 'form-group required' : 'form-group required has-error'">
+                <label for="inputTel" class="control-label col-sm-4 col-md-3">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span th:text="#{FormBean.maker}">FormBean.maker</span>
+                       </label>
                 <div class="col-sm-4 col-md-3">
                     <input type="text" class="form-control" 
                            id="inputMaker" name="maker"
@@ -162,7 +172,8 @@
                         th:text="${makerError}">makerError</span>
                 </div>
               </div>
-              <div class="form-group ">
+              <div class="form-group"
+                   th:class="${#strings.isEmpty(modelError)} ? 'form-group' : 'form-group has-error'">
                 <label for="inputTel" class="control-label col-sm-4 col-md-3" 
                        th:text="#{FormBean.model}">FormBean.model</label>
                 <div class="col-sm-4 col-md-3">
@@ -176,9 +187,13 @@
                 </div>
               </div>
               
-              <div class="form-group">
-                <label for="inputContent" class="control-label col-sm-4 col-md-3" 
-                       th:text="#{FormBean.content}">FormBean.content</label>
+              <div class="form-group required"
+                   th:class="${#strings.isEmpty(contentError)} ? 'form-group required' : 'form-group required has-error'">
+                <label for="inputContent" class="control-label col-sm-4 col-md-3">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span th:text="#{FormBean.content}">FormBean.content</span>
+                </label>
                 <div class="col-sm-6">
                     <textarea class="form-control" rows="10"
                               id="inputContent" name="content"

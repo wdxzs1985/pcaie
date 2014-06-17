@@ -96,21 +96,22 @@
           </div>
       </div>
       
+      
       <div class="form-group" id="contact-by">
         <label class="control-label col-sm-4 col-md-3" for="radioContactByEmail"
-               th:text="#{FormBean.contactBy}">FormBean.contactBy</label>
+               th:text="#{CustomerBean.contactBy}">CustomerBean.contactBy</label>
         <div class="col-sm-6">
             <label class="radio-inline">
                 <input type="radio" 
-                       id="radioContactByEmail" name="contactBy" 
-                       value="0" th:checked="${formBean.contactBy == 0 }" />
-                <span th:text="#{FormBean.contactBy.email}">FormBean.contactBy.email</span> 
+                       id="radioContactByEmail" name="customerBean.contactBy" 
+                       value="0" th:checked="${formBean.customerBean.contactBy == 0 }" />
+                <span th:text="#{CustomerBean.contactBy.email}">CustomerBean.contactBy.email</span> 
             </label>
             <label class="radio-inline">
                 <input type="radio" 
-                       id="radioContactByTel" name="contactBy" 
-                       value="1" th:checked="${formBean.contactBy == 1 }" /> 
-                <span th:text="#{FormBean.contactBy.tel}">FormBean.contactBy.tel</span> 
+                       id="radioContactByTel" name="customerBean.contactBy" 
+                       value="1" th:checked="${formBean.customerBean.contactBy == 1 }" /> 
+                <span th:text="#{CustomerBean.contactBy.tel}">CustomerBean.contactBy.tel</span> 
             </label>
         </div>
       </div>

@@ -7,14 +7,12 @@
     <insert id="insert" useGeneratedKeys="true">
         INSERT INTO m_form (
             customer_id
-        ,   contact_by
         ,   maker
         ,   model
         ,   content
         ,   create_date
         ) VALUES (
             #{customerBean.id}
-        ,   #{contactBy}
         ,   #{maker}
         ,   #{model}
         ,   #{content}

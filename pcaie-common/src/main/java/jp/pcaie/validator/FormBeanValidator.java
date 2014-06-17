@@ -18,12 +18,20 @@ public class FormBeanValidator {
     @Autowired
     private MessageSource messageSource = null;
 
-    public boolean validateInputMaker(final String inputMaker, final Model model, final Locale locale) {
+    public boolean validateInputMaker(final String inputMaker,
+                                      final Model model,
+                                      final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("FormBean.maker",
                                                                null,
                                                                locale);
-        if (StringUtils.length(inputMaker) > MAX_MAKER_LENGTH) {
+        if (StringUtils.isEmpty(inputMaker)) {
+            final String message = this.messageSource.getMessage("validate.empty",
+                                                                 new Object[] { fieldName },
+                                                                 locale);
+            model.addAttribute("makerError", message);
+            isValid = false;
+        } else if (StringUtils.length(inputMaker) > MAX_MAKER_LENGTH) {
             final String message = this.messageSource.getMessage("validate.tooLong",
                                                                  new Object[] { fieldName,
                                                                          MAX_MAKER_LENGTH },
@@ -34,7 +42,9 @@ public class FormBeanValidator {
         return isValid;
     }
 
-    public boolean validateInputModel(final String inputModel, final Model model, final Locale locale) {
+    public boolean validateInputModel(final String inputModel,
+                                      final Model model,
+                                      final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("FormBean.model",
                                                                null,
@@ -50,12 +60,20 @@ public class FormBeanValidator {
         return isValid;
     }
 
-    public boolean validateInputContent(final String inputContent, final Model model, final Locale locale) {
+    public boolean validateInputContent(final String inputContent,
+                                        final Model model,
+                                        final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("FormBean.content",
                                                                null,
                                                                locale);
-        if (StringUtils.length(inputContent) > MAX_CONTENT_LENGTH) {
+        if (StringUtils.isEmpty(inputContent)) {
+            final String message = this.messageSource.getMessage("validate.empty",
+                                                                 new Object[] { fieldName },
+                                                                 locale);
+            model.addAttribute("contentError", message);
+            isValid = false;
+        } else if (StringUtils.length(inputContent) > MAX_CONTENT_LENGTH) {
             final String message = this.messageSource.getMessage("validate.tooLong",
                                                                  new Object[] { fieldName,
                                                                          MAX_CONTENT_LENGTH },

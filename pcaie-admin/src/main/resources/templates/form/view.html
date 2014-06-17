@@ -81,8 +81,26 @@
                      </p>
                 </div>
             </div>
+            <div class="form-group" >
+                <label class="control-label col-sm-4 col-md-3"
+                       th:text="#{CustomerBean.contactBy}">
+                       FormBean.contactBy
+                </label>
+                <div class="col-sm-6">
+                    <p class="form-control-static"
+                       th:if="${formBean.customerBean.contactBy eq 0 }"
+                       th:text="#{CustomerBean.contactBy.email}">
+                       CustomerBean.contactBy.email
+                    </p>
+                    <p class="form-control-static"
+                       th:if="${formBean.customerBean.contactBy eq 1 }"
+                       th:text="#{CustomerBean.contactBy.tel}">
+                       CustomerBean.contactBy.tel
+                    </p>
+                </div>
+            </div>
             <div id="contact-by-email" class="form-group"
-                 th:if="${formBean.contactBy == 0 }">
+                 th:if="${formBean.customerBean.contactBy eq 0 }">
                 <label class=" control-label col-sm-4 col-md-3" 
                        th:text="#{CustomerBean.email}">
                        CustomerBean.email
@@ -95,7 +113,7 @@
                 </div>
             </div>
             <div id="contact-by-tel" class="form-group"
-                 th:if="${formBean.contactBy == 1 }">
+                 th:if="${formBean.customerBean.contactBy eq 1 }">
                 <label class="control-label col-sm-4 col-md-3" 
                        th:text="#{CustomerBean.tel}">
                        CustomerBean.tel
@@ -110,24 +128,6 @@
         </form>
         <hr />
         <form class="form-horizontal">
-            <div class="form-group" >
-                <label class="control-label col-sm-4 col-md-3"
-                       th:text="#{FormBean.contactBy}">
-                       FormBean.contactBy
-                </label>
-                <div class="col-sm-6">
-                    <p class="form-control-static"
-                       th:if="${formBean.contactBy == 0 }"
-                       th:text="#{FormBean.contactBy.email}">
-                       FormBean.contactBy.email
-                    </p>
-                    <p class="form-control-static"
-                       th:if="${formBean.contactBy == 1 }"
-                       th:text="#{FormBean.contactBy.tel}">
-                       FormBean.contactBy.tel
-                    </p>
-                </div>
-            </div>
             <div class="form-group"
                  th:unless="${#strings.isEmpty(formBean.maker)}">
               <label class="control-label col-sm-4 col-md-3" 
@@ -161,11 +161,16 @@
                    th:href="@{/form/__${formBean.id}__/reply}"
                    th:if="${formBean.status} lt 2">
                   <span class="glyphicon glyphicon-share-alt"></span>&nbsp;
-                  <span th:text="#{admin.form.reply.button}">admin.form.reply.button</span> 
+                  <span th:text="#{admin.form.reply}">admin.form.reply</span> 
                 </a>
                 <a class="btn btn-success"
-                   th:href="@{/form/__${formBean.id}__/edit}"
-                   th:if="${formBean.status} lt 2">
+                   th:href="@{/form/__${formBean.id}__/request}"
+                   th:if="${formBean.status} eq 2">
+                  <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                  <span th:text="#{admin.form.request}">admin.form.request</span> 
+                </a>
+                <a class="btn btn-warning"
+                   th:href="@{/form/__${formBean.id}__/edit}">
                   <span class="glyphicon glyphicon-edit"></span>&nbsp;
                   <span th:text="#{button.edit}">button.edit</span> 
                 </a>

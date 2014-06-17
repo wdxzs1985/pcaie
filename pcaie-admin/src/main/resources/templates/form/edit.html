@@ -80,6 +80,24 @@
                </p>
           </div>
       </div>
+      <div class="form-group" >
+          <label class="control-label col-sm-4 col-md-3"
+                 th:text="#{CustomerBean.contactBy}">
+                 FormBean.contactBy
+          </label>
+          <div class="col-sm-6">
+              <p class="form-control-static"
+                 th:if="${formBean.customerBean.contactBy eq 0 }"
+                 th:text="#{CustomerBean.contactBy.email}">
+                 CustomerBean.contactBy.email
+              </p>
+              <p class="form-control-static"
+                 th:if="${formBean.customerBean.contactBy eq 1 }"
+                 th:text="#{CustomerBean.contactBy.tel}">
+                 CustomerBean.contactBy.tel
+              </p>
+          </div>
+      </div>
       
       <div id="contact-by-email" class="form-group">
           <label class=" control-label col-sm-4 col-md-3" 
@@ -108,25 +126,6 @@
       </div>
       
       <hr />
-      
-      <div class="form-group" id="contact-by">
-        <label class="control-label col-sm-4 col-md-3" for="radioContactByEmail"
-               th:text="#{FormBean.contactBy}">FormBean.contactBy</label>
-        <div class="col-sm-6">
-            <label class="radio-inline">
-                <input type="radio" 
-                       id="radioContactByEmail" name="contactBy" 
-                       value="0" th:checked="${formBean.contactBy == 0 }" />
-                <span th:text="#{FormBean.contactBy.email}">FormBean.contactBy.email</span> 
-            </label>
-            <label class="radio-inline">
-                <input type="radio" 
-                       id="radioContactByTel" name="contactBy" 
-                       value="1" th:checked="${formBean.contactBy == 1 }" /> 
-                <span th:text="#{FormBean.contactBy.tel}">FormBean.contactBy.tel</span> 
-            </label>
-        </div>
-      </div>
       
       <div class="form-group ">
         <label for="inputMaker" class="control-label col-sm-4 col-md-3" 

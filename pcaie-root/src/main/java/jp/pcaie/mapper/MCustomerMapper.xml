@@ -34,15 +34,21 @@
         INSERT INTO m_customer (
             name
         ,   kana
+        ,   contact_by
         ,   email
         ,   tel
+        ,   zip_code
+        ,   address
         ,   employment
         ,   department
         ) VALUES (
             #{name}
         ,   #{kana}
+        ,   #{contactBy}
         ,   #{email}
         ,   #{tel}
+        ,   #{zipCode}
+        ,   #{address}
         ,   #{employment}
         ,   #{department}
         )

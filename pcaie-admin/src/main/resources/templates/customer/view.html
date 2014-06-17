@@ -11,18 +11,6 @@
         <h1 th:text="#{admin.customer.edit}">admin.customer.edit</h1>
     </div>
     <div layout:fragment="content">
-        <div class="row" th:unless="${#strings.isEmpty(message)}">
-            <div class="col-sm-6 col-sm-offset-4 col-md-offset-3">
-                <div class="alert alert-success">
-                    <ul>
-                        <li th:text="${message}">
-                            message
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    
         <form class="form-horizontal">
             <div class="form-group">
                 <label for="inputName" class="control-label col-sm-4 col-md-3" >
@@ -95,6 +83,26 @@
                      </p>
                 </div>
             </div>
+            
+            <div class="form-group" >
+                <label class="control-label col-sm-4 col-md-3"
+                       th:text="#{CustomerBean.contactBy}">
+                       CustomerBean.contactBy
+                </label>
+                <div class="col-sm-6">
+                    <p class="form-control-static"
+                       th:if="${customerBean.contactBy eq 0 }"
+                       th:text="#{CustomerBean.contactBy.email}">
+                       CustomerBean.contactBy.email
+                    </p>
+                    <p class="form-control-static"
+                       th:if="${customerBean.contactBy eq 1 }"
+                       th:text="#{CustomerBean.contactBy.tel}">
+                       CustomerBean.contactBy.tel
+                    </p>
+                </div>
+            </div>
+      
             <div class="form-group"
                  th:unless="${#strings.isEmpty(customerBean.email)}">
                 <label class=" control-label col-sm-4 col-md-3" 

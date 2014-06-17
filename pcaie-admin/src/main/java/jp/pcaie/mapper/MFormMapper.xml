@@ -7,14 +7,12 @@
     <insert id="insert" useGeneratedKeys="true">
         INSERT INTO m_form (
             customer_id
-        ,   contact_by
         ,   maker
         ,   model
         ,   content
         ,   create_date
         ) VALUES (
             #{customerBean.id}
-        ,   #{contactBy}
         ,   #{maker}
         ,   #{model}
         ,   #{content}
@@ -50,13 +48,13 @@
             customer.id         AS `customerBean.id`,
             customer.name       AS `customerBean.name`,
             customer.kana       AS `customerBean.kana`,
+            customer.CONTACT_BY AS `customerBean.contactBy`,
             customer.email      AS `customerBean.email`,
             customer.tel        AS `customerBean.tel`,
             customer.zip_code   AS `customerBean.zipCode`,
             customer.address    AS `customerBean.address`,
             customer.employment AS `customerBean.employment`,
             customer.department AS `customerBean.department`,
-            form.CONTACT_BY     AS `contactBy`,
             form.MAKER          AS `maker`,
             form.MODEL          AS `model`,
             form.CONTENT        AS `content`,
@@ -85,13 +83,13 @@
             customer.id         AS `customerBean.id`,
             customer.name       AS `customerBean.name`,
             customer.kana       AS `customerBean.kana`,
+            customer.CONTACT_BY AS `customerBean.contactBy`,
             customer.email      AS `customerBean.email`,
             customer.tel        AS `customerBean.tel`,
             customer.zip_code   AS `customerBean.zipCode`,
             customer.address    AS `customerBean.address`,
             customer.employment AS `customerBean.employment`,
             customer.department AS `customerBean.department`,
-            form.CONTACT_BY     AS `contactBy`,
             form.MAKER          AS `maker`,
             form.MODEL          AS `model`,
             form.CONTENT        AS `content`,
@@ -109,7 +107,6 @@
         UPDATE 
             m_form form
         <set>
-            form.contact_by = #{contactBy},
             form.maker = #{maker},
             form.model = #{model},
             form.content = #{content},

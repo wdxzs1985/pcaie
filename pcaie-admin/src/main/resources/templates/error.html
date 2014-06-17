@@ -4,17 +4,17 @@
   layout:decorator="layout">
 <body>
 <div class="container">
-    <div layout:fragment="content">
+    <div layout:fragment="message">
         <div>
             There was an unexpected error (type=<span th:text="${error}">Bad</span>, status=<span th:text="${status}">500</span>).
         </div>
-        <div class="alert alert-error">
+        <div class="alert alert-danger">
             <h4 th:text="${title}">title</h4>
             <p th:text="${message}">message</p>
         </div>
-        <div>
+    </div>
+    <div layout:fragment="content">
             Please contact the operator with the above information.
-        </div>
     </div>
 </div>
 </body>
