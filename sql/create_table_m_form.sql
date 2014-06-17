@@ -17,7 +17,7 @@ CREATE TABLE `pcaie`.`m_form` (
   `model` varchar(45) DEFAULT NULL,
   `content` text,
   `status` int(1) NOT NULL DEFAULT '0',
-  `create_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` timestamp NULL,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `del_flg` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
