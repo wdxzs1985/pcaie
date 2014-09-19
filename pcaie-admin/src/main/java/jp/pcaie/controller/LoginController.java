@@ -55,7 +55,7 @@ public class LoginController {
             final StaffBean loginUser = this.userService.doLogin(email,
                                                                  password,
                                                                  salt,
-                                                                 model,
+                                                                 model.asMap(),
                                                                  locale);
             if (loginUser != null) {
                 loginUser.setLogin(true);

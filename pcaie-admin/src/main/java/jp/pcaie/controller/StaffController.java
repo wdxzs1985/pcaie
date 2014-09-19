@@ -77,7 +77,7 @@ public class StaffController {
         staffBean.setPassword2(password2);
         staffBean.setRole(role);
         final boolean isUpdated = this.staffService.updateUser(staffBean,
-                                                               model,
+                                                               model.asMap(),
                                                                locale);
         if (isUpdated) {
             final String message = this.messageSource.getMessage("admin.staff.edit.message",
@@ -120,7 +120,7 @@ public class StaffController {
         staffBean.setPassword(password);
         staffBean.setPassword2(password2);
         final boolean isCreated = this.staffService.createUser(staffBean,
-                                                               model,
+                                                               model.asMap(),
                                                                locale);
         if (isCreated) {
             return "redirect:/staff";

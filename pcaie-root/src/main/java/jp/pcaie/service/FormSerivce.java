@@ -3,6 +3,7 @@ package jp.pcaie.service;
 import java.util.Locale;
 
 import jp.pcaie.domain.FormBean;
+import jp.pcaie.mail.FormMail;
 import jp.pcaie.mapper.MFormMapper;
 import jp.pcaie.validator.FormBeanValidator;
 
@@ -18,6 +19,8 @@ public class FormSerivce {
     private FormBeanValidator formBeanValidator = null;
     @Autowired
     private MFormMapper mFormMapper = null;
+    @Autowired
+    private FormMail formMail = null;
 
     public boolean validate(final FormBean formBean,
                             final Model model,
@@ -69,6 +72,6 @@ public class FormSerivce {
     @Transactional
     public void save(final FormBean formBean) {
         this.mFormMapper.insert(formBean);
+        this.formMail.send(formBean);
     }
-
 }

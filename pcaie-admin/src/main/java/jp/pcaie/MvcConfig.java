@@ -14,4 +14,5 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         final StringTrimmerEditor stringtrimmer = new StringTrimmerEditor(true);
         binder.registerCustomEditor(String.class, stringtrimmer);
     }
+
 }

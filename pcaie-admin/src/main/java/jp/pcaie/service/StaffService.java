@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 @Service
 @Transactional
@@ -33,7 +32,7 @@ public class StaffService {
     public StaffBean doLogin(final String mail,
                              final String password,
                              final String salt,
-                             final Model model,
+                             final Map<String, Object> model,
                              final Locale locale) {
         if (this.staffBeanValidator.validateInputEmail(mail, model, locale)) {
             final StaffBean loginUser = this.getUserByEmail(mail);
@@ -62,7 +61,7 @@ public class StaffService {
     public boolean updatePassword(final StaffBean userBean,
                                   final String password,
                                   final String password2,
-                                  final Model model,
+                                  final Map<String, Object> model,
                                   final Locale locale) {
         final boolean isValid = this.staffBeanValidator.validateInputPassword(password,
                                                                               password2,
@@ -98,7 +97,7 @@ public class StaffService {
     }
 
     public boolean updateUser(final StaffBean staffBean,
-                              final Model model,
+                              final Map<String, Object> model,
                               final Locale locale) {
         final String mail = staffBean.getEmail();
         boolean isMailValid = this.staffBeanValidator.validateInputEmail(mail,
@@ -135,7 +134,7 @@ public class StaffService {
     }
 
     public boolean createUser(final StaffBean staffBean,
-                              final Model model,
+                              final Map<String, Object> model,
                               final Locale locale) {
         boolean isMailValid = this.staffBeanValidator.validateInputEmail(staffBean.getEmail(),
                                                                          model,

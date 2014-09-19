@@ -5,7 +5,6 @@
     xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
     <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
@@ -18,15 +17,13 @@
         <property name="maxActive" value="${spring.datasource.max-active}"/>
         <property name="maxIdle" value="${spring.datasource.max-idle}"/>
         <property name="minIdle" value="${spring.datasource.min-idle}"/>
+        <property name="validationQuery" value="select 1"/>
+        <property name="testOnBorrow" value="true"/>
     </bean>
     
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
       <property name="dataSource" ref="dataSource" />
       <property name="typeAliasesPackage" value="jp.pcaie.domain" />
-    </bean>
-    
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-      <property name="dataSource" ref="dataSource" />
     </bean>
 
     <mybatis:scan base-package="jp.pcaie.mapper" />

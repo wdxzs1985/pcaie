@@ -81,7 +81,7 @@ public class FormBeanValidator {
                                                                locale);
         if (StringUtils.isNotBlank(inputZipCode)) {
             if (!this.zipCodeValidator.validate(inputZipCode)) {
-                final String message = this.messageSource.getMessage("validate.unavailable",
+                final String message = this.messageSource.getMessage("validate.invalid",
                                                                      new Object[] { fieldName },
                                                                      locale);
                 model.addAttribute("zipCodeError", message);
@@ -170,7 +170,7 @@ public class FormBeanValidator {
             model.addAttribute("emailError", message);
             isValid = false;
         } else if (!this.emailValidator.validate(inputEmail)) {
-            final String message = this.messageSource.getMessage("validate.unavailable",
+            final String message = this.messageSource.getMessage("validate.invalid",
                                                                  new Object[] { fieldName },
                                                                  locale);
             model.addAttribute("emailError", message);

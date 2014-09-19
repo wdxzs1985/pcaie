@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
 @Component
 public class StaffBeanValidator {
@@ -28,7 +27,7 @@ public class StaffBeanValidator {
     private final MessageSource messageSource = null;
 
     public boolean validateInputEmail(final String email,
-                                      final Model model,
+                                      final Map<String, Object> model,
                                       final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("StaffBean.email",
@@ -38,20 +37,20 @@ public class StaffBeanValidator {
             final String message = this.messageSource.getMessage("validate.empty",
                                                                  new Object[] { fieldName },
                                                                  locale);
-            model.addAttribute("emailError", message);
+            model.put("emailError", message);
             isValid = false;
         } else if (StringUtils.length(email) > StaffBeanValidator.MAX_MAIL_LENGTH) {
             final String message = this.messageSource.getMessage("validate.tooLong",
                                                                  new Object[] { fieldName,
-                                                                               StaffBeanValidator.MAX_MAIL_LENGTH },
+                                                                         StaffBeanValidator.MAX_MAIL_LENGTH },
                                                                  locale);
-            model.addAttribute("emailError", message);
+            model.put("emailError", message);
             isValid = false;
         } else if (!this.emailValidator.validate(email)) {
-            final String message = this.messageSource.getMessage("validate.unavailable",
+            final String message = this.messageSource.getMessage("validate.invalid",
                                                                  new Object[] { fieldName },
                                                                  locale);
-            model.addAttribute("emailError", message);
+            model.put("emailError", message);
             isValid = false;
         }
 
@@ -59,7 +58,7 @@ public class StaffBeanValidator {
     }
 
     public boolean validateExistsMail(final StaffBean userBean,
-                                      final Model model,
+                                      final Map<String, Object> model,
                                       final Locale locale) {
         boolean isValid = true;
         final String mail = userBean.getEmail();
@@ -71,21 +70,21 @@ public class StaffBeanValidator {
             final String message = this.messageSource.getMessage("validate.unique",
                                                                  new String[] { fieldName },
                                                                  locale);
-            model.addAttribute("emailError", message);
+            model.put("emailError", message);
             isValid = false;
         }
         return isValid;
     }
 
     public boolean validateLoginUser(final StaffBean loginUser,
-                                     final Model model,
+                                     final Map<String, Object> model,
                                      final Locale locale) {
         boolean isValid = true;
         if (loginUser == null) {
             final String message = this.messageSource.getMessage("validate.loginFailure",
                                                                  null,
                                                                  locale);
-            model.addAttribute("error", message);
+            model.put("error", message);
             isValid = false;
         }
         return isValid;
@@ -94,7 +93,7 @@ public class StaffBeanValidator {
     public boolean validatePasswordSame(final String password,
                                         final String md5Password,
                                         final String salt,
-                                        final Model model,
+                                        final Map<String, Object> model,
                                         final Locale locale) {
         boolean isValid = true;
         final String encryptPassword = this.encryptPassword(md5Password, salt);
@@ -102,7 +101,7 @@ public class StaffBeanValidator {
             final String message = this.messageSource.getMessage("validate.loginFailure",
                                                                  null,
                                                                  locale);
-            model.addAttribute("error", message);
+            model.put("error", message);
             isValid = false;
         }
         return isValid;
@@ -120,7 +119,7 @@ public class StaffBeanValidator {
 
     public boolean validateInputPassword(final String password,
                                          final String password2,
-                                         final Model model,
+                                         final Map<String, Object> model,
                                          final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("StaffBean.password",
@@ -133,29 +132,29 @@ public class StaffBeanValidator {
             final String message = this.messageSource.getMessage("validate.empty",
                                                                  new Object[] { fieldName },
                                                                  locale);
-            model.addAttribute("passwordError", message);
+            model.put("passwordError", message);
             isValid = false;
         }
         if (StringUtils.isBlank(password2)) {
             final String message = this.messageSource.getMessage("validate.empty",
                                                                  new Object[] { fieldName2 },
                                                                  locale);
-            model.addAttribute("password2Error", message);
+            model.put("password2Error", message);
             isValid = false;
         }
         if (!StringUtils.equals(password, password2)) {
             final String message = this.messageSource.getMessage("validate.notSame",
                                                                  new Object[] { fieldName,
-                                                                               fieldName2 },
+                                                                         fieldName2 },
                                                                  locale);
-            model.addAttribute("password2Error", message);
+            model.put("password2Error", message);
             isValid = false;
         }
         return isValid;
     }
 
     public boolean validateInputName(final String name,
-                                     final Model model,
+                                     final Map<String, Object> model,
                                      final Locale locale) {
         boolean isValid = true;
         final String fieldName = this.messageSource.getMessage("StaffBean.name",
@@ -165,14 +164,14 @@ public class StaffBeanValidator {
             final String message = this.messageSource.getMessage("validate.empty",
                                                                  new Object[] { fieldName },
                                                                  locale);
-            model.addAttribute("nameError", message);
+            model.put("nameError", message);
             isValid = false;
         } else if (StringUtils.length(name) > StaffBeanValidator.MAX_NAME_LENGTH) {
             final String message = this.messageSource.getMessage("validate.tooLong",
                                                                  new Object[] { fieldName,
-                                                                               StaffBeanValidator.MAX_NAME_LENGTH },
+                                                                         StaffBeanValidator.MAX_NAME_LENGTH },
                                                                  locale);
-            model.addAttribute("nameError", message);
+            model.put("nameError", message);
             isValid = false;
         }
         return isValid;

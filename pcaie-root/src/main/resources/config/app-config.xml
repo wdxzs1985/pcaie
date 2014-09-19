@@ -1,8 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- this MessageSource is being used in a web application -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -19,26 +14,15 @@
     </bean>
     
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <!-- 
-        <property name="host" value=""/>
-        <property name="port" value=""/>
-        <property name="username" value=""/>
-        <property name="password" value=""/>
-         -->
-    </bean>
-    
-    <bean id="mailSupport" class="jp.pcaie.support.MailSupport">
-        <property name="encoding" value="UTF-8"/>
-        <property name="from" value="support@pcaie.jp"/>
-        <property name="bcc" value="support@pcaie.jp"/>
+        <property name="host" value="${mail.host}"/>
+        <property name="port" value="${mail.port}"/>
+        <property name="username" value="${mail.username}"/>
+        <property name="password" value="${mail.password}"/>
     </bean>
     
      <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
-       <property name="resourceLoaderPath" value="classpath:/jp/pcaie/mail"/>
+       <property name="resourceLoaderPath" value="classpath:/mail"/>
        <property name="preferFileSystemAccess" value="false"/>
      </bean>
      
-    <bean id="formNotification" class="jp.pcaie.mail.FormNotification">
-        <property name="template" value="form-notification.vm"/>
-    </bean>
-</beans>
+     <bean id="mailSupport" class="jp.pcaie.support.MailSupport"></bean>

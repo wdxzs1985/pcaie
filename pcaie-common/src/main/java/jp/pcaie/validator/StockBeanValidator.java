@@ -93,7 +93,7 @@ public class StockBeanValidator {
                 model.addAttribute("notificationEmailError", message);
                 isValid = false;
             } else if (!this.emailValidator.validate(inputNotificationEmail)) {
-                final String message = this.messageSource.getMessage("validate.unavailable",
+                final String message = this.messageSource.getMessage("validate.invalid",
                                                                      new Object[] { fieldName },
                                                                      locale);
                 model.addAttribute("notificationEmailError", message);

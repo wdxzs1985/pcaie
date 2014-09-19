@@ -19,30 +19,16 @@
     </bean>
     
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <!-- 
-        <property name="host" value=""/>
-        <property name="port" value=""/>
-        <property name="username" value=""/>
-        <property name="password" value=""/>
-         -->
+        <property name="host" value="${mail.host}"/>
+        <property name="port" value="${mail.port}"/>
+        <property name="username" value="${mail.username}"/>
+        <property name="password" value="${mail.password}"/>
     </bean>
     
      <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
-       <property name="resourceLoaderPath" value="classpath:/jp/pcaie/mail"/>
+       <property name="resourceLoaderPath" value="classpath:/mail"/>
        <property name="preferFileSystemAccess" value="false"/>
      </bean>
      
-     <bean id="mailSupport" class="jp.pcaie.support.MailSupport">
-         <property name="encoding" value="UTF-8"/>
-         <property name="from" value="system@pcaie.jp"/>
-         <property name="bcc" value="system@pcaie.jp"/>
-     </bean>
-     
-    <bean id="passwordChangedNotification" class="jp.pcaie.mail.PasswordChangedNotification">
-        <property name="template" value="password-changed-notification.vm"/>
-    </bean>
-    
-    <bean id="signupNotification" class="jp.pcaie.mail.SignupNotification">
-        <property name="template" value="signup-notification.vm"/>
-    </bean>
+     <bean id="mailSupport" class="jp.pcaie.support.MailSupport"></bean>
 </beans>
